@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>DingDONE</title>
+
+        <link href="resources/fonts/roboto-regular.css" rel='stylesheet' type='text/css'>
+
+        <!----------------------STYLES-------------------------------------->
+        <!-- Bootstrap && Font-awesome -->
+
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">    -->
+        <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- Google Material Design Icons -->
+
+        <link href="bower_components/mdi/css/materialdesignicons.min.css" rel="stylesheet">
+
+        <!-- Kendo -->
+
+        <!--<link href="styles/kendo/kendo.common-bootstrap.min.css" rel="stylesheet">        -->
+
+        <link href="styles/kendo/kendo.bootstrap.min.css" rel="stylesheet">
+
+        <link href="styles/kendo/kendo.common.min.css" rel="stylesheet" /> <!-- Needed for telerik dataviz widgets, like calendar -->
+        <link href="styles/kendo/kendo.material.min.css" rel="stylesheet" />
+        <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet">
+
+        <link href="kendo/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet">
+        <!--
+        <link href="kendo/styles/kendo.dataviz.metro.min.css" rel="stylesheet">    
+        -->
+
+        <!--  TODO: use local resources    -->
+
+        <!--
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+   
+        -->
+        <!-- http://www.localfont.com/  use this tool to download fonts locally -->
+
+        <link href="styles/magic.min.css" rel="stylesheet"> 
+        <!-- Custom -->
+        <link href="styles/main.css" rel="stylesheet">
+        <link href="styles/more.css" rel="stylesheet">
+       
+
+        <link rel="stylesheet" type="text/css" href="libs/misc/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="libs/misc/slick/slick-theme.css">
+
+        <!----------------------JAVASCRIPT-------------------------------------->
+
+        <style>
+            #dingdonemessage .km-loader:before
+            {
+                content: none;
+            }
+        </style>
+    
+    </head>
+    
+    <body id="smarthotel"  >
+        
+        <div class="km-loader km-widget" data-role="loader" style="display: none;">
+            
+            <h1>Listo</h1>
+        
+        </div>
+        
+        <div id="dingdonemessage" style="display: none;">
+            <div  style=" position: absolute; z-index: 100000; font-size: 12px; 
+                  opbottom:0px ; left: 0; width: 100%; text-align: center;
+                  background-color: rgba(0, 0, 0, 0.4); color: white">
+                
+                <i class="fa fa-refresh fa-spin2 fa-1x fa-fw margin-bottom" style="color: #00bcd4"></i>
+                <span id="dingdonemessagecontent" >Loading...</span>
+            
+            </div>
+        </div>
+        
+        <div data-role="layout" data-id="main">
+            <header data-role="header">
+                <div class="navbar" data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-icon" >
+                        <!-- <i class="fa fa-align-justify txt-white"></i> -->
+                    </a>
+                    <i style="padding-right: 10px;" data-align="right"  class="connectionStatus fa fa-2x fa-wifi isOffline"></i>
+                </div>
+            </header>
+            
+            <!-- application views will be rendered here -->
+            
+            <footer class="chatBox" data-role="footer" style="display: none">
+                  <div class="panel-footer" style="padding: 0px 0px; ">
+                    <div class="input-group">
+                        <textarea rows="1" id="chatInput" type="text" class="form-control input-sm chat_input" 
+                            style="height3: 40px; font-size: 18px; border-radius:10px;"
+                                placeholder="Escriba su mensaje aquí..."  >
+                        </textarea>
+                        
+                        <span class="input-group-btn">
+                           
+                            <button id="btnChatSend" class="btn btn-main2 btn-sm " 
+                                style="height: 40px; display: none; margin-left: 5px; border-radius:5px; " 
+                               onclick="app.homeView.sendChatComment()" >
+                                <i style="font-size: 24px" class="mdi mdi-send "></i></button>
+                              
+                            <button  id="btnChatPhoto" class="btn btn-main3  btn-sm " 
+                                style="height: 40px; margin-left: 5px; border-radius:5px;"  
+                                onclick="app.homeView.takePicture()">
+                                <i style="font-size: 24px" class="mdi mdi-camera "></i></button>
+                        </span>
+                    </div>
+                </div>
+               
+            </footer>
+                
+            
+            <footer data-role="footer">
+                
+                <div data-role="tabstrip" id="navigation-container" >
+                    <a class="goHome fa" href2="components/homeView/view.html"  data-icon="home"  >
+                        <span style="color: gray">Inicio</span>
+                    </a>
+                    <a class="goProfile fa"  href2="components/profileView/view.html" data-icon="people">
+                        <span style="color: gray">Personal</span>                        
+                    </a>
+                    <a class="goOccupancy fa"  href2="components/hotelView/view.html" data-icon="hotel"   >
+                        <span style="color: gray">Ocupación</span>
+                    </a>
+                    <a  class="goReport fa" href2="components/reportAlertView/createAlertSuccess.html"  data-icon="plus"  >
+                        <span style="color: gray">Reportar</span>
+                    </a>
+                </div>
+                <small class="bottomMessage" style="color: white"><i class="mdi mdi-checkbox-marked-circle"></i></small>
+            </footer>
+        </div>
+        
+        <div data-role="layout" data-id="main-nonav">
+            <header data-role="header">
+                <div class="navbar" data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <i style="padding-right: 10px;" data-align="right"  class="connectionStatus fa fa-2x fa-wifi isOffline"></i>
+                </div>
+            </header>
+            
+            <!-- application views will be rendered here -->
+            
+            <footer data-role="footer" style="background-color:transparent;">
+                <div id="smartAlert" class="alert alert-info hidden" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- Utilizar helper.showSmartAlert, etc  --->
+                </div>
+            </footer>
+        </div>
+        
+       
+        
+        <style>
+            #appDrawer .mensaje
+            {
+            
+                color: white; 
+                font-size: 18px;
+                font-weight: 400;
+                letter-spacing: 0.89px;
+                line-height: 20px;
+            }
+           
+            #appDrawer .hotelname
+            {
+            
+                color: white; 
+                font-size: 24px;
+                font-weight: 400;
+                letter-spacing: 0.89px;
+                line-height: 20px;
+            }
+            
+            #appDrawer .username
+            {
+            
+                color: white; 
+                font-size: 20px;
+                font-weight: 400;
+                letter-spacing: 0.89px;
+                line-height: 20px;
+            }
+        </style>
+
+        <div id="appDrawer" data-role="drawer" data-title="Menú" data-transition="none"
+             class="b-main2"        
+             data-views='["viewHome", "viewProfileMaid","viewProfileHousekeeper", "viewProfileManager", "viewSelectAlertCategory"]' >
+                    
+            <header data-role="header">
+                <div class="navbar b-main" data-role="navbar">
+                    <span style="font-size: 1em; color: white" data-align="center">Acerca de</span>
+                    <i style="padding-left: 10px; font-size: 1.2em;" data-align="left"  class="mdi mdi-settings c-white" 
+                       data-role="button"  onclick="javascript:
+                
+                       $smart.goSettings()"> </i>
+                    <i style="padding-right: 10px;" data-align="right"  class="connectionStatus fa fa-2x fa-wifi isOnline">
+                    </i>
+                </div>
+            </header>
+                
+            <div data-role="content" class="container-fluid  b-main " style="text-align: center">
+                <h1 id="hotelname" class="hotelname " style="opacity: 0.9"></h1>
+                <h1 id="userfullname" class="username " style="opacity: 0.9"></h1>
+                <div class="mensaje" style="padding-top: 5%" >
+                    <img src="resources/imgs/logo.png" width="75%" style="margin-bottom: 5px" class2="magictime puffIn"><br>
+                    <span id="appversion" class="mensaje" style="opacity: 1"></span>
+                    <br>
+                   
+                    
+                    <small id="dingdoneserver"  style="opacity: 0.6; margin-top:-10px;"></small>
+                    <br><br><br>
+                    <!-- dingdone switch -->
+                    <input type="checkbox" id="ding-done" checked="checked" class="valign" 
+                           data-role="switch" data-off-label="DONE" data-on-label="DING" data-change="$smart.onDingDoneClick" />
+            
+                    <i id="syncUserAvailable" class="valign fa fa-spinner fa-pulse " 
+                       style="display: none; margin-bottom: 15px"></i>
+                </div>
+            </div>
+                
+            <footer data-role="footer" class="b-main" style="text-align: center; color: white; ">
+                <div onclick="javascript:
+                
+                $smart.showExitDialog()" style="margin-bottom: 10px;">
+                    <i  class="mdi mdi-logout c-white" style="font-size: 40px; color2: #EFFD4F "></i>
+                    Salir
+                </div>
+            </footer>
+                
+        </div>
+        
+        <!-- DIALOGOS -->
+                
+        <!-- COMMENT  -->
+        <div id="dialogComment" style="display: none; ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center">
+                        <span id="dialogCommentPrompt" class="dialog-text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-xs-12 center">
+                        <br>
+                        <textarea id="dialogCommentText" class="sh-select"  style="width: 100%" rows="3" placeholder="Escriba aquí..."></textarea>
+                        <span style="display:none" id="dialogCommentRequiredMessage"><span style="color:red">*</span><span>Campo requerido!</span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogCommentbuttonNO" data-role="button"  class="btn btn-dialog ">
+                            <span translate style="color: black">NO</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogCommentbuttonYES" data-role="button"  class="btn btn-dialog b-main ">
+                            <strong translate>SI</strong>
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+                
+        <!-- YES/NO With justification -->
+        <div id="dialogYNJ" style="display: none; ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center">
+                        <span id="dialogYNJPrompt" class="dialog-text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-xs-12 center">
+                        <br>
+                        <textarea id="dialogYNJreason" class="sh-select"  style="width: 100%" rows="3" placeholder="Justificación aquí..." autofocus></textarea>
+                        <span style="display:none" id="dialogRequiredMessage"><span style="color:red">*</span><span>Justificación Requerida!</span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogYNJbuttonNO" data-role="button"  class="btn btn-dialog ">
+                            <span translate style="color: black">NO</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogYNJbuttonYES" data-role="button"  class="btn btn-dialog b-main ">
+                            <strong translate>SI</strong>
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+            
+        <!-- Diálog de YES/NO -->
+                    
+        <div id="dialogYN" style="display: none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center">
+                        <span id="dialogYNPrompt" class="dialog-text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogYNbuttonNO" data-role="button"  class="btn btn-dialog ">
+                            <span translate style="color: black">NO</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogYNbuttonYES" data-role="button"  class="btn btn-dialog b-main ">
+                            <strong translate>SI</strong>
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+            
+        <!-- Dialogo SOLUTION -->
+                    
+        <div id="dialogSolution" style="display: none; ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center">
+                        <span id="dialogSolutionPrompt" class="dialog-text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-xs-12 center">
+                        <br>
+                        <textarea id="dialogSolutionreason" class="sh-select"  style="width: 100%" rows="7" placeholder="Indicar solución aquí..." autofocus></textarea>
+                        <span style="display:none" id="dialogSolutionRequiredMessage"><span style="color:red">*</span><span>Indica como lo resolviste!</span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogSolutionbuttonNO" data-role="button"  class="btn btn-dialog ">
+                            <span translate style="color: black">NO</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <br><br>
+                        <button id="dialogSolutionbuttonYES" data-role="button"  class="btn btn-dialog b-main ">
+                            <strong translate>SI</strong>
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+                    
+        <div id="dialogMessage" style="display: none; text-align: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span id="dialogMessagePrompt" class="dialog-text">Mensaje Acá</span>
+                    </div>
+                    <div class="col-xs-12 col-xs-shift-6">
+                        <br><br>
+                        <button id="dialogMessageClose" data-role="button"  class="btn btn-dialog b-main2" >
+                            <span translate >ACEPTAR</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+             
+        <div id="windowMessage" style="display: none; text-align: left; " 
+             onclick=" javascript: helper.windowMessage.close()">
+            <i class="mdi mdi-check" style="color: white"></i>
+            <span id="windowMessagePrompt" class="dialog-text" style="color:white"></span>
+        </div>
+        
+        
+         <div id="windowPushNotification"  style="display: none; text-align: left; " >
+            <i id="notificationIcon" class="mdi  mdi-comment " style="color: white"></i>
+             
+             <span style="position: absolute; right: 2px; top: 2px"  
+                 onclick=" javascript: helper.notificationWindow.close()">
+                 <i class="mdi mdi-window-close " style="color: white; font-size: 2em"></i>
+             </span> 
+             
+             <small id="PushNotificationTitle" style="color:white"></small>
+             <div id="PushNotificationPrompt" class="dialog-text" style="color:white; margin-top: 10px"></div>
+             
+             
+             <div style="text-align: right; margin: top: 10px">
+              <span id="PushNotificationAlertName" style="color:white"></span> <br>
+              <small id="PushNotificationFacilityName" style="color:white"></small>
+            </div> 
+             
+             
+             <div style="text-align: center">
+                 <button id="PushNotificationGo" data-role="button"  class="btn btn-primary" 
+                     style="margin-top: 10px;">
+                     <span translate>ABRIR</span>
+                 </button>
+             </div>
+        </div>
+        
+        
+        
+        
+        <script src="cordova.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap-spin.js"></script>
+        <script src="bower_components/bootstrap/dist/js/autosizejs.js"></script>
+        
+        <script src="bower_components/moment/moment-with-locales.min.js"></script>
+        <script src="bower_components/moment-timezone/moment-timezone-with-data.min.js"></script>
+        
+        <!--<script src="kendo/js/kendo.dataviz.mobile.min.js"></script> -->
+        <!--<script src="libs/kendo/kendo.all.min.js"></script> -->
+        <script src="libs/kendo/kendo.custom.min.js"></script>
+        <script src="libs/kendo/everlive.all.min.js"></script>
+        
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
+        
+        <script  src="bower_components/jaydata/release/jaydata.min.js" ></script>
+        <script src="bower_components/jaydata/release/jaydatamodules/kendo.min.js" ></script>
+        <script src="bower_components/bit6/bit6.min.js"></script>
+        
+        <script  src="libs/localization/localization.js"></script>
+        <script src="resources/sound/buzz.min.js"></script>
+        
+        <script src="libs/helper.js"></script>
+        <!-- CUSTOM -->
+        <script src="libs/globals.js"></script>
+
+        <script src="libs/$localdb.js"></script>
+        <script src="libs/$restapi.js"></script>
+        <script src="libs/$smart.js"></script>
+        
+        <script src="libs/controllers/loginController.js"></script>
+        <script src="libs/controllers/syncController.js"></script>
+        <script src="libs/controllers/taskController.js"></script>
+        <script src="libs/controllers/everliveController.js"></script>
+        <script src="libs/controllers/localizationController.js"></script>
+        
+        <script src="app.js"></script>
+        
+        <!--
+        <script src="libs/misc/transitions.js"></script>  -->
+        <script src="libs/misc/fastclick.min.js"></script>
+        
+        <script src="libs/misc/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="components/profileView/index.js"></script>
+        <script src="components/settingsView/index.js"></script>
+        <script src="components/reportAlertView/index.js"></script>
+        <script src="components/homeView/index.js"></script>
+        <script src="components/hotelView/index.js"></script>
+        <script src="components/loginView/index.js"></script>
+                
+        <script>
+        
+            window.addEventListener('load', function() {
+                new FastClick(document.body);
+            }, false);
+                
+        </script>
+        
+        <!--- TEMPLATES -->
+            
+        <!-- alerts header template -->
+        <script type="text/x-kendo-template" id="alerts-header-template">
+                
+            <div class="listviewHeader">
+                #if (value === globals.ALERT_STATUS_PENDING) {#   
+                <i class="mdi mdi-timer-sand groupIcon"></i>
+                <span class="groupHeader">Alertas Pendientes
+                    (<span id="groupAlertsPending">#: app.homeView.data.alerts.pending #</span>) </span>
+                #} #
+                    
+                #if (value === globals.ALERT_STATUS_IN_PROGRESS) {#   
+                <i class="mdi mdi-clock groupIcon"></i>
+                <span class="groupHeader">Alertas en Progreso
+                    (<span id="groupAlertsInprogress">#: app.homeView.data.alerts.inprogress #</span>) </span>
+                #} #
+                    
+                #if (value === globals.ALERT_STATUS_PAUSED) {#   
+                <i class="mdi mdi-pause groupIcon"></i>
+                <span class="groupHeader">Alertas Pausadas
+                    (<span id="groupAlertsPaused">#: app.homeView.data.alerts.paused#</span>) </span>
+                #} #
+                    
+                #if (value === globals.ALERT_STATUS_RESOLVED) {#   
+                <i class="mdi mdi-star groupIcon"></i>
+                <span class="groupHeader">Alertas Resueltas
+                    (<span id="groupAlertsResolved">#: app.homeView.data.alerts.resolved #</span>) </span>
+                #} #
+            
+            </div>
+        
+        </script>
+        
+        
+          <script type="text/x-kendo-template" id="alerts-template">     
+              <span id="sliderderecho" style="display: none">
+                  <section  style="margin-right: 8px ; position: absolute; right: 0px; width: 250px;  height: 110px; 
+                           color:\#00bcd4; background-color: white; text-align: center   ">
+                      
+                      <div id="sliderStart" style="display: none; float: left;width:250px; height: 110px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                            data-role="touch" data-tap="slider.startAlert"  > 
+                                <i style="line-height: 80px; color: \#00bcd4; font-size: 5em; " class=" mdi  mdi-play "></i>                                            
+                                <br><small style="color: \#999">COMENZAR</small>
+                      </div> 
+                       
+                      <div id="sliderPause" style="display: none; float: left;width:125px; height: 110px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="slider.pauseAlert" data-idalert="#: idalert #" > 
+                                                <i style="line-height: 80px; color: black; font-size: 5em; " class=" mdi mdi-pause "></i>   
+                                                <br><small style="color: \#999">PAUSAR</small>
+                      </div>
+                       
+                       <div id="sliderFinish" style="display:none; float: left;width:120px; height: 110px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="slider.finishAlert" data-idalert="#: idalert #" > 
+                                                <i style="line-height: 80px; color: \#fe3636; font-size: 5em; " class="  mdi mdi-stop "></i>                                            
+                                                 <br><small style="color: \#999">FINALIZAR</small>
+                       </div>   
+              
+                      <div id="sliderResume" style="display: none; float: left;width:250px; height: 110px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="slider.resumeAlert" data-idalert="#: idalert #" > 
+                                                <i style="line-height: 80px; color: black; font-size: 4em; " class="  mdi mdi-play "></i>    
+                                                  <br><small style="color: \#999">REANUDAR</small>
+                      </div>
+                  </section> 
+                  
+              </span>
+               
+           
+              <div style="height: 110px; " >
+              
+                 <div id="slideActionLeft#: idalert #" class=" slider-action listview-item noborder " style="display: none"  >
+                    
+                 </div>
+               
+                
+                <div id="slideActionRight#: guid #" class="slider-action  listview-item noborder "  >
+                                  
+                                   
+                        
+                </div>
+                <span  data-idalert="#: idalert #" data-guid="#: guid #" data-uuid="#: uuid #" data-idstatus="#: idstatus #" class="slider-item" data-role="touch" data-enable-swipe="1" data-swipe="slider.swipe" data-tap="slider.openAlert" >
+                    <div data-role="listview-link" class="km-listview-link2 listview-item alertStatus#: idcategory ##: idstatus # isRequest#:  idtypecategory # " 
+                         style=" margin: 8px !important; padding: 8px; height: 110px;  ">
+                        <div class="container-fluid istaskStatus#: idstatus #">
+                            <div class="row">
+                                <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                    <div class="sh-fixlongtext " >                                              
+                                        #if (idstatus === globals.ALERT_STATUS_IN_PROGRESS || idstatus === globals.ALERT_STATUS_RESOLVED) { #
+                                             # if (idcategory=== globals.IS_TASK) { #
+                                                <i class="fa fa-wrench  color-task " style="font-size: 16px;"> </i>
+                                            # } else if (idtypecategory=== globals.ALERT_CATEGORY_REQUEST) { #
+                                                <i class="fa fa-bell  color-alert " style="color: \#38b8a4;  font-size: 16px;"></i>
+                                            # } else { #                                    
+                                                <i class="fa fa-warning  color-alert " style=" font-size: 16px;" ></i>
+                                            # } #
+                                        # } #
+            
+                                        # if (idchecklist > 0) { #
+                                             <i class="c-main3 mdi mdi-checkbox-marked-outline"></i>
+                                        #}#
+            
+                                        #if (helper.hasPicture(uris)) { #
+                                            <i class="mdi mdi-camera  " style="opacity: 1"></i>
+                                        # } #
+                                            
+                                        #if (iscleaningtask == 1) { #                                           
+                                            <span style="display: inline-block" class="  taskTitle#: idstatus #
+                                                sh-taskName  sh-title "><strong>#: helper.getFacilityName(idfacility) #
+                                                </strong> <sup><small>#:helper.getFacilityTypeName(idfacility) #</small></sup>
+                                            </span>
+                                            
+                                         <div style="display: none"  class="occupancyStatusOnTask" id="facility#: idfacility#"> <img src="resources/imgs/page-loader.gif"  
+                                                style="width: 20px; height: 10px; "> 
+                                          </div> 
+                            
+                                           
+                                            
+                                        # } else { #
+                                            #if (insync == false) {#                              
+                                                <i id="spinner#: idalert #" class="fa fa-spinner fa-pulse c-main"></i>
+                                            # } else { #
+                                                <i id="spinner#: idalert #" style="display: none" class="fa fa-spinner fa-pulse c-main"></i>
+                                            # } #
+                                                
+                                           
+                                                <span class="taskTitle#: idstatus #
+                                                sh-title">#: name #</span>
+                                              
+                                        # } #
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-2" style="text-align: right; padding-right:0px;">                            
+                                    
+                                        # if (idtypecategory === globals.ALERT_CATEGORY_LOSTANDFOUND) { #
+                                            <i class="mdi  mdi-binoculars c-main  " style="font-size: 20px; "></i>    
+                                        # } else if (idtypecategory === globals.ALERT_CATEGORY_REQUEST) { #
+                                            <i class="mdi  mdi-bell-ring-outline c-main2  " style="font-size: 20px; "></i>    
+                                        # } else { #
+                                            #if (byguest == 1) {#
+                                                <i class="mdi mdi-emoticon-sad mdi-alertcolor    " style="font-size: 20px; "></i>
+                                            
+                                        #}#
+                                    #}
+                            
+                                    #
+                                </div>
+                            </div>
+                                   
+                                <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            
+                                      
+                        <div class="row" style2="height: 60px !important">
+                            <div class="col-xs-8" >
+                              
+                                    <span class=" sh-fixlongtext"><strong>#: helper.getFacilityName(idfacility) #</strong></span>   
+                                            
+                                    
+                            </div>
+                            <div class="col-xs-4" style="text-align: right; padding-right:0px;">
+                                # if (idstaff != 0) {#
+                                    <span class=" sh-fixlongtext"> 
+                                        <div style="text-align: left; display: inline-block" class="valign "  >
+                                            <span class="c-black m0 staffName ">#: helper.getStaffFirstName(idstaff) #</span>
+                                        </div> </span>
+                                # } else {#                            
+                                    <div style="text-align: right; display: inline-block; font-size: 0.7em; 
+                                         background-color: \#ff362f; color: white; padding: 2px;  "
+                                         class="sh-fixlongtext">
+                                        <span class="m0 ">SIN ASIGNAR&nbsp;</span>
+                                    </div>                                       
+                                # } #
+                            </div>
+                        </div>                         
+                           
+                          <div class="row rowinform" >    
+                                 #if (tag === globals.TAG_DND || tag === globals.TAG_MARKED_AS_FINISHED || tag === globals.TAG_ALERT_TO_TASK ||
+                                    tag === globals.TAG_ALREADY_DONE) { #                                            
+                                    #if (tag === globals.TAG_DND) { #
+                                        <!--DND -->
+                                        <div class="col-xs-10" style="margin: 0px; padding-left: 5px; text-align: left">
+                                            <span style="color: red; opacity: 1; border: 1px solid \#00bcd4; padding: 2px">DND </span>
+                                        </div>
+                                    # } else if (tag === globals.TAG_MARKED_AS_FINISHED) { #  
+                                        <div class="col-xs-10" style="margin: 0px; padding-left: 5px; text-align: left">
+                                            <span style="color: gray; border: 1px solid \#00bcd4; padding: 2px">Marcada como Finalizada</span>
+                                        </div>
+                                    # } else if (tag === globals.TAG_ALERT_TO_TASK) { #  
+                                        <div class="col-xs-10" style="margin: 0px; padding-left: 5px; text-align: left">
+                                            <span style="color: gray; border: 1px solid \#00bcd4; padding: 2px">Tarea Creada</span>
+                                        </div>                                         
+                                    # } else if (tag === globals.TAG_ALREADY_DONE) { #  
+                                        <div class="col-xs-10" style="margin: 0px; padding-left: 5px; text-align: left">
+                                            <span style="color: gray; border: 1px solid \#00bcd4; padding: 2px">Reporte de Trabajo Realizado</span>
+                                        </div>
+                                    # } #
+                                # } else { #
+                                    #if (action === globals.ACTION_PAUSED) { #                                     
+                                        <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">                                            
+                                            <small class="valign" >Alerta pausada </small>
+                                        </div>                 
+                                    # } #    
+                                        
+                                    #if (action === globals.ACTION_RESOLVED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">                                        
+                                        <small class="valign">Se resolvió a las #:  $date.datef(finishdate, "h:mm a") # </small>
+                                    </div>                 
+                                    # } #            
+                                        
+                                    #if (action === globals.ACTION_STARTED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                       
+                                        <small class="valign">Finalizará a las #: $date.toCurrentTimeZone(startdate).add(expectedduration, 'minutes').format("h:mm a") # </small>
+                                    </div>                 
+                                    # } #
+                                        
+                                    #if (action === globals.ACTION_RESUMED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">                                        
+                                        <small class="valign">Finalizará a las #: $date.toCurrentTimeZone(resumedate).add(expectedduration - (duration / 60), 'minutes').format("h:mm a") # </small>
+                                    </div>                 
+                                    # } #
+                                        
+                                    #if (action === globals.ACTION_REPORTED || action === globals.ACTION_RECEIVED_BY_MODULE || action === globals.ACTION_RECEIVED_BY_OWNER || action === globals.ACTION_ASSIGNED ||
+                                        action === globals.ACTION_ESTIMATED_DURATION || action === globals.ACTION_WILLCHECK || action == globals.ACTION_ALERT_TO_TASK) { #
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        #if (willcheckdate !== 0) {#
+                                            <i class="mdi mdi-2x mdi-eye c-main3 valign" style="opacity: 1"></i>
+                                            <small class="valign">Lo reviso a las #: $date.datef(willcheckdate, "h:mm a") # </small>
+                                        #} else {#
+                                            
+                                            # if (idcategory == globals.IS_TASK) { #                                                
+                                                <small class="valign">#: $date.showTaskStartDate(startdate) # </small>
+                                            #} else { #
+                                                <small class="valign">#: $date.showAlertReportedDate(reporteddate) # </small>
+                                            #} #
+                                        #} #
+                                    </div>
+                                   
+                                    # } #  
+                                # } #
+                                   #if ( isapproved != null ) { # 
+                                              #if (isapproved == 1) { # 
+                                                     <i class="c-main3 mdi mdi-thumb-up" style="margin-left: 10px; font-size: 20px;"></i>
+        
+                                              #}else{#
+                                                  <i class="c-main3 mdi mdi-thumb-down" style="margin-left: 10px; font-size: 20px;"></i>
+                                              #}#
+              
+                                       #}# 
+              
+                            </div>
+                          </div>
+                                                    
+                        
+                       
+              
+                          
+                        
+            
+                    </div>
+              
+              
+        
+                </span>
+            </div>
+              
+        </script>
+
+        
+        
+                
+                       
+        <script>
+             
+    
+            $(function() {
+                
+                slider = {};
+                slider.swiping = false;
+                slider.open = false;      
+                window.prevent = false;
+                var item = null;
+                var previousItem = null;               
+                var previousidalert = null;               
+                var idalert = null;
+                var uuid = null;
+                var guid = null;
+                slider.swipe = function(e) {
+                    var newidalert = $(e.sender.element).data("guid");
+                    
+                    if (e.direction === "left") {         // open
+                     previousItem = item;
+                     previousidalert = newidalert;
+                     item = e.sender.element;
+                     guid = $(e.sender.element).data("guid");
+                     idalert = $(e.sender.element).data("idalert");
+                     var idstatus = $(e.sender.element).data("idstatus");
+                     uuid = $(e.sender.element).data("uuid");
+                     // Remove slider from any previous list-items.
+                     $(".slider-action").empty();
+                                        
+                     $('#sliderStart #sliderPause #sliderFinish #sliderResume').hide();
+                    
+                     if (idstatus == globals.ALERT_STATUS_PENDING) {
+                        $('#sliderStart').show();
+                     } else if (idstatus == globals.ALERT_STATUS_PAUSED) {
+                        $('#sliderResume').show();
+                     } else if (idstatus == globals.ALERT_STATUS_IN_PROGRESS) {
+                        $('#sliderPause').show();
+                        $('#sliderFinish').show();
+                     } 
+                    
+                    
+                     var s = $("#sliderderecho");                     
+                     s.show();
+                     $("#slideActionRight" + guid).empty().append(s);
+                   
+                    
+                     slider.swiping = true;       
+                   
+                        console.info('Open',slider.open);
+                        if (slider.open == false) {
+                             console.info('Slide left');
+                             $("#slideActionLeft" + guid).hide();
+                             $("#slideActionRight" + guid).show();
+                            slider.open = true;
+                            var del = e.sender.element;                                                                    
+                            $(del).animate({'marginLeft': -250 + "px"}, 200);                                                   
+                        } else {
+                            // Close Previous item
+                            previousItem.css({ left: 0 });
+                            $(previousItem).animate({'marginLeft': 0 + "%"}, 200);   
+                            
+                            if (item != previousItem) {
+                                // Open New
+                                $("#slideActionLeft" + guid).hide();
+                                 $("#slideActionRight" + guid).show();
+                                slider.open = true;
+                                                                                               
+                                $(item).animate({'marginLeft': -250 + "px"}, 200);       
+                                
+                                slider.open = true;
+                                }
+                             else
+                                 slider.open = false;
+                            //item.css({ left: 0 });
+                            //$(item).animate({'marginLeft': 0 + "%"}, 200);   
+                        }                    
+                    } else if (e.direction === "right") {    // close    
+                        console.log("rithg");
+                        if (slider.open == true) {
+                             
+                 
+                            if(previousidalert == newidalert || previousidalert == null){
+                             slider.open = false;
+                            console.log("ds");
+                             item = e.sender.element;
+                             item.css({ left: 0 });
+                             $(item).animate({'marginLeft': 0 + "%"}, 200);  
+                           }
+                        }
+                        else { // slide right                           
+                         /*  console.info('Slide right');
+                             $("#slideActionRight" +idalert).hide();
+                            $("#slideActionLeft" + idalert).show();
+                            slider.open = true;
+                            del = e.sender.element;                                                                    
+                            $(del).animate({'marginLeft': 250 + "px"}, 200);     
+                            
+                           */ 
+                        }
+                    }
+                }                               
+                    
+                slider.openAlert = function(e) {
+                    e.preventDefault();                    
+                    console.info('Open Alert');
+                    console.info(window.prevent);
+                    
+                    if (window.prevent) {
+                        window.prevent = false;
+                        return;
+                    }            
+                    if (slider.swiping && window.navigator.simulator) {
+                        slider.swiping = false;
+                        return;
+                    } 
+                    
+                    slider.open = false;
+            
+                    var item = e.sender.element;                                                        
+                    item.css({ left: 0 });
+                    $(item).animate({'marginLeft': 0 + "%"}, 200);       
+                
+                    var idalert = $(e.sender.element).data("idalert");
+                    var uuid = $(e.sender.element).data("uuid");
+                
+                    app.homeView.openAlertFromSlider(e, idalert,uuid); 
+                }
+                    
+                slider.markAlertAsFinished = function(e) {                  
+                    e.preventDefault();    
+                    
+                    slider.open = true;
+                    
+                    var idalert = $(e.sender.element).data("idalert");
+                    var uuid = $(e.sender.element).data("uuid");
+                    var item = e.sender.element.parent().siblings();        
+                            
+                    app.homeView.markAlertAsFinishedFromSlider(idalert,uuid)
+                        .done(function() {                   
+                            item.css({ left: 0 });
+                            $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                        })
+                }
+                
+                slider.showSettings = function(e) {                                  
+                    e.preventDefault();    
+                    
+                     slider.open = true;
+                    
+                    var idalert = $(e.sender.element).data("idalert");
+                    var uuid = $(e.sender.element).data("uuid");
+                    var item = e.sender.element.parent().siblings();        
+                            
+                    app.homeView.showSettingsFromSlider(idalert,uuid)
+                        .done(function() {                   
+                            item.css({ left: 0 });
+                            $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                        })
+                }
+                
+                slider.takeAlert = function(e) {
+                    e.preventDefault();                        
+                    slider.open = true;
+                    
+                    var idalert = $(e.sender.element).data("idalert");
+                    var uuid = $(e.sender.element).data("uuid");
+                    var item = e.sender.element.parent().siblings();        
+                            
+                    app.homeView.takeAlertFromSlider(idalert,uuid)
+                    .done(function() {                   
+                        item.css({ left: 0 });
+                        $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                    })
+                }
+                
+                              
+                               
+                slider.startAlert = function(e) {
+                                       
+                    e.preventDefault();                        
+                    slider.open = true;
+                    
+                    //var idalert = $(e.sender.element).data("idalert");
+                    var item = e.sender.element.parent().siblings();  
+                    
+                    app.homeView.startAlertFromSlider(idalert,uuid)
+                    .done(function() {                   
+                        item.css({ left: 0 });
+                        $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                    })                    
+                }
+                
+                 slider.finishAlert = function(e) {
+                    e.preventDefault();                        
+                    slider.open = true;
+                    
+                    //var idalert = $(e.sender.element).data("idalert");
+                    var item = e.sender.element.parent().siblings();        
+                          
+                    app.homeView.finishAlertFromSlider(idalert,uuid)
+                    .done(function() {                   
+                        item.css({ left: 0 });
+                        $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                    })
+                    
+                }
+                
+                slider.pauseAlert = function(e) {
+                    e.preventDefault();                        
+                    slider.open = true;
+                    
+                    //var idalert = $(e.sender.element).data("idalert");
+                    var item = e.sender.element.parent().siblings();        
+                        
+                    app.homeView.pauseAlertFromSlider(idalert,uuid)
+                    .done(function() {                   
+                        item.css({ left: 0 });
+                        $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                    })
+                    
+                }
+                
+                slider.resumeAlert = function(e) {
+                    e.preventDefault();                        
+                    slider.open = true;
+                    
+                    //var idalert = $(e.sender.element).data("idalert");
+                    var item = e.sender.element.parent().siblings();      
+                   
+                    app.homeView.resumeAlertFromSlider(idalert,uuid)
+                    .done(function() {                   
+                        item.css({ left: 0 });
+                        $(item).animate({'marginLeft': 0 + "%"}, 200);                   
+                    })
+                    
+                }
+                
+                
+                
+                slider.showActionSheet = function(e) {
+                    $("#actionsheet").data("kendoMobileActionSheet").open();
+                    
+                }
+                
+              
+            })
+        
+            </script>
+            
+        <!-- MANAGER/OPERATIONS/HOUSEKEEPER Staff Template (Perfil) -->
+            
+        <script type="text/x-kendo-template" id="staff-header-template-housekeeper">
+            
+            <div class="listviewHeader">
+            <h3 class="c-main2">#: helper.isAvailableText(value) #</h3>
+                </div>
+        
+            </script>
+                
+        <script type="text/x-kendo-template" id="staff-template-housekeeper">
+        <div data-role="listview-link" class="km-listview-link listview-item ">
+            <a>
+                <div class="container-fluid">
+                    <article class="row">
+                        <div class="col-xs-2">
+                                    
+                                <img src="#: helper.getAvatar(avatar) #
+                                "  class="image-cropper-no-valign" style="width: 60px; height: 60px;"/>
+                                #if (available == true) { # 
+                                    <span style="font-size: 0.9em;display: inline-block; margin-left: 20px;" class="label label-available">DISPONIBLE</span>
+                                #} else {#        
+                                    <span style="font-size: 0.8em;display: inline-block; margin-left: 20px;" class="label label-not-available">NO DISPONIBLE</span>
+                                #}
+                                    
+                                #        
+                                <sup style="margin-left:-10px; margin-top: -20px" class="badge b-main4 c-white">
+                                #: stats.alerts.pending + stats.tasks.pending #
+                                    </sup>
+                                </div>
+                            <div class="col-xs-10">
+            
+                                <div style="text-align: left; margin-left: 10px; display: inline-block" class="valign">
+                                <h4 class="c-black m0 sh-fixlongtext ">#: fullname #                             
+                                    <br><small >#: helper.getRole(type) #
+                
+                                        </small> </h4>
+                                        </div>
+                                </div>
+
+                        </article>
+                            
+                        <!-- CURRENT ACTIVITY -->
+                                
+                        #if (false) { // (currentactivity != null)# 
+                            <div class="row" style="display: none">
+                            <div class="col-xs-1 alertStatus#: currentactivityStatus #" 
+                                style="text-align: left; padding-left:5px; padding-right: 10px;">
+                                     # if (currentactivitytype === 1) { #                                
+                                         <i class="mdi mdi-alert-outline mdi-alertcolor  valign "></i>    
+                                     #}
+                                
+                                    #                                       
+                                    </div>
+                                <div class="col-xs-7" style="padding-right: 0px; padding-left: 5px;">
+                                <div class="sh-fixlongtext " >
+                                    <span class=" sh-alertname valign" style="font-size: 12px;" >#: currentactivityName #</span>
+                                
+                                    </div>
+                                    </div>
+                                        
+                                <div class="col-xs-4" style="padding-right: 0px; padding-left: 5px; text-align: right;">
+                                <div class="sh-fixlongtext " >
+                                    <span class="sh-alertname valign" style="font-size: 12px;">#: currentactivityFacility #</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        # }
+                        
+                        #
+                        <!-- PROGRESS -->
+                        <div class="row">
+                        <div class="col-xs-12" style="padding:0px;">
+                            <div id="progress-#: idstaff #" data-role="progressbar" data-min="0" data-max="100" data-type= "percent" data-value= "#: stats.progress #"
+                                style="width: 100%; height: 20px; margin-top: 10px; ">
+                                     </div>
+                                
+                            </div>
+                            <div class="col-xs-12" style="text-align: center">
+                            <span class="sh-info" >                                                                 
+                                #: stats.alerts.resolved + stats.tasks.resolved #/#: stats.all #
+                                    </span>
+                                </div>
+                            </div>
+            
+                    </div>
+                    </a>
+                </div>
+            </script>
+                                
+    </body>
+
+</html>
+            
+                        

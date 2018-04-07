@@ -1,0 +1,84 @@
+<style>    
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    
+    
+    
+    
+ </style>
+
+<div id="viewAlertSettings" data-role="view" data-title="Crear Tarea"  data-model="app.homeView">
+    
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar" >
+             <span style="font-size: 1.5em; color: white" data-align="left">Opciones</span> 
+            
+            <a  data-align="right"  data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-close mdi-2x " style="color: white"></i>
+            </a>              
+        </div>
+    </header>
+    
+    <footer data-role="footer">
+        
+    </footer> 
+    
+    
+   <div class="container-fluid">
+    
+            <div class="row">
+                <div class="col-xs-12 mt10" style="text-align: left">
+                    <div class="form-group">
+                        <label class="sh-label2">¿Cuándo lo vas a ir a ver?</label>                            
+                    </div> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6" style="text-align: left">
+                    <div class="form-group">
+                        <label class="sh-label">Horas</label>
+                            <select class="form-control sh-select" data-value-field="hour" data-text-field="hour"
+                                data-bind="source: settings.hours, value: alert.willcheckhours">                                
+                            </select>   
+                    </div> 
+                </div>
+                 <div class="col-xs-6" style="text-align: left">
+                    <div class="form-group">
+                        <label class="sh-label">Minutos</label>
+                            <select class="form-control sh-select" data-value-field="minute" data-text-field="minute"
+                                data-bind="source: settings.minutes, value: alert.willcheckminutes">                                
+                            </select>   
+                    </div> 
+                </div>
+            </div>
+            
+            <div class="row">                                
+                <div class="col-xs-6 center" >
+                    <br><br>
+                    <button  data-role="button" data-bind="click: cancelAlertSettingWillCheckDate"  class="btn btn-dialog  c-black ">
+                        <span translate>CANCELAR</span>
+                    </button>
+                </div>
+                <div class="col-xs-6 center" >
+                    <br><br>
+                    <button data-role="button" data-bind="click: acceptAlertSettingsWillCheckDate"  class="btn btn-dialog btn-main b-main ">
+                        <span translate>ENVIAR</span>
+                    </button>
+                </div>
+            </div>
+             
+   
+            
+   </div> <!-- container-fluid -->
+        
+ 
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

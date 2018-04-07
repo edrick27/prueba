@@ -1,0 +1,184 @@
+<style>    
+    #viewAlert .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+    }
+    
+   
+    
+    
+  
+    
+    </style>
+
+<div id="viewOccupancy" data-role="view" data-title="Alerta" data-layout="main" data-model="app.hotelView"
+    data-init="app.hotelView.initViewOccupancy" data-before-show="app.hotelView.beforeShowViewOccupancy">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header" >
+        <div id="navbarmaid" class="navbar" data-role="navbar" style="height: 60px !important;">
+             <a data-align="left" data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-black valign" style="font-size: 36px"></i>                
+                <span class="sh-volver valign">Volver</span>
+            </a>             
+            
+             <a data-align="right" data-role="button" data-bind="click: showSaveChanges, enabled: hasChanges" class="hidden sh-headerbutton"> 
+                <i class="mdi mdi-content-save  c-main " style="vertical-align: middle; font-size: 26px;"></i>                 
+                
+            </a>
+        </div>
+              
+    </header>
+
+    <header id="jumbotron" class="jumbotron " style="padding-bottom: 10px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center" >
+                    <h3 class="c-main" style="margin-top: 5px" data-bind="html: occupancy.facility "></h3>
+                    <h5 data-bind="html: occupancy.facilitytype "></h5>
+                </div>
+            </div>
+            
+            <div class="row " >
+                <div class="col-xs-12" style="text-align: center" >                    
+                    <div class="sh-fixlongtext" >                        
+                        <span id="occupancyStatus" class="label " style="font-size: 18px;" data-bind="html: occupancy.status"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt10" >
+                <div class="col-xs-12" style="margin-bottom:0px; padding-bottom: 0px;" >                    
+                    <div class="" style="margin-bottom:0px; padding-bottom: 0px;" >
+                        <i class="mdi mdi-account-outline c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong>Huésped:</strong>
+                        <span class="valign" data-bind="html: occupancy.guest"></span>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="row hidden " style="background-color: lightgray" >
+                <div class="col-xs-12" >                    
+                    <br>   
+                    <h4 class="valign" style="display: inline-block; margin-top:0px">LISTA</h4>
+                    <input type="checkbox" id="roomReady" checked="checked" class="valign" 
+                       data-role="switch" data-off-label="NO" data-on-label="SI" 
+                       data-change="app.hotelView.toggleRoomReady" />                                    
+                    
+                </div>
+            </div>
+
+           
+
+           
+        </div>
+    </header>
+    
+    <div class="container-fluid">
+             
+            
+            <div class="row" >
+                <div class="col-xs-12" >                    
+                    <div class="sh-fixlongtext" >
+                        <i class="mdi mdi-clock c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong class="valign">Ingreso:</strong>
+                        <span class="valign" data-bind="html: occupancy.ingreso"></span>
+                    </div>
+                </div>
+            </div>
+             <div class="row mt10" >
+                <div class="col-xs-12" >                    
+                    <div class="sh-fixlongtext" >
+                        <i class="mdi mdi-clock c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong class="valign">Salida:</strong>
+                        <span class="valign" data-bind="html: occupancy.salida"></span>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="row mt10" >
+                <div class="col-xs-12" >                    
+                    <div class="sh-fixlongtext" >
+                        <i class="mdi mdi-account-circle c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong class="valign">ACTIVIDAD:</strong>
+                        <span class="valign" data-bind="html: occupancy.guestactivity"></span>
+                    </div>
+                </div>
+         </div>
+        
+         <div class="row mt10" >
+                <div class="col-xs-12" >                    
+                    <div class="sh-fixlongtext" >
+                        <i class="mdi mdi-tag-multiple c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong class="valign">PAX:</strong>
+                        <span class="valign" data-bind="html: occupancy.pax"></span>
+                    </div>
+                </div>
+         </div>        
+        <div class="row mt10" >
+                <div class="col-xs-12" >                    
+                    <div class="sh-fixlongtext" >
+                        <i class="mdi mdi-map-marker c-light valign " style2="font-size: 24px; "></i>                        
+                        <strong class="valign">Origen:</strong>
+                        <span class="valign" data-bind="html: occupancy.origin"></span>
+                    </div>
+                </div>
+            </div>
+
+        <span data-bind="visible: occupancy.showComments">
+        
+             <div class="row mt10">
+
+                    <div class="col-xs-12"  >
+                        <hr style="margin-bottom: 10px; margin-top: 10px;">
+                        <i class="mdi mdi-glass-flute valign" style="font-size: 20px; "></i>
+                        <strong class="valign c-main">Comentarios & Preferencias</strong>
+                        <!--<textarea class="sh-textarea" style="padding: 5px;" data-bind="html: occupancy.guestlog" rows="5" >                        
+                        </textarea> -->
+                        <div class="sh-textdisplay" style="padding: 5px;" data-bind="html: occupancy.guestlog" >                        
+                        </div>
+                    </div>
+                   
+             </div>
+             
+            
+            <div class="row mt10">
+
+                    <div class="col-xs-12" >  
+                        <hr style="margin-bottom: 10px; margin-top: 10px;">
+                        <i class="mdi  mdi-emoticon-sad valign" style="font-size: 20px; "></i>
+                        <strong class="valign c-main3">Quejas</strong>
+                         <div class="sh-textdisplay" style="padding: 5px;" data-bind="html: occupancy.complaints" >                        
+                        </div>
+                    </div>
+                   
+             </div>
+         </span>
+
+    </div>
+
+                
+
+        
+  
+
+   
+
+            
+            
+       
+        
+       
+    
+    
+     
+    
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

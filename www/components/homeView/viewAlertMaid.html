@@ -1,0 +1,498 @@
+<style>    
+    #viewAlert #chatInput{
+       max-height: 230px;   
+   }
+    #viewAlert .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+    }
+    
+    #viewAlert .tiempoEstimado
+    {
+        color: #909090; 
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    
+    #viewAlert .time
+    {
+    
+        color: #00bcd4;
+        font-weight: 400;
+        line-height: 53px;
+    
+        /* Text style for "15:00" */
+        font-size: 50px;
+    }
+    
+    #viewAlert .delayed
+    {
+        color: #fe3636;
+    }
+    
+    .strechLostAndFound {
+       width: 100% !important;
+    }
+     
+    #viewAlert .km-listview-link:after {
+        display: none !important;
+    }
+    
+    
+ 
+  
+    
+    </style>
+
+<div id="viewAlert" data-role="view" data-title="Alerta" data-layout="main" data-model="app.homeView" 
+     data-init="app.homeView.initAlertMaid" data-before-show="app.homeView.beforeShowAlertMaid" data-after-show="app.homeView.afterShowAlertMaid">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header" >
+        <div id="navbarmaid" class="navbar" data-role="navbar" style="height: 60px !important;">
+             <a data-align="left" data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-black valign" style="font-size: 36px"></i>                
+                <span class="sh-volver valign">Volver</span>
+            </a> 
+           
+        </div>
+        
+       
+        
+        
+        
+    </header>
+
+    <header id="viewAlertHeaderMaid" class="jumbotron " style="padding-bottom: 10px;">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div  data-bind="visible: alert.isOrphan">
+                
+                   <div class="col-xs-12" > 
+                        <button class="btn btn-block btn-main b-main valign btn-raisehand " type="button" data-role="button" 
+                            data-bind="click: takeAlert" style="border: 1px white solid; padding: 0px;">
+                            <h4 style="margin: 10px" class="c-white center valign">Yo puedo ayudar <i class="mdi raisehand shadow rotateminus90   mdi-hand-pointing-right"></i></h4>
+                            
+                        </button>
+                    </div>
+                
+                </div>
+                
+
+                <div class="col-xs-10" style="padding-right: 5px; padding-left: 0px;">
+                    
+                     <span data-bind="invisible: alert.isRequest">
+                         <i class="fa fa-cog fa-spin  fa-fw c-main2 " style="font-size: 22px;"
+                              data-bind="visible: alert.inprogress"></i>
+                     </span> 
+                      <span data-bind="visible: alert.isRequest">
+                         <i class="fa fa-circle-o-notch fa-spin  fa-fw c-main2 " style="font-size: 22px;"
+                              data-bind="visible: alert.inprogress"></i>
+                     </span> 
+                      
+                    <span class="c-light" data-bind="visible: alert.alertaTomada">
+                        <i class="mdi shadow c-main rotateminus90  mdi-hand-pointing-right" style="font-size: 18px"></i>
+                    </span>
+                    <span class="sh-title2" data-bind="html: alert.name "></span>&nbsp;
+                    <!-- <sup data-bind="html: alert.idalert" style="opacity: .6"></sup> -->
+                </div>
+
+                <div class="col-xs-2" style="text-align: right" data-bind="invisible: alert.isTask" >   
+                    <i data-bind="invisible: alert.isRequest" class="mdi mdi-alert-outline mdi-alertcolor " style="font-size: 24px; "></i>
+                    <i data-bind="visible: alert.isRequest" class="mdi mdi-bell-ring-outline c-main2 " style="font-size: 24px; "></i>
+                </div>
+                <div class="col-xs-2" style="text-align: right" data-bind="visible: alert.isTask" >                                       
+                   <i data-bind="visible:alert.isTask" class="mdi mdi-wrench c-main shadow " style="font-size: 24px; "></i>                 
+                </div>  
+
+            </div>
+
+            <div class="row" >
+                <div class="col-xs-12 " style="margin-top: 10px;  margin: 0px; padding:0px;">
+                    <br>
+                    <div class="row" style="margin:0px; padding:0px;">
+                        <div class="col-xs-1" style="padding: 0px; margin: 0px;">                            
+                             <i class="mdi mdi-label-outline  c-light valign" style="font-size: 24px; "></i>
+                        </div>
+                        <div class="col-xs-11 c-black">                            
+                            <strong class="valign" style="font-size: 18px" data-bind="html: alert.facility"></strong>
+                        </div>
+
+                    </div>
+                </div>
+                
+
+                <!--<div class="col-xs-5" style="padding-right: 0px; padding-left: 0px; text-align: left">
+                    <br>
+                    <div class="sh-fixlongtext" data-bind="visible: alert.hasguest" >
+                        <i class="mdi mdi-account-outline c-light valign " style="font-size: 24px; "></i>
+                        <span class="c-light">Huésped</span> <br>
+                        <span class="valign" data-bind="html: alert.guest"></span>
+                    </div>
+                </div>-->
+                
+            </div>
+
+             <div class="row">                                       
+                <div class="col-xs-12" style="padding-top:20px; margin: 0px;">
+                    <div clas="row" style="margin:0px; padding:0px;">
+                        <div class="col-xs-1" style="padding: 0px; margin: 0px;">
+                            <i class="mdi mdi-clock-in valign c-light" style="font-size: 24px; "></i>
+                        </div>
+                        <div class="col-xs-11" style="margin-left: -4%" data-bind="invisible:alert.isTask">
+                            <span class="c-light valign">Reportada a las </span>
+                            <span data-bind="html: alert.reportedtimeDisplay"></span> <br>
+                            por <span data-bind="html: alert.reportedByFullName"></span>
+                        </div>
+                         <div class="col-xs-11" style="margin-left: -4%" data-bind="visible:alert.isTask">
+                            <span class="c-light valign"></span>
+                            <span data-bind="html: alert.startdateDisplay"></span> -
+                            <span data-bind="html: alert.finishdateDisplay"></span>
+                        </div>
+                         <div class="col-xs-11" style="margin-left: -4%" data-bind="visible:alert.isTask">
+                            <small class="c-light valign">Por </small>                           
+                            <small data-bind="html: alert.reportedByFullName"></small>
+                              <small class="c-light valign">a las </small><small class="c-light valign" data-bind="html: alert.reportedtimeDisplay"></small> 
+                        </div>
+                       
+                    </div>
+                </div>
+
+              </div>             
+
+            <div class="row">
+
+                <!-- data-bind="visible: alert.notes != '' " -->
+                <div class="col-xs-12"  style="padding: 0px;" data-bind="visible: alert.hasnotes">
+                    <br>
+                    <div class="row" style="margin:0px; padding:0px;">
+                        <div class="col-xs-1" style="padding: 0px; margin: 0px;">
+                            <i class="mdi mdi-comment-text-outline" style="font-size: 20px; "></i>
+                        </div>
+                        <div class="col-xs-11" style="margin: 0px; padding-left: 5px;">
+                            <span style="color: #909090;">Instrucciones</span>
+                            <div style="border-left: 0px solid #009688;  " >
+                                <span data-bind="html: alert.notes"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                               
+                <div class="col-xs-12 c-light" data-bind="visible: hasChecklist" style="font-size: 16px; text-align: center;">
+                    <br>
+                    
+                   <h3 data-bind="click: showChecklist" class="c-main" ><i class="c-main3 mdi mdi-checkbox-marked-outline"></i> Checklist</h3>
+                </div>
+
+                <div class="col-xs-12 c-light" style="font-size: 16px; text-align: center;">
+                    <br>
+                    <small data-bind="html:alert.reporteddateDisplay"></small>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div id="alertMaidActions" class="container-fluid" >
+        
+        <!-- <div class="row">
+            <div class="col-xs-12" data-bind="visible: hasImage" style="padding: 15px; text-align: center"
+                        data-role="touch" data-tap="app.homeView.strechImage">               
+                         
+                         <img id="imageAlert" data-bind="attr: { src: imageAlert }" style="width: 50%; height: 50%" >                     
+             </div>
+         </div> -->
+        
+      
+        
+           <div data-bind="invisible: alert.isOrphan">
+            
+                <div class="col-xs-3" style="margin-right:0px; padding-right:0px" data-bind="invisible: alert.resolved">
+                    
+                    <button class="btn btn-block btn-button " type="button" data-bind="enabled: alert.inprogress, invisible: alert.paused, click: showPauseAlert"
+                            data-role="button">                    
+                        <i class="mdi mdi-2x mdi-pause"></i>
+                    </button>
+                        
+                    
+                    <button class="btn btn-block btn-button " type="button" data-bind="visible: alert.paused, click: showResumeAlert"
+                            data-role="button">                    
+                        <i class="mdi mdi-2x mdi-play"></i>
+                    </button>
+                    
+                </div>
+         
+        
+            
+                <div class="col-xs-6 " data-bind2="visible: alert.isMine">                
+                    
+                   <!-- PLAY --->
+                    <button class="btn btn-main btn-block b-main valign" type="button" data-role="button"
+                            data-bind="visible: alert.pending, click:showStartAlert" >
+                        <i class="mdi mdi-2x mdi-play valign"></i>
+                        
+                    </button>
+                    <!-- STOP --->
+                    <button class="btn btn-finish btn-block b-finish valign" type="button" data-role="button"                     
+                            data-bind="visible: alert.inprogress, click: showFinishAlert" style="margin-top: 0px;" >                    
+                        <i class="mdi mdi-2x mdi-stop valign"></i>                    
+                    </button>
+                                    
+                    <h3 class="c-light center valign" style="opacity: 0.5;" data-bind="visible: alert.paused">PAUSADA</h3>
+                
+                </div>
+            
+            
+                 <div class="col-xs-3" style="margin-left:0px; padding-left:0px"> 
+                    <button class="btn btn-block btn-default valign" type="button" data-role="button" 
+                        data-bind="invisible: alert.resolved, click: showAlertSettings">
+                         <i class="mdi mdi-2x mdi-settings"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        
+        <div class="row" data-bind="invisible: alert.resolved">
+
+            <div class="col-xs-12" style="text-align: center" data-bind="visible: runChronometer">
+                <span data-bind="invisible: alert.delayed"> <span class="tiempoEstimado" data-bind="visible: alert.pending">TIEMPO SUGERIDO</span> 
+                 
+                      <span class="tiempoEstimado" data-bind="visible: alert.inprogress">TIEMPO TRANSCURRIDO</span> 
+                </span>  
+            </div>
+            
+           
+
+            <!-- MOSTRAMOS EXPECTED DURATION -->                
+                <span data-bind="invisible: alert.resolved">
+                    
+                    <div class="col-xs-12" style="text-align: center" >
+                        <i data-bind="click:showChronometer"  class="mdi mdi-timer c-main" style="font-size: 40px; "></i> 
+                        <span data-bind="click:showSettingEstimateDuration">
+                            <span data-bind="visible: alert.isLong">
+                                <span class="time" data-bind="html: alert.hours"></span>
+                                <span class="c-main" style="font-size:18px">h</span>                                                        
+                            </span>
+                            <span class="time" data-bind="html: alert.minutes"></span>
+                            <span class="c-main" style="font-size:18px">min</span>                        
+                            <sup><i class="mdi mdi-pencil c-main3" style="font-size: 25px; opacity: 0.5 "></i> </sup>
+                        </span>
+                       <br><br>
+                    </div>
+                    
+                </span>
+            
+            
+                     
+           
+              <div id="alertImagesSliderParent"  class="col-xs-12"  
+            style="text-align: center; padding: 0px; margin: 0px; " data-bind="visible: hasImage">
+            
+        </div>
+        
+            
+           
+        </div>
+        
+        
+        
+         <style>
+        .ratingmaid {
+            /*float:left;*/
+        }
+
+        /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+           follow these rules. Every browser that supports :checked also supports :not(), so
+           it doesn’t make the test unnecessarily selective */
+        .ratingmaid:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+            clip:rect(0,0,0,0);
+        }
+
+        .ratingmaid:not(:checked) > label {
+            float:right;
+            width:1em;
+            padding:0 .1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:200%;
+            line-height:1.2;
+            color:#ddd;
+            
+        }
+
+     
+
+        .ratingmaid > input:checked ~ label {
+            color: #f70;
+            
+        }
+
+       /* .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: gold;
+            
+        }*/
+
+        /*.rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label, 
+        .rating > label:hover ~ input:checked ~ label {
+            color: #ea0;
+            
+        } */
+
+        .ratingmaid > label:active {
+            position:relative;
+            top:2px;
+            left:2px;
+        }
+    </style>
+      
+        
+        
+       <div data-bind="invisible: alert.markedAsFinished">
+           <div data-bind="invisible: alert.dnd">
+                <div class="row" data-bind="visible: alert.resolved" style="margin:0px; padding:0px;">
+                    <div class="col-xs-12" style="text-align: center;  ">                
+                           <fieldset class="ratingmaid" style="display: inline-block">   
+                            <input disabled='disabled' type="radio" id="starmaid5" name="ratingmaid" value="5" /><label for="starmaid5" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                            <input disabled='disabled' type="radio" id="starmaid4" name="ratingmaid" value="4" /><label for="starmaid4" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                            <input disabled='disabled' type="radio" id="starmaid3" name="ratingmaid" value="3" /><label for="starmaid3" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                            <input disabled='disabled' type="radio" id="starmaid2" name="ratingmaid" value="2" /><label for="starmaid2" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                            <input disabled='disabled' type="radio" id="starmaid1" name="ratingmaid" value="1" /><label for="starmaid1" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                        </fieldset>                
+                    </div>                    
+                </div>
+            </div>
+       </div>
+        
+       <div class="row" data-bind="invisible: alert.markedAsFinished"> 
+          <span data-bind="invisible: alert.dnd"> 
+              <span data-bind="visible: alert.resolved" style="margin:0px; padding:0px;">
+                    <div  class="col-xs-12"  style="padding: 0px; text-align: center; ">
+                        <h3 class="c-light" style="opacity: 0.5; margin-top: 10px; ">ALERTA RESUELTA</h3>
+                    </div>
+                    <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: center">
+                        <i class="mdi mdi-clock valign c-light" style="font-size: 20px; "></i>
+                        <span class="c-light">Duración: </span>
+                        <span data-bind="html: alert.durationtext"></span>
+                        
+                    </div>
+                  <div class="col-xs-12" > 
+                        <button class="btn btn-block btn-main b-main valign btn-raisehand " type="button" data-role="button" 
+                            data-bind="click: takeAlert" style="border: 1px white solid; padding: 0px;">
+                            <h4 style="margin: 10px" class="c-white center valign">Reabrir alerta<i class="mdi raisehand shadow rotateminus90   mdi-hand-pointing-right"></i></h4>
+                            
+                        </button>
+                  </div>
+              </span>
+          </span>
+        </div> 
+
+            
+      
+            
+          
+            
+             <div class="row">
+                <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: center" data-bind="visible: alert.markedAsFinished">
+                             <h4 class="c-light" style="opacity: 0.5; border: 1px solid #00bcd4; padding: 2px">MARCADA COMO FINALIZADA</h4>                    
+                </div>            
+                 <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: center" data-bind="visible: alert.dnd">
+                      <h4 style="color: red; opacity: 0.5;border: 1px solid #00bcd4; padding: 2px">DND</h4>
+                </div>
+            </div>
+            
+       
+    
+        <!------------------- -->
+        <!-- COMMENTS/PROMPT -->
+        
+             <!-- Deslice para actualizar -->
+                 
+         <div class="row" data-bind="visible: noActionlog">
+             <div class="col-xs-12">
+                 <div style="text-align: center">                                
+                     <h3 class="c-light" style="opacity: 0.5">NO HAY ACTIVIDAD</h3>
+                     <h5 class="c-light" style="opacity: 0.5">Deslice para actualizar</h5>
+                     <img src="resources/imgs/misc/pulltorefresh.png" > 
+                 </div>                
+             </div>
+         </div>
+        
+        
+        <hr style="margin-bottom: 10px; margin-top: 10px;">
+        <div class="row">            
+            <div id="actionLogStart" class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                <ul data-role="listview" 
+                    data-bind="source: actionLogDataSource"     
+                    data-template="alert-maid-comments-template">
+                </ul>
+            </div>    
+        </div>
+   
+        
+        <script type="text/x-kendo-template" id="alert-maid-comments-template">                
+             <div data-role="listview-link" class="km-listview-link " style="padding: 0px;">
+                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-2">                           
+                            # if (action === globals.ACTION_COMMENT) { #
+                                <i class="mdi mdi-comment-outline valign  " style="font-size: 20px; "></i>
+                            # } else if (action === globals.ACTION_PICTURE) { #
+                                <i class="mdi mdi-camera valign  " style="font-size: 20px; "></i>            
+                            # } else if (action === globals.ACTION_STARTED) { #
+                                <i class="mdi c-main mdi-play valign  " style="font-size: 20px; "></i>            
+                            # } else if (action === globals.ACTION_PAUSED) { #
+                                <i class="mdi  mdi-pause-circle-outline  valign " style="font-size: 20px; "></i>                                
+                            # } else if (action === globals.ACTION_RESOLVED) { #
+                                <i class="mdi c-main4 mdi-checkbox-marked-outline  valign " style="font-size: 20px; "></i>        
+                            # } else if (action === globals.ACTION_RESUMED) { #
+                                <i class="mdi  mdi-play-circle-outline valign  " style="font-size: 20px; "></i>        
+                            # }  #
+                                
+                        </div>
+                        <div class="col-xs-10" >
+                           <span style="font-size: 12px; margin-left: 5px" class="c-main2">
+                                
+                                <strong>#: helper.getStaffFullName(idstaff) #</strong> a las  #: $date.datef(lastmodified, "h:mm a") #
+                           </span>
+                           <br>             
+                         # if (action === globals.ACTION_PICTURE) { #
+                                # if (insync === true) { #
+                                    <a  onclick="app.homeView.strechActionLogImage(#: idactionlog#)">
+                                         <img style="width: 50%; height: 50%"  id="actionlogPicture#:idactionlog#"  src="#: uris #" >
+                                    </a>
+                                # } else { #
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>                                    
+                                
+                                # }  #
+                                
+                         # } else { #
+                             <span style="margin-left: 5px; font-size: 18px">#: prompt #</span>                              
+                         # }  #
+                        </div>
+                    </div>               
+                 </div> 
+            </div> 
+        </script>        
+        
+   
+     </div>        
+
+    
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

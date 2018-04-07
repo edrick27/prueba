@@ -1,0 +1,74 @@
+<div id="viewSettings" data-role="view" data-title="Profile" data-layout="main" data-model="app.settingsView" 
+       data-before-show="app.settingsView.beforeShow" >
+    <!-- START_CUSTOM_CODE_contactsView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+    
+     
+    <header data-role="header">
+        <div class="navbar b-main"  data-role="navbar">
+             <span data-align="left"> 
+                
+                <a data-align="left" data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px"></i>                                
+            </a>              
+            </span>
+            
+            <span style="font-size: 1.2em; color: white" data-align="middle">
+                <i class="mdi mdi-settings c-white"></i>
+                Configuración                
+            </span>
+            
+        </div>
+    </header>
+    
+    
+    
+    <header class="jumbotron" style="padding:0px">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center">
+                    <h2 data-bind="html: profile.hotelname" class="shadow"></h2>
+                </div>
+                
+            </div>
+            <div class="row" style="vertical-align: middle">
+                <div class="col-xs-4" style="text-align: center">
+                    <div class="image-cropper" >
+                        <img id="imgAvatar" data-bind="attr: {src: profile.avatar }, click: takePicture"   
+                        class="img-responsive" />
+                    </div>
+                 </div>
+                <div class="col-xs-8" style="text-align: center">                    
+                    <h4 data-bind="html: profile.fullname" class="color-main m5"></h4><br>
+                    <strong data-bind="html: profile.role"></strong> 
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    
+    
+     <ul data-role="listview" data-style="inset2">                
+        <li><a  data-bind="click: takePicture"  data-role="button2"><span translate>Cambiar Foto</span></a></li> 
+         <li><a  data-bind="click: goChangePassword"  data-role="button2"><span translate>Cambiar Contraseña</span></a></li>          
+        <li >
+            <input type="checkbox" data-role="switch" data-off-label="No" data-on-label="Si" 
+                   data-change="app.settingsView.toggleExteriorMode" data-bind="checked: preferences.exterior"/><span translate>Modo Exterior</span>            
+        </li>                                
+        <li class="hidden">
+            <input type="checkbox" data-role="switch" data-bind="checked: preferences.autorefresh" data-change="app.settingsView.toggleAutoRefresh"/>
+            <span translate>AutoRefresh</span><sup> beta</sup>            
+        </li>        
+        
+                  
+     </ul>
+    
+        <!--- a id="versionInfo" href=""></a> -->
+    
+    
+    
+    
+    <!-- END_CUSTOM_CODE_contactsView -->
+</div>

@@ -1,0 +1,88 @@
+<style>    
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    
+     #viewAlertSettings .km-listview-link:after, .km-listview-label:after {
+         display: none;
+     }
+    
+    
+    
+    
+ </style>
+
+<div id="viewAlertSettings" data-role="view"  data-model="app.reportAlertView">
+    
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar">
+            <span style="font-size: 1em; color: white" data-align="center">Opciones</span>
+            <a data-align="left"  data-role="touch" data-tap="app.reportAlertView.goBack">
+                <i class="mdi mdi-chevron-left mdi-2x c-white"></i>
+            </a>
+                     
+        </div>
+    </header>
+    
+    <footer data-role="footer">
+        
+    </footer> 
+    
+    
+   
+       <div class="container-fluid" style="width:100%;"> 
+           
+             <div class="row" style="margin-top: 20px;">             
+               <div class="col-xs-12">
+                 
+                   <div class="km-listview-wrapper">
+                       <ul data-role="listview"  class="km-widget km-listview km-list">
+                            <li id="optionTakeAlert" data-bind="visible: canTakeAlert, click:toggleTakeAlert" >
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" >                                                           
+                                     <span style="color: black" class="valign">Tomar alerta (Asignación propia) </span>                                     
+                                 </div>
+                               </div>
+                           </li>
+                           <li id="optionTakeAlertAndStart" data-bind="visible: canTakeAlert, click:toggleTakeAlertAndStart" >
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" >                                                           
+                                     <span style="color: black" class="valign">Tomar y Comenzar</span>                                     
+                                 </div>
+                               </div>
+                           </li>
+                           <li id="optionReportDone" data-bind="click:toggleReportDone" >
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" >                                                           
+                                     <span style="color: black" class="valign">Reportar trabajo realizado</span>                                     
+                                 </div>
+                               </div>
+                           </li>
+                           <li id="optionByHousekeeper" data-bind="click:toggleByHousekeeper" >
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" >                                                           
+                                     <span style="color: black" class="valign">Asignar a Ama de llaves</span>                                     
+                                 </div>
+                               </div>
+                           </li>
+                       </ul>    
+                   </div>                 
+               </div>
+                 
+                 
+               
+                
+            
+            </div>
+       </div>
+        
+ 
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

@@ -1,0 +1,91 @@
+<style>    
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    </style>
+
+    <div id="viewAlertSettings" data-role="view" data-title="Crear Tarea"  data-model="app.homeView"
+        data-before-show="app.homeView.beforeShowEstimateDuration">
+
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar" >
+            <a  data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left mdi-2x " style="color: white"></i>
+            </a>
+            <span style="color: white" data-align="center">Opciones</span>
+
+            <a  data-align="right"  data-role="button" data-bind="click:cancelSettings" class="sh-headerbutton">
+                <i class="mdi mdi-close mdi-2x " style="color: white"></i>
+            </a>
+        </div>
+    </header>
+                
+    <footer data-role="footer">
+        
+    </footer>
+
+    <div class="container-fluid">
+
+      
+
+        <div class="row">
+                       
+            
+            <div class="col-xs-12 mt10" style="text-align: left" >
+                <div class="form-group" data-bind="visible: alert.hasstarted">
+                    <label class="sh-label">Estimación: </label> <span data-bind="html: alert.expectedduration"></span> min. <br>
+                    <label class="sh-label">Transcurrido: </label> <span data-bind="html:alert.elapsed"></span> min. <br> 
+                </div>
+            </div>
+        
+            <div class="col-xs-12 mt10" style="text-align: left">
+                <div class="form-group">
+                    <label class="sh-label2">¿Cuánto tiempo <strong data-bind="visible:hasstarted">más</strong> ocupas?</label>
+                </div>
+            </div>
+                
+            <div class="col-xs-6" style="text-align: center">
+                <div class="form-group">
+                    <label class="sh-label">Horas</label><br>
+                    <select class="form-control344 sh-select44 c-main" data-value-field="hour" data-text-field="hour"
+                            style="font-size: 50px; border: none; background-color: transparent; "
+                            data-bind="source: settings.hours, value: estimate.hours">
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6" style="text-align: center">
+                <div class="form-group">
+                    <label class="sh-label">Minutos</label><br>
+                    <select class="form-control333 sh-select333 c-main" data-value-field="minute" data-text-field="minute"
+                            style="font-size: 50px; border: none; background-color: transparent;"
+                            data-bind="source: settings.minutes, value: estimate.minutes">
+                    </select>
+                </div>
+            </div>
+        </div>
+                    
+        <div class="row">
+            <div class="col-xs-6 center" >
+                <br><br>
+                <button  data-role="button" data-bind="click: cancelSettingEstimateDuration"  class="btn btn-dialog  c-black ">
+                    <span translate>CANCELAR</span>
+                </button>
+            </div>
+            <div class="col-xs-6 center" >
+                <br><br>
+                <button data-role="button" data-bind="click: acceptSettingsEstimateDuration"  class="btn btn-dialog btn-main b-main ">
+                    <span translate>ENVIAR</span>
+                </button>
+            </div>
+        </div>
+                    
+    </div> <!-- container-fluid -->
+            
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+    

@@ -1,0 +1,44 @@
+<style>    
+  
+    .mensaje {
+       
+        color: white;        
+        font-size: 25px;
+        font-weight: 400;
+        letter-spacing: 0.89px;
+        line-height: 40px;
+    }
+    
+    
+    
+    
+</style>
+
+<div data-role="view" data-layout="main"  data-model="app.reportAlertView" class="b-main" >
+   
+    
+      <header data-role="header"  >
+      </header>
+    <div data-role="content" class="container-fluid  b-main " style="text-align: center" >
+        <div class="mensaje" style="padding-top: 10%" >
+            <i class="mdi mdi-checkbox-marked-outline" style="font-size:100px"></i>
+            <h1 class="mensaje">¡Alerta creada exitosamente! </h1>
+        </div>
+        <div class="c-white" style="padding-top: 10%; text-align: center; font-size: 16px">                                   
+            
+             <button type="button" data-role="button" data-bind="click: goBackLocation" 
+                            class="btn sh-button mb10 b-main3"  >                         
+                         <i class="mdi mdi-plus   magictime tinDownIn" style="font-size: 1.5em;"></i>
+                        <span translate>Nueva Alerta misma Habitación</span>
+                    </button>           
+                       
+            
+            
+        </div>
+        
+        
+    </div>
+    
+    
+</div>
+

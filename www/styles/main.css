@@ -1,0 +1,770 @@
+.selectedData {    
+    background-color : #00bcd4;
+    color: white !important;
+    border-radius: 5px;
+}
+
+.selectedData * {    
+    background-color : #00bcd4;
+    color: white !important;
+}
+
+
+
+/* Enables font awesome to be used with kendo icons  */
+.fa .km-icon:after,
+.fa .km-icon:before
+{
+    font: 1em/1em 'FontAwesome';
+}
+
+
+.km-warning:after,
+.km-warning:before
+ {
+        content: "\f071";  
+ }
+.km-calendar:after,
+.km-calendar:before
+ {
+        content: "\f272";
+ }
+
+.km-calendar:after,
+.km-calendar:before
+ {
+        content: "\f272";
+ }
+
+.km-hotel:after,
+.km-hotel:before
+{
+    content: "\f236";
+}
+
+.km-people:after,
+.km-people:before {
+    content: "\f007";
+}
+
+.km-home:after,
+.km-home:before {
+    content: "\f015";
+}
+
+.km-plus:after,
+.km-plus:before {
+    content: "\f067";
+}
+
+
+/* Used when showing loader -- app.showLoading 
+This enables the h1 to be visisble in .km-nova and 
+*/
+.km-nova .km-loader h1, .km-flat .km-loader h1
+{
+    display: block;
+    background-color: rgba(71, 69, 67, 0.7);
+    background: rgba(71, 69, 67, 0.7);
+    color: White !important;
+    padding: 10px 0; 
+    font-size: 1.5em;        
+}
+
+/**/
+
+
+
+/* reset everything to the default box model */
+
+*, :before, :after
+{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+
+ .maid .km-list > li {
+       border-bottom: 1px solid  transparent !important;
+}    
+
+
+/* set a border-box model only to elements that need it */
+
+.form-control, /* if this class is applied to a Kendo UI widget, its layout may change */
+.container,
+.container-fluid,
+.row,
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+.col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+.col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+.col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+.col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#smarthotel .isOnline
+{
+    color: #EFFD4F; /*#FF6600;*/
+}
+#smarthotel .isOffline
+{
+    color: lightgray;
+}
+
+#smarthotel .isCallingAPI
+{
+    color: #84CC63;
+}
+
+#smarthotel .apiCallFailed
+{
+    color: red;
+}
+
+
+.iscleaningtask1 {
+    /*background-color: rgba(56,184,164,0.2);    */
+}
+
+
+#smarthotel .hidden {
+    display: none;
+}
+
+#smarthotel .loader {
+    /*position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;*/
+    background: url('resources/imgs/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+
+
+.km-drawer-icon
+{
+    color: lightgray;
+}
+
+.ml0
+{
+    margin-left: 0px !important;
+}
+
+.valign
+{
+    vertical-align: middle !important;
+}
+
+/*****************/
+
+    
+.km-flat .km-group-title {
+    background: white !important;    
+} 
+
+
+
+
+
+
+/*
+#smarthotel .km-flat .km-drawer .km-content {
+background-color: white;
+}
+*/
+
+.backButton:hover {
+        text-decoration: none;
+}
+
+
+
+/* Removes rounded border to tabstrip navigation */
+.km-nova .km-button, .km-nova .km-buttongroup .km-button
+{
+    border-radius: 0px;
+}
+
+#kendoUiMobileApp .image-with-text img
+{
+    float: left;
+    margin-right: 15px;
+}
+
+#kendoUiMobileApp .block
+{
+    display: block;
+    margin: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+#kendoUiMobileApp .button-group,
+#kendoUiMobileApp .icon-group
+{
+    width: 100%;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 1em;
+}
+
+#kendoUiMobileApp .button-group
+{
+    table-layout: fixed;
+}
+
+#kendoUiMobileApp .button-group .km-button
+{
+    display: table-cell;
+    padding: .6em .8em;
+    margin: 1em 0;
+}
+
+#kendoUiMobileApp .button-group.button-group-vertical .km-button
+{
+    display: block;
+}
+
+#kendoUiMobileApp.km-flat .button-group .km-button.primary
+{
+    color: #fff;
+    background-color: #10c4b2;
+}
+
+#kendoUiMobileApp.km-ios7 .button-group .km-button.primary
+{
+    color: #fff;
+    background-color: #007aff;
+}
+
+#kendoUiMobileApp.km-android .button-group .km-button.primary
+{
+    color: #fff;
+    background-color: #33b5e5;
+}
+
+#kendoUiMobileApp .group-separator
+{
+    border: none;
+    background: transparent;
+}
+
+#kendoUiMobileApp .group-separator-header
+{
+    margin: 1em 0;
+}
+
+#kendoUiMobileApp .app-icon
+{
+    text-align: center;
+    margin: 3em 0;
+}
+
+#kendoUiMobileApp .view-title
+{
+    text-align: center;
+    font-weight: normal;
+}
+
+/*
+.km-drawer-button:after,
+.km-drawer-button:before {
+content: '\e077';
+}
+
+*/
+
+
+
+#kendoUiMobileApp.km-flat .km-drawer .km-content
+{
+    background-color: #fcfcfc;
+}
+
+#kendoUiMobileApp form .form-content li p
+{
+    margin: 0;
+}
+
+#kendoUiMobileApp .icon-group .app-icon,
+#kendoUiMobileApp .icon-group .app-details
+{
+    display: table-cell;
+    vertical-align: top;
+}
+
+#kendoUiMobileApp .icon-group .app-icon
+{
+    margin: 0;
+    width: 5em;
+    overflow: hidden;
+    text-align: left;
+}
+
+#kendoUiMobileApp .icon-group .app-icon img
+{
+    display: block;
+    max-width: 5em;
+    height: auto;
+}
+
+#kendoUiMobileApp .icon-group .app-details h2,
+#kendoUiMobileApp .icon-group .app-details h4
+{
+    font-weight: normal;
+    margin: 0;
+}
+
+#kendoUiMobileApp .icon-group .app-details h4
+{
+    color: #828282;
+    margin-top: 0.5em;
+}
+
+/*
+#kendoUiMobileApp #navigation-container .km-tabstrip .km-button
+{
+vertical-align: middle;
+}
+*/
+
+#kendoUiMobileApp #navigation-container.km-tabstrip .km-button .km-text
+{
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/*
+#kendoUiMobileApp #navigation-container .active
+{
+background: #10c4b2; 
+color: #fff;
+}
+
+*/
+
+#kendoUiMobileApp #navigation-container .active:after
+{
+    color: #fff;
+}
+
+#kendoUiMobileApp #navigation-container-drawer.km-tabstrip .km-button
+{
+    vertical-align: top;
+}
+
+#kendoUiMobileApp #navigation-container-drawer.km-tabstrip .km-button .km-text
+{
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+#kendoUiMobileApp #navigation-container-drawer .active
+{
+    background: #10c4b2;
+    color: #fff;
+}
+
+#kendoUiMobileApp #navigation-container-drawer .active:after
+{
+    color: #fff;
+}
+
+/************************************************/
+/*           VIEW HOME                          */ 
+/************************************************/
+
+#viewHome .km-view-title
+{
+    font-size: 1.5em; 
+}
+
+/**** navbar housekeeper */
+
+#viewHome .navbarhousekeeper .km-view-title
+{
+    /*line-height: 1.5em;*/
+    font-size: 1em;
+}
+
+#viewHome .navbarhousekeeper .nav>li>a
+{
+    /*padding: 10px 10px;*/
+}
+    
+#smarthotel .image-cropper
+{
+    
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+#smarthotel .image-cropper-no-shadow
+{
+    
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+    
+#viewHome .jumbotron
+{
+    padding: 0px !important;
+    padding-bottom: 0px;
+    margin-bottom: 0px; /*9px*/
+    background-color: #f4f4f4;
+    /*border-bottom: 2px dashed gray;*/
+}
+
+.jumbotron
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    background-color: #f4f4f4;
+}
+
+.km-listview-link
+{
+    margin: 0px !important;
+    padding-left: 0px !important;
+}
+    
+.m5
+{
+    margin: 5px;
+    display: inline-block;
+}
+
+.m0
+{
+    margin: 0px;
+    display: inline-block;
+}
+    
+.vcenter
+{
+    display: inline-block;
+    vertical-align: middle;
+    float: none; 
+}
+    
+
+/* idcategory= 2 && idstatus=1 */
+.isTask21 {
+    border-left: solid #00bcd4 5px !important; 
+}
+
+.isTask13 {
+    border-left: dashed #ff362f 5px !important;  
+}
+
+.isTask23 {
+    border-left: dashed #00bcd4 5px !important;   
+}
+
+.alertStatus1 {   
+   border-left: solid #ff362f 5px !important;    
+}
+
+
+
+ .alertStatus2 {    
+   border-left: solid #ffe00d 5px !important;    
+}
+
+
+
+.alertStatus3 {   
+   /*border-left: dashed #FF6600 5px;    */
+}
+
+.alertStatus100 {
+     border-left: solid lightgray    5px !important;    
+    
+}
+
+.alertStatus11 {
+     border-left: solid #ff362f 5px !important;
+}
+
+.alertStatus21 {
+     border-left: solid #00bcd4 5px !important;
+}
+
+.alertStatus12, .alertStatus22 {
+     border-left: solid #ffe00d 5px !important;
+}
+
+
+.alertStatus13 {
+     border-left: dashed #ff362f 5px !important;
+}
+
+.alertStatus23 {
+     border-left: dashed #00bcd4 5px !important;
+}
+
+
+.alertStatus1100 {
+     border-left: solid lightgray 5px !important;
+}
+
+.alertStatus2100 {
+     border-left: solid lightgray 5px !important;
+}
+
+
+
+.isRequest2 {
+    /*border-right: solid #38b8a4 2px !important;    */
+}
+
+
+.orphan0 {   
+    opacity: 1; 
+}
+   
+
+
+.taskStatus1 {   
+   border-left: solid #00bcd4 5px;    
+}
+
+ .taskStatus2 {    
+   border-left: solid #ffe00d 5px;    
+}
+
+.taskStatus3 {   
+   border-left: dashed #FF6600 5px;    
+}
+
+ .taskStatus100 {
+     border-left: solid lightgray    5px;    
+     
+}
+
+    
+
+
+
+
+#viewHome .status-2
+{
+    /*background-color: #FFF0DD;*/
+}
+
+#viewHome .labelstatus-2
+{ /* in progress */
+    color: Darkorange;
+    /* text-decoration: underline;*/
+    
+}
+
+/********************************/
+/********   VIEWHOME ********** */
+/********************************/
+
+#viewHome .newVersion 
+{
+    background-color: #38b8a4;
+    color: White;
+    text-align: center;
+    padding: 5px;    
+}
+
+#viewHome .newVersion span
+{
+   font-size: 18px;
+    
+}
+
+#viewHome .alertNumber
+{
+    background-color: #fe3636;
+    color: White;
+    text-align: center;
+}
+#viewHome .alertNumber h4
+{
+
+
+    color: white;
+    /*font-family: 'Roboto';*/
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+}
+#viewHotel .center-pills, #viewHome .center-pills
+{
+    display: inline-block;
+}
+
+
+#viewHome .plusCircle:hover, #viewProfileHousekeeper .plusCircle:hover, #viewAlert .plusCircle:hover, 
+    #viewTask .plusCircle:hover, #viewHotel .plusCircle:hover, #viewProfileManager .plusCircle:hover ,
+    #viewSelectAlertCategory .plusCircle:hover, #viewProfileMaid .plusCircle:hover
+ {
+    /*background-color: #38b8a4;  */
+     opacity: 1;
+     
+     
+}
+
+.plusCircleAlert {
+    background-color: #ff362f !important; 
+}
+
+.plusCircleCleaningTask {
+    background-color: #38b8a4 !important; 
+}
+
+#viewHome .plusCircle, #viewProfileHousekeeper .plusCircle, #viewAlert .plusCircle, 
+    #viewTask .plusCircle, #viewHotel .plusCircle, #viewProfileManager .plusCircle,
+    #viewSelectAlertCategory .plusCircle, #viewProfileMaid .plusCircle
+{ 
+        
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    background-color: #00bcd4; 
+    color: White;
+    border: none; /*0.5px solid black;*/
+            
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.24), 0 0 8px rgba(0, 0, 0, 0.12);
+            
+    font-size: 24px;
+    font-weight: lighter;
+    line-height: 1em; 
+        
+    position : fixed; 
+    top: 350px; /* recalculated in the code */
+    right: 5px; 
+    z-index: 100000;
+    
+    opacity: 0.6;
+}
+    
+ #viewHome .plusCircle .height_fix, #viewProfileHousekeeper .plusCircle .height_fix, #viewAlert .plusCircle .height_fix,
+    #viewTask .plusCircle .height_fix, #viewHotel .plusCircle .height_fix, #viewProfileManager .plusCircle .height_fix,
+    #viewSelectAlertCategory .plusCircle .height_fix, #viewProfileMaid .plusCircle .height_fix
+{
+    margin-top: 100%;
+}
+    
+ #viewHome .plusCircle .content, #viewProfileHousekeeper .plusCircle .content, #viewAlert .plusCircle .content, 
+    #viewTask .plusCircle .content, #viewHotel .plusCircle .content, #viewProfileManager .plusCircle .content,
+     #viewSelectAlertCategory .plusCircle .content , #viewProfileMaid .plusCircle .height_fix  
+{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -12px; /* Note, this must be half the font size */
+}
+
+/* DIALOG */
+.k-window-titlebar
+{
+    background-color: White;
+  
+}
+    
+.dialog-text
+{
+        
+    color: #2b3a40;
+    /*font-family: 'Roboto';*/
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.k-header
+{
+    border: none; 
+}
+
+
+
+/******** SWITCH ******/
+
+.onoffswitch {
+    position: relative; width: 45px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 22px; padding: 0; line-height: 22px;
+    border: 2px solid #CCCCCC; border-radius: 22px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 22px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 21px;
+    border: 2px solid #CCCCCC; border-radius: 22px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #00bcd4;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #00bcd4;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+
+
+
+
+
+
+
+
+
+.dingdonepriority {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 25px 25px;
+    /* border-color: transparent transparent #007bff transparent;*/
+    
+}
+
+
+
+
+

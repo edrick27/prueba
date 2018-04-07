@@ -1,0 +1,230 @@
+<style>
+    #viewCreateAlert .row {
+        margin-top: 10px;
+    }
+</style>
+
+<div id="viewCreateAlert" data-role="view" data-title="Crear Alertar" data-layout="main" data-model="app.reportAlertView"
+     data-before-show="app.reportAlertView.beforeViewCreateAlert" >
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+    
+    
+   <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+     <footer data-role="footer">
+        
+    </footer>
+
+    <div data-role="header"  style="border-bottom: 1px solid #e5e5e5; ">
+        <div class="col-sm-12" style="padding: 10px">
+            <span data-bind="html: alert.facility.name"  class="sh-breadcrumb"></span>  
+            <span data-bind="invisible: noItem" >
+                <span data-bind="invisible: isLostAndFound" >
+                   <span data-bind="visible: isLodging">
+                        <span  class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                        <span data-bind="html: alert.location.name"  class="sh-breadcrumb"></span>
+                        <span data-bind="invisible: isRequest" class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                        <span data-bind="invisible: isRequest, html: alert.item.name"  class="sh-breadcrumb"></span>
+                   </span>
+                </span>
+            </span>
+        </div>
+    </div>
+   
+        
+    
+    
+    <div class="container-fluid" >
+       
+        <div class="row">
+            <div class="col col-xs-12 text-center">                        
+             
+                <div style="padding-top: 2%" class="text-center">
+                    <span data-bind="invisible: isLostAndFound">
+                        <strong data-bind="html: alert.category.name, invisible: isTask " class="sh-label "></strong> 
+                        <strong data-bind="visible: isTask " class="sh-label ">Tarea</strong> 
+                        <br> 
+                    </span>
+                    <strong data-bind="invisible: isRequest, html: alert.alertType.name" class="sh-label2 "></strong> 
+                    <span data-bind="visible: isRequest, html: alert.item.name"  class="sh-label2"></span>
+                </div>
+            <br>
+            </div>
+        </div>
+        
+        <div class="row" data-bind="visible: canAssign">
+            <div class="col-xs-12" data-bind="invisible: isLostAndFound">               
+                     <button data-role="button"   class="btn btn-block btn-button mb10"
+                            data-bind="visible: alert.isOrphan, click: openSelectStaffView" style="background-color: #f4f4f4; height: 40px; margin-top: 0px;">                        
+                        <span class="c-main2 valign" translate>SELECCIONA PARA ASIGNAR</span>
+                     </button>
+                     
+                     <button data-role="button" class="btn btn-block btn-button mb10 c-color"
+                            data-bind="invisible: alert.isOrphan, click: openSelectStaffView" 
+                            style="background-color: #f4f4f4; height: 70px; margin-top: 10px; text-align: left;">                        
+                                                  
+                        <img  data-bind="attr: { src: alert.staffAvatar}" class="image-cropper-no-shadow valign " style="width: 50px; height: 50px;"/>              
+                        
+                         <div style="text-align: left; margin-left: 0px; display: inline-block; width: 50%" class="valign">
+                             <div class="sh-fixlongtext " >       
+                              <h4  data-bind="html: alert.staffFullname" class="m0 staffName" style="margin-left: 10px;"></h4>
+                              </div>   
+                             <div class="sh-fixlongtext " >       
+                                <span class="c-light" data-bind="html: alert.staffRole" style="margin-left: 10px;"></span>
+                            </div>
+                        </div>                        
+                     </button>                     
+                 </div>    
+        </div>
+        
+        
+        <div class="row">
+            <div class="col col-xs-12">                
+                
+                <span>Comentarios<br> <br>
+                <textarea id="alertComment" class="sh-select" data-bind="value: alert.notes" style="width: 100%" rows="3" placeholder="Si deseas puedes dejar un comentario"></textarea></span>                    
+            </div>            
+        </div>
+        
+        <div class="row" >
+             <div class="col col-xs-8" data-bind="visible: showCamera">                
+                 <button data-role="touch" data-tap="app.reportAlertView.takePicture"  class="btn btn-block btn-button mb10"
+                         style="background-color: #f4f4f4;">
+                    TOMAR FOTO <i class="mdi mdi-camera c-main2 valign" style="font-size: 24px"></i>                                    
+                 </button>
+             </div>    
+            <div class="col col-xs-4" data-bind="visible: showCamera">                
+                 <button data-role="touch" data-tap="app.reportAlertView.selectPicture"  class="btn btn-block btn-button mb10"
+                         style="background-color: #f4f4f4;">
+                    <i class="mdi mdi-folder-image c-main2 valign" style="font-size: 24px"></i>                                    
+                 </button>
+             </div>    
+        </div>   
+            <section data-bind="invisible: isCleaningTask">
+                <section data-bind="visible: isTask">
+                    <div class="col-xs-4 " style="margin-top: 10px;" >
+                        <span>Fecha:</span>
+                    </div>
+                    <div class="col-xs-8 text-center">
+                        <input class=" form-control sh-select" type="date" data-bind="value: alert.startdate" 
+                                    style2="padding:0px; display: inline-block">
+                    </div>     
+                </section>
+            </section>
+       
+           <div data-bind="invisible: isTask" >
+               <div class="row" data-bind="invisible: isRequest">
+                    <div class="col-xs-9 pb5 text-center valign" >
+                       
+                        <input type="checkbox" id="byguestcheckbox" value="0">
+                        <span data-bind="click: toggleReportadoPorHuesped" >
+                             <span data-bind="invisible: isCleaningTask" >Reportado por Huésped</span>
+                             <span data-bind="visible: isCleaningTask" >Solicitada por Huésped</span>
+                            
+                        </span> <br>
+                    </div>  
+                   <div class="col-xs-3 valign" style="margin-left:0px; padding-left:0px" data-bind="visible: seeAlertSettings"> 
+                        <button class="btn btn-block btn-default valign" type="button" data-role="button" 
+                                data-bind="click: showCreateAlertSettings">
+                             <i class="mdi  mdi-settings"></i>
+                        </button>
+                    </div>
+               </div>  
+           </div>
+        
+            <div class="row" data-bind="visible: hasOptionSelected">
+                <div class="col-xs-12 text-center">                
+                    <small style="color: white; padding: 3px;" class="b-main3" data-bind="html: optionSelectedMsg"> </small> 
+                </div>
+            </div>      
+            
+           <div class="row">
+        
+            <div class="col-xs-12 pb5 text-center" >
+                <br>
+                <button id="btnCreateAlert" class="btn sh-button mb10 "  
+                        data-bind="click: createAlert, invisible: alert.sent" style="width22: 150px;">                 
+                    <span data-bind="invisible: isRequest">
+                        <span translate data-bind="invisible: isTask">CREAR ALERTA</span>    
+                        <span translate data-bind="visible: isTask">CREAR TAREA</span>    
+                    </span>
+                    
+                    <span translate data-bind="visible: isRequest">ENVIAR SOLICITUD</span>                    
+                    
+                    
+                </button>
+            </div>    
+            
+            
+            <!-- Display any Pictues taken -->
+            <div class="col-xs-12" data-bind="visible: hasPicture" >
+                
+                 <!-- <div class="col col-xs-12" >
+                    <i style="float: right;font-size: 24px" class="mdi mdi-close c-main4" 
+                       data-role="touch" data-tap="app.reportAlertView.deletePicture"></i>
+                    <a  class="thumbnail">
+                        <img id="imgAlert" >                        
+                    </a>
+                </div>  -->
+                
+                
+                <div class="row" data-bind="source: pictures" data-template="picture-template">      
+                   
+               </div>        
+            </div>
+            
+        </div>
+        
+        
+        <script type="text/x-kendo-template" id="picture-template">    
+            <div class="col col-xs-12">                
+                <i style="float: right;font-size: 24px" class="mdi mdi-close c-main4" 
+                   data-role="touch" data-tap="app.reportAlertView.deletePicture" data-picture="#: data #"></i>
+                <a  class="thumbnail">
+                    <img id="imgLostAndFoundTemplate" src="data:image/jpeg;base64,#: data #" >                        
+                </a>
+            </div>
+        </script>
+         
+        <!--<script type="text/x-kendo-template" id="picture-template">    
+            <div class="col col-xs-12">
+                <i style="float: right;font-size: 24px" class="mdi mdi-close c-main4" 
+                   data-role="touch" data-tap="app.reportAlertView.deletePicture" data-uri="#: data #"></i>
+                <a  class="thumbnail">
+                    <img id="imgLostAndFoundTemplate" src="data:image/jpeg;base64, + #: data #" >                        
+                </a>
+            </div>
+        </script> -->
+        
+    
+        
+    </div> <!-- container -->
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

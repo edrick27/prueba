@@ -1,0 +1,345 @@
+<style>
+   
+    .viewProfile .km-content
+    {
+        background-color: #f4f4f4 !important;
+    }
+    
+    .viewProfile .label
+    {
+    
+        color: #909090;        
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+    
+    table .header
+    {
+    
+        color: black; /*#2b3a40; */        
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 15px;
+    }
+    
+    table .data
+    {         
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 15px;
+    }    
+    
+    table .starttime
+    {
+        color: #38b8a4;
+    }   
+    
+    table .endtime
+    {
+        color: #fe3636; 
+    }    
+    table .free
+    {
+        color: #909090;
+    }    
+    
+    .viewProfile .footerLabel
+    {
+    
+        color: #2b3a40;        
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 13px;
+        margin-right: 10px;
+    }    
+
+    .viewProfile .profilehr
+    {
+        background-color: #e5e5e5;
+        color: #e5e5e5;
+        border-color: #e5e5e5;
+    }
+    
+      #taskHistory tbody tr td:first-child {
+          text-align: left;
+      }
+    
+    
+    #taskHistory thead tr {
+        height: 50px; 
+        background-color: #e5e5e5;                
+        color: Black;        
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 15px;        
+    }
+    
+     #taskHistory tbody tr {
+         border-bottom: 1px solid #e5e5e5;
+          height: 50px; 
+     }
+    
+    
+    
+    
+    </style>
+            
+<div id="viewProfileMaid" class="viewProfile" data-role="view" data-title="Profile" data-layout="main" data-model="app.profileView" 
+      data-init="app.profileView.initMaid" data-before-show="app.profileView.beforeShowMaid" data-after-show="app.profileView.afterShowMaid">
+                   
+    
+     <header data-role="header" >
+        <div id="navbarmaid" class="navbar" data-role="navbar" style="height: 60px !important;">
+            
+            <a  id="profileGoBack" data-align="left"  data-role="button" data-bind="click:goBack" class="hidden sh-headerbutton"
+                style="padding-right: 40px;">
+                <i class="mdi mdi-chevron-left mdi-2x c-black"></i>
+                
+            </a>         
+            
+            
+            <span data-align="left" data-bind="visible: dingdone">                                 
+                <img data-bind="attr: {src: avatar }"   class="image-cropper" style="width: 50px; height: 50px;"
+                onclick="javascript: $smart.goSettings()" />                 
+            </span>
+            <span data-align="left" data-bind="invisible:dingdone"> 
+                <img src="resources/imgs/misc/zzz2.jpg"   style="width: 50px; height: 50px; opacity: 1"
+                     onclick="javascript: $smart.goSettings()" />                                  
+            </span> 
+            <div data-align="left" style="text-align: left; margin-left: 10px;">
+                <h4  data-bind="html: staff.fullname" class="c-black m0"></h4><br>
+                <small data-bind="html: staff.role"></small>
+            </div>
+            
+            <!--<span data-align="right"> 
+                <i class="mdi mdi-clock sh-mdi-clock" style="vertical-align: middle"></i> 
+                <span id="clockprofile" style="vertical-align: middle" class="sh-time"></span>                 
+            </span> -->
+        </div>
+    </header>
+            
+    <div class="container-fluid">
+        <div class="row" style="display: none">
+            <div class="col-xs-12">               
+                <br>
+                <span> <i class="mdi mdi-calendar-multiple c-light valign" style="font-size: 24px"></i> <span  class="label c-light valign">Mi horario</span> </span>
+            </div>
+            <div class="col-xs-12">
+                <br>
+                <table width="100%" border="0">
+                    <tbody>
+                        <tr class="header">
+                            <td height="30px;">Lun.</td>
+                            <td>Mar.</td>
+                            <td>Mie.</td>
+                            <td>Jue.</td>
+                            <td>Vie.</td>
+                            <td>Sáb.</td>
+                            <td>Dom.</td>
+                        </tr>
+                        <tr id="starttime" class="data starttime">
+                            <td height="25px;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="endtime" class="data endtime">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="col-xs-12" style="text-align: center; padding: 0px; ">
+                <br>
+                <i class="mdi mdi-checkbox-blank-circle c-main" style="font-size: 8px;"></i><span class="footerLabel">&nbsp;Entrada</span>
+                <i class="mdi mdi-checkbox-blank-circle c-main4" style="font-size: 8px;"></i>&nbsp;<span class="footerLabel">Salida</span>
+                <i class="mdi mdi-checkbox-blank-circle" style="color: #909090; font-size:8px;">&nbsp;</i><span class="footerLabel">Libre</span>
+                <hr class="profilehr" style="margin-bottom: 10px;">
+            </div>
+        </div>
+        
+        <div class="row" >
+            <div class="col-xs-12">
+                <br>
+                <span> <i class="mdi mdi-timer c-light valign" style="font-size: 24px"></i> 
+                    <span  class="label c-light valign">Progreso de hoy</span>                     
+                </span>
+                 <div data-role="progressbar" id="progressTasks" data-min="0" data-max="100" data-type= "percent" data-bind="value: progress"
+                                     style="width: 100%; height: 20px; margin-top: 10px;">
+                 </div> 
+            </div>
+            <div class="col-xs-12" style="text-align: center">
+                <span class="sh-info" >
+                    
+                     <span data-bind="html: staff.stats.finished"></span>/<span data-bind="html: staff.stats.all"></span>                    
+                      actividades completadas
+                </span>
+            </div>            
+        </div>
+        
+         <style>
+        .ratingmaid {
+            /*float:left;*/
+        }
+
+        /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+           follow these rules. Every browser that supports :checked also supports :not(), so
+           it doesn’t make the test unnecessarily selective */
+        .ratingmaid:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+            clip:rect(0,0,0,0);
+        }
+
+        .ratingmaid:not(:checked) > label {
+            float:right;
+            width:1em;
+            padding:0 .1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:200%;
+            line-height:1.2;
+            color:#ddd;
+            
+        }
+
+        /*.ratingmaid:not(:checked) > label:before {
+            content: '★ ';
+        }*/
+
+        .ratingmaid > input:checked ~ label {
+            color: #f70;
+            
+        }
+
+       /* .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: gold;
+            
+        }*/
+
+        /*.rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label, 
+        .rating > label:hover ~ input:checked ~ label {
+            color: #ea0;
+            
+        } */
+
+        .ratingmaid > label:active {
+            position:relative;
+            top:2px;
+            left:2px;
+        }
+    </style>
+        
+        
+        
+        <div class="row">
+            <div class="col-xs-12">
+                 <br>
+                <span> <i class="mdi mdi-star c-light valign" style="font-size: 24px"></i> 
+                    <span  class="label c-light valign">Desempeño</span>                     
+                </span>                  
+            </div>
+        </div>
+        <div class="row"  style="padding-top: 10px;" >
+                <div class="col-xs-12" style="text-align: center;  ">                
+                   <fieldset class="ratingmaid" style="display: inline-block">   
+                    <input disabled='disabled' type="radio" id="starmaidprofile5" name="ratingmaid" value="5" /><label for="starmaid5" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                    <input disabled='disabled' type="radio" id="starmaidprofile4" name="ratingmaid" value="4" /><label for="starmaid4" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                    <input disabled='disabled' type="radio" id="starmaidprofile3" name="ratingmaid" value="3" /><label for="starmaid3" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                    <input disabled='disabled' type="radio" id="starmaidprofile2" name="ratingmaid" value="2" /><label for="starmaid2" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                    <input disabled='disabled'  type="radio" id="starmaidprofile1" name="ratingmaid" value="1" /><label for="starmaid1" ><i class="mdi mdi-star" style="font-size: 24px"></i></label>
+                </fieldset>                
+            </div>
+                
+                
+         </div>
+        
+        
+        <div class="row ">
+            <div class="col-xs-12">
+                 <br>
+                <span> <i class="mdi mdi-calendar-check c-light valign" style="font-size: 24px"></i> 
+                    <span  class="label c-light valign">Cumplimiento de tiempo</span>                     
+                </span>
+                 <div data-role="progressbar" id="cumplimiento" data-min="0" data-max="100" data-type= "percent" data-bind="value: timeaccomplishment"
+                                     style="width: 100%; height: 20px; margin-top: 10px;">
+                 </div> 
+            </div>
+            <div class="col-xs-12" style="text-align: center">
+                <span class="sh-info" >
+                    
+                     <span data-bind="invisible: hasDelay">sin atrasos </span> 
+                    <span data-bind="visible: hasDelay"><span data-bind="html: timeDelay, visible: hasDelay"></span> min. de atraso en promedio</span> 
+                      
+                </span>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12">
+                 <br><br>
+                <span> <i class="mdi mdi-history c-light valign" style="font-size: 24px"></i> 
+                    <span  class="label c-light valign">Historial de tareas</span>                     
+                </span>                
+            </div>
+            <div class="col-xs-12" style="text-align: center">
+                <br>
+                <table id="taskHistory" width="100%" border="0" cellspacing="10">
+                    <thead>
+                        <tr>
+                          <td>Tarea</td>                     
+                          <td>Hab.</td>                      
+                        </tr>
+                    </thead>                          
+                </table>
+                
+                <div class="col-xs-12" style="padding-right: 0px; padding-left:0px;" >                   
+                   <ul  data-role="listview" 
+                        data-bind="source: historyDS, click: openHistoryAlertItem"  
+                        data-template="history-template">
+                   </ul>                            
+                </div>                 
+                
+                
+                  
+                 <script type="text/x-kendo-template" id="history-template">
+                    <div data-role="listview-link" class="km-listview-link">
+                         <div class="sh-listview-item"  
+                              data-role="touch" >                              
+                     
+                           <div class="row" style="font-size: 12px;">
+                                <div class="col-xs-8">
+                                     <span style="color: black; " class="sh-fixlongtext"> 
+                                       #: name # 
+                                      </span>
+                                </div>
+                                <div class="col-xs-2">
+                                     <span style="color: black"> #: helper.getShortFacilityName(idfacility) # </span>
+                                </div>
+                           </div>
+                         </div>
+                    </div>
+                 </script>
+                
+            </div>
+        </div>
+
+    </div>
+
+</div> 

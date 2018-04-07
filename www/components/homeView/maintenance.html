@@ -1,0 +1,173 @@
+<style>
+    #viewHome 
+    .km-listview-link:after
+    {
+        display: none !important;
+    }
+    
+    #viewHome .rowinform {
+        margin-top: 5px;
+        padding: 5px;
+        /*background-color: rgba(244,244,244,0.8);*/
+        border-top: solid 1px rgba(244,244,244,1); 
+        /*border-radius: 10px;*/
+    
+    }  
+    
+    
+    
+    
+</style>
+<div id="viewHome"  data-role="view" data-title="" data-layout="main" data-model="app.homeView"   class="homeView made" 
+     data-init="app.homeView.init" data-before-show="app.homeView.beforeShow" data-after-show="app.homeView.afterShow">
+    
+    
+    
+
+     <header data-role="header"  >
+        <div id="navbarmaid" class="navbar b-main33" data-role="navbar" style="height: 70px !important; opacity: 1">
+            <a data-align="left" data-role="button" data-bind="click:openDrawer" class="sh-headerbutton">
+                <i class="mdi mdi-menu c-black valign" style="font-size: 25px"></i>
+                &nbsp;
+            </a>    
+            <span data-align="left" data-bind="visible:dingdone">
+                <img data-bind="attr: {src: avatar }"   class="image-cropper shadow" 
+                     style="width: 40px; height: 40px; border: 1px white solid"/>
+            </span>             
+            <span data-align="left" data-bind="invisible:dingdone"> 
+                <img src="resources/imgs/misc/zzz2.jpg"   style="width: 45px; height: 45px; opacity: 1"/>                                  
+            </span>             
+            
+           <ul class="nav nav-pills center-pills" >
+                        <li class="active" style="width2: 55%; padding-left: 55px;">
+                            <a href="#tab_mistareas" data-toggle="pill" style="margin-right: 0px !important; padding: 5px 15px "  data-transition-native="false">
+                                <i style="font-size: 1.5em" class=" mdi mdi-account-outline"></i>
+                                <br><small>MIS TAREAS</small>
+                            </a>
+                        </li>
+                        <li class="active22" style="width2: 35%"> 
+                            <a href="#tab_equipo" data-toggle="pill" data-role="touch" data-tap="app.homeView.afterShowAssignmentTab"
+                                style="margin-left: 0px !important; padding: 5px 15px " data-transition-native="false">
+                                <i style="font-size: 1.5em" class=" mdi mdi-account-multiple-outline"></i>
+                                <br><small>EQUIPO</small>
+                            </a>
+                        </li>
+                    </ul>           
+                
+            
+            <span class="hidden2" data-align="right" data-bind="click: goFilter">
+                <i class="mdi mdi-2x mdi-filter c-main valign shadow " style="font-size: 20px; float: right; padding-right: 2px;"></i> 
+            </span>         
+            
+            
+        </div>
+       <header>
+         <div id="divnewversion"  style="display: none; color: Black; background-color: rgb(246, 255, 103); border: 1px solid white; padding: 5px; margin-top: 5px">            
+             <i class="mdi mdi-information-outline"></i> 
+            <small style="font-size: 15px;color: black;opacity: 0.6;">
+              <a id="hrefnewversion" style="background: rgba(0,0,0,0);border-style: hidden;" data-role="button" data-bind="click:getNewVersion" ></a>          
+            </small>            
+         </div>
+       </header>
+    </header>
+    
+    <header data-role="header" >       
+        
+        <!-- CIRCULO PARA CREAR TAREAS -->
+       <div class="plusCircle plusCircleAlert hidden " data-role="button" data-bind="click: goCreateAlert">        
+           <div class="height_fix"></div>
+           <div class="content"><i class="mdi mdi-plus"></i></div>
+       </div>
+    
+        
+    </header>
+
+
+    <div class="tab-content">
+        
+       <div class="tab-pane fade in active" id="tab_mistareas">    
+    
+            <div class="container-fluid">
+                <div class="row" data-bind="visible: noActivity">
+                    <div class="col-xs-12">
+                        <div  style="padding: 10px; text-align: center">
+                            <h3 class="c-light" style="opacity: 0.5">NO TIENES TAREAS ASIGNADAS</h3>
+                            <h5 class="c-light" style="opacity: 0.5">Desliza para actualizar</h5>
+                            <img src="resources/imgs/misc/pulltorefresh.png" >
+                        </div>
+                    </div>
+                </div>
+               
+                <!--- click: openAlertMaid"     -->
+               
+                    <!-- ALERTS -->
+                    <div class="row" >
+                        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                            <ul  data-role="listview" 
+                                 data-bind="source: alertsDataSource"     
+                                 data-template="alerts-template"
+                                 data-pull-to-refresh="true"
+                                 data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                                 "refreshTemplate": "Actualizando"}'>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- TASKS -->
+                    <!-- <div class="row" >
+                        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                            <ul  data-role="listview" 
+                                 data-bind="source: tasksDataSource"     
+                                 data-template="alerts-template"
+                                 data-pull-to-refresh="true"
+                                 data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                                 "refreshTemplate": "Actualizando"}'>
+                            </ul>
+                        </div>
+                    </div>   -->             
+            </div>
+        </div>
+        
+        
+        
+         <div class="tab-pane fade in" id="tab_equipo">    
+             <div class="container-fluid">
+                     <div class="row" >
+                        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                            <ul  data-role="listview" 
+                                 data-bind="source: teamAlertsDataSource"     
+                                 data-template="alerts-template"
+                                 data-pull-to-refresh="true"
+                                 data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                                 "refreshTemplate": "Actualizando"}'>
+                            </ul>
+                        </div>
+                    </div>        
+                 <div class="row" >
+                        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                            <ul  data-role="listview" 
+                                 data-bind="source: teamTasksDataSource"     
+                                 data-template="alerts-template"
+                                 data-pull-to-refresh="true"
+                                 data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                                 "refreshTemplate": "Actualizando"}'>
+                            </ul>
+                        </div>
+                  </div>  
+             </div>
+             
+         </div>
+        
+      </div>
+
+
+
+   
+    
+    
+    
+    
+    
+</div>
+
+    

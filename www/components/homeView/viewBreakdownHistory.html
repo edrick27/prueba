@@ -1,0 +1,187 @@
+<style>    
+   
+    
+    
+    
+</style>
+
+
+<div id="viewBreakdownHistory" data-role="view" data-title="Reporte de Averías" data-layout="main" data-model="app.homeView" 
+      data-before-show="app.homeView.beforeShowBreakdownHistory" >
+    
+    
+
+    <header data-role="header" >
+        <div id="navbarmaid" class="navbar" data-role="navbar" style="height: 60px !important;">
+            <a data-align="left" data-bind="{click: goBack}">
+                <i class="mdi mdi-chevron-left mdi-2x c-black valign"></i>
+                <span class="sh-volver valign">Volver</span>
+            </a>            
+            
+        </div>
+    </header>
+    
+  
+
+   
+    
+    
+    <div  class="container-fluid">  
+        <div class="row">
+            <br>
+            <div class="col-xs-12">                                
+                <i class="mdi  mdi-chart-pie valign" style="font-size:24px"></i>
+                <span class="sh-title3 valign">Reporte de averías</span>                
+            </div>
+        </div>             
+    </div>
+    
+    
+     <header class="jumbotron" style="margin-top: 10px;" >
+        <div class="container-fluid">            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="sh-label"><span translate>Fecha Inicio</span></label> 
+                             <input id="startdateHistory" class="sh-select" type="date" data-bind="value: startdateHistory">                                               
+                    </div>
+                </div>
+                <div class="col-xs-12">                
+                    <div class="form-group">
+                        <label class="sh-label"><span translate>Fecha Final</span></label> 
+                             <input class="sh-select" type="date" data-bind="value: enddateHistory">                                               
+                    </div>
+                </div>
+                
+                <div class="col-xs-12">        
+                     <button class="btn btn-main btn-block" type="button" data-role="touch" data-tap="app.homeView.refreshBreakdownHistory">
+                        <span translate>REFRESCAR</span>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+     </header>
+    
+    
+    
+     <div  class="container-fluid">  
+         <div class="row">
+            <br>
+            <div class="col-xs-12" style="text-align: center; margin-top: 10px">                
+                <br>                
+                <div style="height: 350px;" id="breakdownsChartHistory"></div>
+            </div>            
+         </div>    
+         
+         <div class="row">
+             <br>
+             <div class="col-xs-12" >                
+                <i class="mdi mdi-bell-outline valign" style="font-size:24px"></i>
+                <span class="sh-title3 valign">Notificaciones importantes</span>
+             </div>
+            
+              
+             <div  style="margin-top: 10px">                
+                 <ul  data-role="listview" class="listViewAlerts"         
+                        data-bind="source: breakdownsDataSource, click: openAlertHousekeeper"                                                
+                        data-template="breakdowns-template"
+                        data-pull-to-refresh="true"
+                        data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                         "refreshTemplate": "Actualizando"}'>
+                 </ul>
+             </div>           
+             
+              <script type="text/x-kendo-template" id="breakdowns-template">                
+                    <div data-role="listview-link" class="km-listview-link listview-item2 alertStatus#: idstatus #" style="padding: 8px; ">
+                        
+                        <div class="container-fluid istaskStatus#: idstatus # " >
+                            <div class="row">
+                                <div class="col-xs-1" style="text-align: left; padding-left:0px; padding-right: 10px;">
+                                      # if (idcategory === globals.ALERT_CATEGORY_LOSTANDFOUND) { #
+                                        <i class="mdi  mdi-binoculars c-main valign " style="font-size: 28px; "></i>    
+                                      #} else { #
+                                        <i class="mdi mdi-alert-outline mdi-alertcolor valign " style="font-size: 24px; "></i>    
+                                     #}#                                        
+                                </div>   
+                                <div class="col-xs-6" style="padding-right: 0px; padding-left: 5px;">
+                                     <div class="sh-fixlongtext " >                                    
+                                        <span class="sh-alertname valign" >#: name #</span>
+                                     </div>
+                                </div>
+                                          
+                                <div class="col-xs-5" style="padding-right: 0px; padding-left: 5px;">
+                                     <div class="sh-fixlongtext " >                                    
+                                        <span class="sh-alertname valign" >#: helper.getShortFacilityName(idfacility) #</span>
+                                     </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </script>
+         </div>
+         
+         
+         
+                  
+         <div class="row">
+              <div  style="margin-top: 10px">                
+                  <hr style="margin-bottom: 10px; margin-top: 0px;"> 
+                 <ul  data-role="listview" class="listViewAlerts"         
+                        data-filterable="{ field: 'itemname', operator: 'contains' }"   
+                        data-bind="source: itemizedBreakdownsDataSource" 
+                        data-template="itemized-template">
+                 </ul>
+             </div>           
+             
+              <script type="text/x-kendo-template" id="itemized-template">                
+                    <div data-role="listview-link" class="km-listview-link listview-item2 " style="padding: 8px; ">
+                        
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-4" style="text-align: left; padding-left:0px; padding-right: 10px;">
+                                    <img src="#: helper.getItemImagePath(itemimage) #" width="100" height="80" class="valign" > 
+                                </div>   
+                                <div class="col-xs-4" style="padding-right: 0px; padding-left: 5px;">
+                                     <div class="sh-fixlongtext " >                                    
+                                        <span class="sh-alertname valign" >#: itemname #</span>
+                                     </div>
+                                </div>
+                                          
+                                <div class="col-xs-4" style="padding-right: 0px; padding-left: 5px; text-align: center">
+                                      <span class="sh-alertname valign" >#: count #</span><br><span>reporte(s)</span>                                     
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+              </script>
+         </div>
+         
+         
+         
+         
+         
+         
+    </div>  <!-- container-fluid -->
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+

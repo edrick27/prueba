@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "896464041962",
+    "firebase_url": "https://dingdone-38c11.firebaseio.com",
+    "project_id": "dingdone-38c11",
+    "storage_bucket": "dingdone-38c11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896464041962:android:db859e23c942e9e1",
+        "android_client_info": {
+          "package_name": "com.dingandone.dingdone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896464041962-3f2a7h0hpn8l3guorq3k06ppp0b40me5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPuUvC85CtqMjGEktXfyu8n6E-aG1CRrE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

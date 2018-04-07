@@ -1,0 +1,69 @@
+<style>    
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    
+    
+    
+    
+ </style>
+
+<div id="viewNewVersion" data-role="view"  data-model="app.homeView">
+    
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar" >
+             <span style="font-size: 1.5em; color: white" data-align="left">Nueva Vesión</span> 
+            
+            <a  data-align="right"  data-role="button" data-bind="click:goBack2" class="sh-headerbutton">
+                <i class="mdi mdi-close mdi-2x " style="color: white"></i>
+            </a>              
+        </div>
+    </header>
+    
+    <footer data-role="footer">
+        
+    </footer> 
+    
+    
+   
+       <div class="container-fluid" style="width:100%;"> 
+           
+             <div class="row">             
+               <div class="col-xs-12">
+                 
+                   <h3>DESCARGAR NUEVA VERSIÓN</h3>
+                   <br>
+                   <a id="linknuevaversion" data-bind="attr: { href: linknewversion  } ">CLICK ACÁ </a>
+                   <div data-bind="visible: isAndroid">
+                       <ol>
+                           <li>Descargar el APK</li>
+                           <li>Desinstalar la versión actual (Recomendado)</li>
+                           <li>Dar click al archivo DingDone.apk Descargado (ver notificaciones)</li>
+                           <li>Seguir las instrucciones</li>
+                       </ol>
+                           
+                       
+                       
+                       
+                       
+                   </div>
+                 
+                 
+               
+                
+            
+            </div>
+       </div>
+        
+ 
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+    
+    </div>
+

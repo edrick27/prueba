@@ -1,0 +1,97 @@
+
+<style>
+     #viewFilterHousekeeper  .number{
+        border-width: 2px;
+        border-color: #ff1dd9;
+    }
+   #viewFilterHousekeeper .row .col-xs-12 .num{
+         width: 100%;
+         height: 30px;
+         height: 34px;
+    }
+</style>
+
+    <div id="viewFilterHousekeeper" data-role="view" data-title="" data-layout="main" data-model="app.homeView"
+        data-init="app.homeView.initFilter">
+    
+    <header data-role="header" >
+        <div class="navbar b-main" data-role="navbar">
+             <span style="font-size: 1em; color: white"  data-align="center">Filtar por</span>
+              <a data-align="left" data-role="button" data-bind="click:goBackWithScrollReset" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px"></i>                
+                <span class="sh-volver valign c-white">Volver</span>
+            </a> 
+        </div>
+    </header>
+        
+        
+    
+     <div class="container-fluid" style="width:100%;"> 
+        
+         <div id="myactivityfilters" >             
+              <div class="row">
+                 <div class="col-xs-8" style="padding: 10px; ">                                              
+                        <span class="valign">VER</span>
+                 </div>
+             </div>  
+             
+             <div class="row">            
+                <div class="col-xs-12" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Numero de alertas a mostrar</span>
+                </div>
+            </div>
+             <div class="row"> 
+               <div class="col-xs-12">
+                   <input id="numalerttoshow" class="num" type="number" min="1"  value="50"/>                   
+               </div>
+             </div>
+             
+             <br>        
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">En Progreso</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-maid-inprogress" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-maid-inprogress"></label>
+                    </div>                    
+                </div>
+            </div>             
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Pausadas</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-maid-paused" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-maid-paused"></label>
+                    </div>                    
+                </div>
+            </div>             
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Resueltas</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-maid-finished" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-maid-finished"></label>
+                    </div>                    
+                </div>
+            </div>
+            
+           
+         
+         </div>
+         
+    </div>
+    
+    <!--  ---------------------->
+    
+    
+    
+    
+</div>
+
+       

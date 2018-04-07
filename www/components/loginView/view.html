@@ -1,0 +1,139 @@
+<style>
+    .form-signin
+    {
+        /* max-width: 330px;*/
+        padding: 15px;
+        margin: 0 auto;
+    }
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox
+    {
+        margin-bottom: 10px;
+    }
+    .form-signin .checkbox
+    {
+        font-weight: normal;
+    }
+    .form-signin .form-control
+    {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus
+    {
+        z-index: 2;
+    }
+    .form-signin input[type="text"]
+    {
+        margin-bottom: 0px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"]
+    {
+        margin-bottom: 0px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    
+    
+    #viewLogin .km-content {
+      /*  background: url("resources/imgs/background.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;*/
+        background-color: #2C5DFF;
+    }
+    
+     #viewLogin input[type=checkbox] {
+      transform: scale(1.5);
+    }
+   
+</style>
+
+
+<div id="viewLogin" data-role="view"  data-title="Iniciar Sesión" data-layout="main-nonav2" data-model="app.loginView" 
+        data-init="app.loginView.init"  data-show="app.loginView.onShow" data-after-show="app.loginView.afterShow">
+    <!-- START_CUSTOM_CODE_templateView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+    
+     
+   <header data-role="header">
+        <!--<div class="navbar b-main3" data-role="navbar">           
+            <span style="font-size: 1em; color: white" data-align="center">Iniciar</span>
+            <i style="padding-right: 10px;" data-align="right"  class="connectionStatus fa fa-2x fa-wifi isOnline"></i>
+        </div> -->
+    </header> 
+    
+   
+  
+    
+    
+    <div class="container-fluid " >               
+        
+        
+       
+                    
+        <!-- I use div instead of form, to avoid blink when clicking on the button -->
+        <div class="form-signin" style="width: 100%; margin-top: 40px;">
+            <div class="form-group">
+                <label class="sr-only" for="username">Username</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user shadow"></i></span> 
+                    <input type="text" class="form-control" id="username" placeholder="Usuario"  data-bind="value: username" autocapitalize="off" autocorrect="off" spellcheck="false"  translate autofoucus >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group " >
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock shadow"></i></span>
+                    <input  type="password" class="form-control " id="password" placeholder="Contraseña" data-bind="value: password" translate>                         
+                </div>
+
+            </div>
+            <button  class="btn btn-lg b-main3 c-white btn-block" data-bind="click: onLogin"><span style="font-size: 1.2em" translate>Ingresar</span></button>
+            
+          
+          <label class="hidden c-main3" style="font-size: 1.2em; margin-top: 10px;">
+            <input id="fullsync" type="checkbox" value="" checked>          
+            <span class="c-white">Sincronizar</span>
+          </label>
+        
+            
+
+           
+            
+        </div>
+        <div  style="text-align: center">             
+            <h2 style="padding-top: 0px; margin-top: 20px; color: white;">                                 
+                <img src="resources/imgs/logo.png" width="50%" class2="magictime twisterInDown " ><br>                
+                
+                <sup style="font-size: 18px; color: white; opacity: 0.5" data-bind="html: hotelname"></sup><br>        
+                <sup style="font-size: 18px; color: white; opacity: 1" data-bind="html: version"></sup>&nbsp;
+                <sup style="font-size: 14px; color: white; opacity: 0.6" data-bind="html: server "></sup>
+                
+            </h2>
+        </div>
+        
+       
+        
+    </div> <!-- /container -->  
+    
+     <div data-role="footer" style="color: white ;padding: 5px; opacity: 1; " class="b-main5">            
+         <img src="resources/imgs/sincronizing.gif" width="10%" > 
+         <small style=" font-size: 14px; color: white; opacity: 1">Boost your Hotel</small>
+
+            
+        </div>
+    
+     
+        
+    <!-- END_CUSTOM_CODE_templateView -->
+</div>

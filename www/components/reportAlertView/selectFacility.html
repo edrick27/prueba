@@ -1,0 +1,103 @@
+<style>
+    #viewSelectRoom .km-filter-wrap:before {
+        content: '';
+    }
+    
+</style>
+
+<div id="viewSelectRoom" data-role="view" data-title="Crear Alerta" data-layout="main" data-model="app.reportAlertView"
+     data-init="app.reportAlertView.initViewSelectFacility"  data-after-show="app.reportAlertView.afterShowSelectFacility" 
+     data-before-show="app.reportAlertView.beforeShowSelectFacility"
+     data-use-native-scrolling="false">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+     <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBackWhere" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+
+    <header data-role="header">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="km-listview-wrapper">
+                    <form class="km-filter-form">
+                        <div class="km-filter-wrap">
+                            <input type="search" placeholder="Buscar" id="searchfacility">
+                            <a href="#" class="km-filter-reset" title="Clear" style="display: none;">
+                                <span class="km-icon km-clear"></span>
+                                <span class="km-text">Clear</span>
+                            </a>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+    <footer data-role="footer">
+
+    </footer>
+    
+    <div style="width:100%;">
+               <!-- <ul  data-role="listview"                      
+                     data-bind="source: roomsDataSource,  click: selectFacility"                                         
+                     data-endless-scroll="false"
+                     data-virtual-view-size="20"
+                     data-template="facilities-template">
+                </ul>-->
+        <ul id="listviewFacility"></ul>
+    </div>
+        
+    
+
+    <script type="text/x-kendo-template" id="facilities-template">
+        <div data-role="listview-link" class="km-listview-link listview-item" style="padding: 4px; padding-top: 8px;">
+            <div class="container-fluid ">
+                <div class="row" >
+                    <div class="col-xs-7" style="padding-right: 0px; padding-left: 0px;">
+                        <div class="sh-fixlongtext ">
+                            <strong>#: name #</strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-5" style="text-align: right; padding-right: 30px; padding-left: 0px;">
+                        <div class="sh-fixlongtext ">
+                            <span>#: zone #</span>
+                        </div>
+                        <div class="sh-fixlongtext ">
+                            <span style="opacity: 0.7">#: parentzone #</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

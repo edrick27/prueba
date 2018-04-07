@@ -1,0 +1,109 @@
+
+
+
+    <div id="viewFilterHousekeeper" data-role="view" data-title="" data-layout="main" data-model="app.homeView"
+        data-init="app.homeView.initFilter">
+    
+    <header data-role="header" >
+        <div class="navbar b-main" data-role="navbar">
+             <span style="font-size: 1em; color: white"  data-align="center">Filtar por</span>
+              <a data-align="left" data-role="button" data-bind="click:goBackWithScrollReset" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px"></i>                
+                <span class="sh-volver valign c-white">Volver</span>
+            </a> 
+        </div>
+    </header>
+        
+        
+    
+     <div class="container-fluid" style="width:100%;"> 
+        
+        
+         <hr style="margin: 0 1px;" >         
+          
+          
+         <div id="myactivityfilters" >             
+             <div class="row">            
+                <div class="col-xs-8" style="padding: 10px; ">                                              
+                    <span class="valign">Agrupar</span>
+                </div>
+                <div class="col-xs-4" style="padding: 10px;">                                                              
+                    <input type="checkbox" id="agrupar-switch" checked="checked" class="valign"
+                     data-role="switch" data-off-label="NO" data-on-label="SI" data-change="app.homeView.onSwitchAgruparClick" 
+                        data-bind="checked: filterpreferences.grouping"/>    
+                </div>
+              </div>
+              <hr style="margin: 0 1px;" >
+             
+             <div class="row">
+                 <div class="col-xs-8" style="padding: 10px; ">                                              
+                        <span class="valign">VER</span>
+                 </div>
+             </div>             
+              <div class="row hidden">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Pendientes</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                                                  
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-notstarted" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-notstarted"></label>
+                    </div>
+                </div>
+            </div>             
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">En Progreso</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-inprogress" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-inprogress"></label>
+                    </div>                    
+                </div>
+            </div>             
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Pausadas</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-paused" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-paused"></label>
+                    </div>                    
+                </div>
+            </div>             
+              <div class="row">            
+                <div class="col-xs-8" style="padding: 3px; padding-left: 40px; ">                                              
+                    <span class="valign">Finalizadas</span>
+                </div>
+                <div class="col-xs-4" style="padding: 3px;">                                                              
+                    <div class="onoffswitch">
+                        <input type="checkbox" id="switch-finished" name="onoffswitch" class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="switch-finished"></label>
+                    </div>                    
+                </div>
+            </div>
+             <hr style="margin: 0 1px;" >
+             
+             
+             
+             
+             
+             
+             
+             
+            
+         
+         </div>
+         
+    </div>
+    
+    <!--  ---------------------->
+    
+    
+    
+    
+</div>
+
+       

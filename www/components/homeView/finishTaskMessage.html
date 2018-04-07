@@ -1,0 +1,46 @@
+<style>    
+  
+    #mensaje .mensaje {
+       
+        color: white;        
+        font-size: 25px;
+        font-weight: 400;
+        letter-spacing: 0.89px;
+        line-height: 40px;
+    }
+    
+    #mensaje .gracias {
+        /* Text style for "¡GRACIAS!" */
+
+    color: white;
+
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    }
+    
+    
+    
+</style>
+
+<div id="mensaje" data-role="view"   data-model="app.homeView" class="b-main">
+   
+     <header data-role="header">
+        <div class="navbar b-main" data-role="navbar" style=" box-shadow: none; border: none;" >             
+            <span class="c-white">Toca para cerrar</span>  
+        </div>
+    </header>
+    
+    <div data-role="content" class="container-fluid  b-main " style="text-align: center" data-bind="{click: goBackNoTransition}">
+        <div class="mensaje" style="padding-top: 15%" >            
+            <h1 class="gracias">¡GRACIAS!</h1>
+            <h4 class="mensaje">Sos increíble en tu trabajo</h4>            
+            <i style="font-size: 240px" class="mdi mdi-emoticon-cool"></i>            
+              
+        </div>
+        
+    </div>
+    
+    
+</div>
+

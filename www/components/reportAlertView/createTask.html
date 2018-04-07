@@ -1,0 +1,173 @@
+<style>
+    .row {
+        margin-top: 10px;
+    }
+</style>
+
+<div id="viewCreateTask" data-role="view" data-title="Crear Tarea" data-layout="main" data-model="app.reportAlertView"
+     data-before-show="app.reportAlertView.beforeViewCreateTask" >
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+    
+    
+    <header data-role="header">
+        <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>            
+            <sup data-bind="visible:showModule, html: modulename" style="font-size: 0.5em; color: white" data-align="center">
+                
+            </sup>
+            <a data-align="left"  data-role="touch" data-tap="app.reportAlertView.goBack">
+                <i class="mdi mdi-chevron-left mdi-2x c-white"></i>
+            </a>
+            <a  data-align="right" data-role="touch" data-tap="app.reportAlertView.goHome">
+                <i class="mdi mdi-close mdi-2x " style="color: white"></i>
+            </a>              
+        </div>
+    </header>
+    
+     <footer data-role="footer">
+        
+    </footer>
+
+    <div data-role="header"  style="border-bottom: 1px solid #e5e5e5; ">
+        <div class="col-sm-12" style="padding: 10px">
+            <span data-bind="html: task.facility.name"  class="sh-breadcrumb"></span>                                        
+            <span data-bind="invisible: isGeneralTask ">
+                <span  class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                <span data-bind="html: task.itemCategory.name"  class="sh-breadcrumb"></span>
+                <span  class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                <span data-bind="html: task.item.name"  class="sh-breadcrumb"></span>      
+            </span>
+        </div>
+    </div>
+   
+        
+    
+    
+    <div class="container-fluid" >
+       
+        <div class="row">
+            <div class="col col-xs-12 text-center">                        
+             
+                <div style="padding-top: 5%" class="text-center">                                           
+                    <span data-bind="invisible: isGeneralTask , html: task.item.name"  class="sh-label"></span><br>
+                    <strong data-bind=" html: task.taskType.name" class="sh-label2 "></strong>
+                </div>
+            <br>
+            </div>
+        </div>
+        
+        <div class="row" data-bind="visible: canAssign">
+            <div class="col-xs-12" >               
+                     <button data-role="button"   class="btn btn-block btn-button mb10"
+                            data-bind="visible: task.isOrphan, click: openSelectStaffFromCreateTask" 
+                         style="background-color: #f4f4f4; height: 40px; margin-top: 0px;">                        
+                        <span class="c-main2 valign" translate>SELECCIONA PARA ASIGNAR</span>
+                     </button>
+                     <button data-role="button" class="btn btn-block btn-button mb10 c-color"
+                            data-bind="invisible: task.isOrphan, click: openSelectStaffFromCreateTask" 
+                            style="background-color: #f4f4f4; height: 70px; margin-top: 10px; text-align: left;">                        
+                                                  
+                        <img  data-bind="attr: { src: task.staffAvatar}" class="image-cropper-no-shadow valign " style="width: 50px; height: 50px;"/>              
+                        
+                         <div style="text-align: left; margin-left: 0px; display: inline-block; width: 50%" class="valign">
+                             <div class="sh-fixlongtext " >       
+                              <h4  data-bind="html: task.staffFullname" class="m0 staffName" style="margin-left: 10px;"></h4>
+                              </div>   
+                             <div class="sh-fixlongtext " >       
+                                <span class="c-light" data-bind="html: task.staffRole" style="margin-left: 10px;"></span>
+                            </div>
+                        </div>                        
+                     </button>    
+                
+             </div>    
+             
+            
+        </div>
+        
+        
+        <div class="row">
+            <div class="col col-xs-12">                
+                
+                <span>Instrucciones<br> 
+                <textarea id="taskComment" class="sh-select" data-bind="value: task.instructions" style="width: 100%" rows="3" placeholder="Puedes indicar instrucciones aquí"></textarea></span>                    
+            </div>            
+        </div>
+        
+        <div class="row" >
+             <div class="col col-xs-8" data-bind="visible: showCamera">                
+                 <button data-role="touch" data-tap="app.reportAlertView.takePicture"  class="btn btn-block btn-button mb10"
+                         style="background-color: #f4f4f4;">
+                    TOMAR FOTO <i class="mdi mdi-camera c-main2 valign" style="font-size: 24px"></i>                                    
+                 </button>
+             </div>    
+            <div class="col col-xs-4" data-bind="visible: showCamera">                
+                 <button data-role="touch" data-tap="app.reportAlertView.selectPicture"  class="btn btn-block btn-button mb10"
+                         style="background-color: #f4f4f4;">
+                    <i class="mdi mdi-folder-image c-main2 valign" style="font-size: 24px"></i>                                    
+                 </button>
+             </div>    
+            
+       
+            <div class="col-xs-4 " style="margin-top: 10px;">
+                <span>Fecha:</span>
+            </div>
+            <div class="col-xs-8 text-center">
+                <input class=" form-control sh-select" type="date" data-bind="value: task.startdate" 
+                            style2="padding:0px; display: inline-block">
+            </div>            
+            
+            <div class="col-xs-12 pb5 text-center" >
+                <br>            
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="" id="starttasknow">
+                    <span data-bind="click: toggleStartTaskNow" >Comenzar ya</span>                    
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="" id="taskfinished">
+                    <span data-bind="click: toggleTaskFinished" >Ya fue realizada</span>                                        
+                </label>            
+            </div>    
+            
+            
+        
+            <div class="col-xs-12 pb5 text-center" >
+                <br>
+                <button id="btnCreateTask" class="btn sh-button mb10 "  
+                        data-bind="click: createTask, invisible: task.sent" style="width22: 150px;">                 
+                    <span translate>CREAR TAREA</span>
+                </button>
+            </div>    
+            
+            
+            <!-- Display any Pictues taken -->
+            <div class="col-xs-12" data-bind="visible: hasPicture" >
+                
+                <div class="col col-xs-12" >
+                    <i style="float: right;font-size: 24px" class="mdi mdi-close c-main4" 
+                       data-role="touch" data-tap="app.reportAlertView.deletePicture"></i>
+                    <a  class="thumbnail">
+                        <img id="imgTask" >                        
+                    </a>
+                </div>
+                             
+            </div>
+            
+        </div>
+    
+        <script type="text/x-kendo-template" id="picture-template">    
+            <div class="col col-xs-12">
+                <i style="float: right;font-size: 24px" class="mdi mdi-close c-main4" 
+                   data-role="touch" data-tap="app.reportAlertView.deletePicture" data-uri="#: data #"></i>
+                <a  class="thumbnail">
+                    <img id="imgLostAndFoundTemplate" src='#: data #' >                        
+                </a>
+            </div>
+        </script>
+    
+        
+    </div> <!-- container -->
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

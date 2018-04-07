@@ -1,0 +1,283 @@
+<style>    
+   .checklisttitle{
+       text-align: center;
+       text-decoration: underline;
+       font-size: 25px;
+   }
+    
+    .km-flat .km-list>li {
+        border: none;
+        margin-bottom: 5px;
+    }
+   #viewChecklist .divswitch{
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-left: -10px;
+    }
+   
+   #viewChecklist .input-group{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+   #viewChecklist .textoption{
+        max-height: 150px;
+    }
+   #viewChecklist ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+  #viewChecklist  .number{
+        border-width: 2px;
+        border-color: #ff1dd9;
+    }
+   #viewChecklist .row .col-xs-12 .num{
+         width: 90%;
+    }
+   #viewChecklist .row .col-xs-12 textarea{
+       width: 100%;
+       border-bottom-style: solid;
+       border-bottom-width: 2px;
+       border-bottom-color: #f50399;
+       margin-right: 0px;
+       resize: none;
+       margin-top: 10px;
+       padding-bottom: 0px;
+    }
+ 
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    
+   .checkbox label:after, 
+   .radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+ .checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.9em;
+    height: 1.9em;
+    float: left;
+    margin-right: .5em;
+}
+
+ .radio .cr {
+    border-radius: 50%;
+}
+
+ .checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: 1.2em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+    color: #ff326f;
+}
+
+ .radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+ .checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+ .checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .1s ease-in;
+}
+
+ .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+ .checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+    
+      #viewChecklist  .Titletext{
+        margin-left: 0px;
+       color: #000;
+       font-size: 16px;
+       line-height: 135%;
+       font-weight: bold;
+    }
+ 
+ #viewChecklist label {
+     /* margin-bottom: 15px;*/
+     /*font-size: 16px; */
+     padding: 0px; margin: 0px;
+     color: #000;
+    font-size: 16px;
+    line-height: 135%;
+      font-weight: bold;
+ }
+    
+   #viewChecklist  .km-list>li {
+           padding: 0 .7em;
+   }
+
+    
+    
+    </style>
+
+    <div id="viewChecklist" data-role="view"  data-model="app.homeView"
+                            data-before-show="app.homeView.beforeShowChecklist"
+                            data-after-show="app.homeView.aftershowChecklist">
+
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar">
+            <span style="font-size: 1em; color: white" data-align="center">Checklist</span>
+             <a data-align="left" data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px"></i>                
+                <span class="sh-volver c-white valign">Volver</span>
+            </a>    
+           
+        </div>
+    </header>
+                
+    <footer data-role="footer">
+        
+    </footer>
+
+    <div class="container-fluid" style="width:100%; margin-top: 15px"> 
+        <div class="row">
+            
+             <div class="col-xs-12" data-bind="visible: loadingChecklist" style="padding: 15px; text-align: center">
+                     <img id="imageAlert" data-bind="attr: { src: loadingImg }" style="width: 50%; height: 50%" >                     
+             </div>
+            <script >var lastsection = "";var target = 0;</script>
+            <div data-bind="visible: checkListVisible" class="col-xs-12" style="padding-right: 0px; padding-left: 0px">
+                <ul data-role="listview" 
+                    data-bind="source: checklistDataSource,click : toggleChecklistOption"     
+                    data-template="checklist-template">
+                </ul>
+            </div>    
+        </div>
+        
+        <script type="text/x-kendo-template" id="checklist-template"> 
+             <div data-role="listview-link2" class="km-listview-link2 " style="padding: 0px;">
+              # if(lastsection != optionsection && optionsection != "" && optionsection != null)
+                { lastsection = optionsection; target++; #  
+                 
+                 <h5 data-toggle="collapse" data-target='.#:target#' style="margin:0px;" class='checklisttitle'>#:lastsection# </h5>
+               #}#
+            #if(optionsection != "" && optionsection !== null){ #   
+              <div class="collapse #:target#">
+            #}#
+                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px">  
+                            #if (optiontype == 1) 
+                            {#   
+                                <div class="checkbox" id="#:alertguid#">
+                                  <label id="#:idalert#">
+                                    <input type="checkbox" value="" 
+                                    #if (value == 1) { #
+                                    checked
+                                    # } #
+                                    id='#:idchecklistoption#'>
+                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                    #:name #
+                                  </label>
+                                </div>    
+                          # } #
+                           #if (optiontype == 2) 
+                            {#          
+                             <div class="row">
+                                <div class="col-xs-12">
+                                 <span class="Titletext">#:name #</span>
+                                </div>
+                             </div>
+                             <div id="#:idalert#" class="row divswitch">
+                               <div class="col-xs-7" style="margin-bottom: 20px;">
+                                 <input type="checkbox" class="switch" id='#:idchecklistoption#' data-role="switch" data-off-label="No" data-on-label="Si" #if (value == 1) { # checked # } #/>
+                               </div>
+                             </div>
+                         # } #
+                         #if (optiontype == 4 ) 
+                            {#
+                             <div class="row"> 
+                                <div  class="col-xs-12">
+                                 <span class="Titletext">#:name #</span>
+                                </div>
+                             </div>
+                              <div class="row"> 
+                                <div class="col-xs-12">
+                                  <input id="#:idchecklistoption#" class="num" type="number" min="1"  value="#:value#" style="width: 90%;" readonly="readonly"/>
+                                </div>
+                              </div>  
+                          # } #  
+                          #if (optiontype == 3) 
+                            {#
+                              <div class="row"> 
+                                <div class="col-xs-12">
+                                <b class="Titletext">#:name #</b>
+                                </div>
+                              </div> 
+                              <div id="#:alertguid#" class="row"> 
+                                <div id="#:idalert#" class="col-xs-12" style="padding-right: 0px;">
+                                  <textarea id="#:idchecklistoption#" class="textoption" >#if (value != 0) { # #:value# #  } #</textarea>
+                                </div>                
+                              </div>
+                          # } #
+                        </div>
+                    </div>               
+                 </div> 
+           #if(optionsection != "" && optionsection !== null){ #     
+              </div>
+            #}#
+            </div> 
+        </script>      
+        
+      
+        <div class="row hidden ">
+            <div class="col-xs-12">
+                 <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        Option one is this and that — be sure to include why it's great
+                      </label>
+                 </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="" checked>
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            Option two is checked by default
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="" disabled>
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            Option three is disabled
+          </label>
+        </div>
+        
+            </div>  
+          </div>
+        
+    </div>         
+   <!-- END_CUSTOM_CODE_homeView -->
+            </div>
+                

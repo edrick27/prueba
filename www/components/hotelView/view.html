@@ -1,0 +1,575 @@
+<style>
+   
+    /*.k-nav-current {
+        display: none !important;
+    }*/
+    
+    
+    /*#viewHotel .k-scheduler-toolbar,  #viewHotel .k-header, #viewHotel .k-link {
+       background-color: #00bcd4;
+    }*/
+    #viewHotel .statusclean {/*limpiando*/
+        background-color: #ffe00d;
+        color: black;
+    } 
+    #viewHotel .statuscleanasig {/*asignada*/
+        background-color: #fb3c36;
+        color: black;
+        font-size: 15px;
+    }
+    #viewHotel .statusnoclean {/*sinlimpiar*/
+        background-color: #D1D1D0;
+    }
+    #viewHotel .statusDND {/*no molestar*/
+        background-color: #949494;
+    }
+    #viewHotel .statuspause {/*pausada*/
+        background-color: #00bcd4;
+    }
+    #viewHotel .statuscleaning {/*limpia*/
+        background-color: #48FF8A;
+    }
+    #viewHotel .spaniscleaningstatus {
+        text-align: right;
+        margin-top: -20px;
+        font-size: medium;
+    }
+   
+     #viewHotel .km-listview-link:after {
+        display: none !important;
+    }
+    
+    #viewHotel .km-filter-wrap:before {
+        content: '';
+    }
+    
+</style>
+
+<div id="viewHotel" data-role="view" data-title="Hotel View" data-layout="main" data-model="app.hotelView" 
+        data-init="app.hotelView.init" data-show="app.hotelView.onShow" data-after-show="app.hotelView.afterShow"
+        data-before-show="app.hotelView.beforeShow">
+    
+    
+      <header data-role="header">
+            <div class="navbar" data-role="navbar" style="height: 60px !important;">
+                 
+                <span style="font-size: 1.5em; color: black; font-weight: 400" data-align="left">Ocupación</span> 
+                
+                   
+                    <a  data-align="right" data-role="button" data-bind="click:toogleGroup" class="sh-headerbutton" >                        
+                         <i id="iconGroupOcupaction" class="mdi mdi-view-list shadow " style="vertical-align: middle; color: gray; font-size: 34px;"></i>
+                    </a> 
+                
+                    <!--<i class="mdi mdi-wrench sh-mdi-clock" style="vertical-align: middle"></i>                    
+                    <i class="mdi mdi-alert sh-mdi-clock" style="vertical-align: middle"></i> -->
+                
+            </div>
+      </header>
+    
+    
+    <header class="jumbotron" style="margin-bottom: 0px; border-bottom: 1px solid #e5e5e5" >
+        <div class="container-fluid">
+            
+            <div class="row">
+
+                
+
+                <div class="col-xs-3 center mt10" style="border-right: 1px solid #e5e5e5;" >
+                    <span data-bind="html: stats.pax" class="c-main3 sh-number3"></span>
+                    <br><span class="sh-info2">Huéspedes</span>
+                </div>
+                
+                <div class="col-xs-3 center mt10" style="border-right: 1px solid #e5e5e5;" >
+                    <span data-bind="html: stats.occupancy" class="c-main2 sh-number4 shadow"></span>                    
+                    <br><span class="sh-info2">Ocupación</span>
+                </div>
+
+                <div id="occupancyEntriesInfo" data-bind="click: toggleShowByEntries" class="col-xs-3 center mt10" style="border-right: 1px solid #e5e5e5; box-sizing: border-box; "  >
+                    <span data-bind="html: stats.entran "  class="c-main-ni sh-number3"></span>
+                    <br><span class="sh-info2">Ingresan</span>
+                </div> 
+                <div id="occupancyExitsInfo"  data-bind="click: toggleShowByExits"  class="col-xs-3 center mt10" >
+                    <span data-bind="html: stats.salen"  class="c-main4-ni sh-number3"></span>
+                    <br><span class="sh-info2">Salen</span>
+                </div> 
+            
+            </div>
+        </div>
+        <br>
+    </header>
+   
+            
+             
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div class="km-listview-wrapper" style="padding:0px; margin: 0px;">
+                                <form class="km-filter-form" style="padding-top: 0px">
+                                    <div class="km-filter-wrap" style="padding-top: 0px">
+                                        <input type="search" placeholder="Buscar" id="searchfacilityHotel" style="padding-top: 0px">
+                                        <!---<a href="#" class="km-filter-reset" title="Clear" style="display: none;">
+                                            <span class="km-icon km-clear"></span>
+                                            <span class="km-text">Clear</span>
+                                        </a>-->
+
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    
+            
+             <div class="container-fluid" data-bind="visible: noOccupancy">
+                     <div class="row" >
+                         
+                        <div class="col-xs-12">
+                            <div style="text-align: center">                                
+                                <h3 class="c-light" style="opacity: 0.5">NO HAY OCUPACIÓN</h3>
+                                <h5 class="c-light" style="opacity: 0.5">Deslice para actualizar</h5>
+                                <img src="resources/imgs/misc/pulltorefresh.png" > 
+                             </div>                
+                        </div>
+                    </div>
+              
+            </div>
+   
+    
+            
+            <!-- click: toggleSelectOccupancy" -->                                                                     
+            
+             <div style="margin-top: 0px">                
+                 <ul id="listviewOccupancy" class="listViewAlerts"  
+                     data-role="listview"   
+                     data-bind="source: occupancyDataSource " 
+                     data-template="occupancy-template"                     
+                     data-header-template="occupancy-header-template"
+                     data-pull-to-refresh="true"                     
+                     data-fixed-headers="false"       
+                     data-endless-scroll="false"
+                     data-virtual-view-size="20"
+                     data-filterable22="{ field: 'facilityname', operator: 'contains' }"    
+                     data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                         "refreshTemplate": "Actualizando"}'>
+                 </ul>
+             </div>  
+            
+            <script type="text/x-kendo-template" id="occupancy-header-template">                                      
+                    <div class="listviewHeader">                         		           
+                       <span class="groupHeader">#: value.toUpperCase() #                         
+                       </span>                     
+                    </div>                 
+                
+            </script>             
+            
+            
+              <script type="text/x-kendo-template" id="occupancy-template">   
+                  
+                  <span id="sliderderechoOcupacy" style="display: none">
+                       <section  style="margin-right: 8px ; position: absolute; right: 0px;   height: 110px; 
+                           color:\#00bcd4; text-align: center   ">
+                      
+                          <div id="sliderStartOcupacy" style="display:none; float: right; width:100px; height: 80px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                            data-role="touch" data-tap="sliderOcuppacy.startCleaningTask"  > 
+                                <i style="line-height: 50px; color: \#00bcd4; font-size: 4em; " class=" mdi  mdi-play "></i>                                            
+                                <br><small style="color: \#999">LIMPIAR</small>
+                          </div> 
+                          <div id="sliderDND" style="display:none; margin-left: 50px; width:100px; height: 80px; float: left; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                            data-role="touch" data-tap="sliderOcuppacy.markDND"  > 
+                                <i style="line-height: 50px; color: black; font-size: 2.5em; " class=" mdi mdi-hotel"></i>                                            
+                                <br><small style="color: \#999">No molestar</small>
+                          </div> 
+                           <div id="sliderChecklistOcupacy" style="display:none;  width:70px; height: 80px; float: left; color: white; background-color: white; margin-left: 40px;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="sliderOcuppacy.GotoChecklist" data-idoccupancy="#: idoccupancy #" > 
+                                                <i style="line-height: 50px; color: \#FF53C3; font-size: 2.5em;" class="  mdi  mdi-checkbox-marked-outline"></i>                                            
+                                                 <br><small style="color: \#999">Checklist</small>
+                           </div>   
+                           <div id="sliderPauseOcupacy" style="display:none; float: right; width:70px; height: 80px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="sliderOcuppacy.pauseCleaningTask" data-idoccupancy="#: idoccupancy #" > 
+                                                 <i style="line-height: 50px; color: black; font-size: 3em; " class=" mdi mdi-pause "></i>                                           
+                                                 <br><small style="color: \#999">Pausar</small>
+                           </div>  
+                           <div id="sliderFinishOcupacy" style="display:none; float: right; width:70px; height: 80px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="sliderOcuppacy.finishCleaningTask" data-idoccupancy="#: idoccupancy #" > 
+                                                <i style="line-height: 50px; color: \#fe3636; font-size: 4em; " class="  mdi mdi-stop "></i>                                            
+                                                 <br><small style="color: \#999">LISTA</small>
+                           </div>  
+                           <div id="sliderResumeOcupacy" style="display:none; float: right; width:70px; height: 80px; color: white; background-color: white;  border: 1px solid \#F0F0F0"
+                                                  data-role="touch" data-tap="sliderOcuppacy.reanudarCleaningTask" data-idoccupancy="#: idoccupancy #" > 
+                                                <i style="line-height: 50px; color: Black; font-size: 4em; " class="  mdi mdi-play "></i>                                            
+                                                 <br><small style="color: Black">Reanudar</small>
+                           </div>  
+              
+                      </section> 
+                  
+                  </span>
+                   <div id="slideActionRightOcupacy#: idfacility #" class="slider-action  listview-item noborder "  >
+                                  
+                   </div>
+                <span class="col-xs-12"  style="padding-right: 0px; padding-left: 0px"
+                  # if (app.user.role == globals.ROLE_HOUSEKEEPER || app.user.role == globals.ROLE_MAID|| app.user.role == globals.ROLE_OPERATIONS) { #
+                      data-idfacility="#: idfacility #"  data-status="#: iscleaningstatus #" data-idalert="#: idalert #" data-uuid="#: alertguid #" data-facilityname="#: facilityname #" data-role="touch" data-enable-swipe="1" data-swipe="sliderOcuppacy.swipe" data-tap="sliderOcuppacy.openAlert"
+                  #}#
+                  >  
+                       
+                  <div id="occupancy#: idfacility #" data-role="listview-link" class="facility#: idfacility #  km-listview-link listview-item " style="padding: 8px; height: 85px; background-color: white;">
+                    <div class="facilityinfo"  data-id="#: idfacility #" data-stats="#: stats #">
+                     
+                      
+                        <div class="container-fluid" >
+                            <div class="row"  > 
+                              
+                                <div class="col-xs-10"  style="padding-right: 0px; padding-left: 0px"
+                                     data-bind="click: showOccupancy" >                                                       
+                                     <div class="sh-fixlongtext " >                                          
+                                         <span class="sh-alertName ">                  
+                                          <strong>#: facilityname #</strong>
+                                          # if (app.user.role != globals.ROLE_HOUSEKEEPER && app.user.role != globals.ROLE_OPERATIONS) { #                                              
+                                                   # if (status != 'Desocupada') { #                                                  
+                                                      # if (ready === 1) { #
+                                                          <i id="broomReady#: idoccupancy #" class="mdi mdi-broom" style="color: \#E52E86; font-size: 24px "></i>
+                                                      # } else { #             
+                                                          <i id="broomnotReady#: idoccupancy #" class="mdi  mdi-broom" style=" color: \#4c5356; font-size: 24px"></i>
+                                                      # }  #             
+                                                  # } else {  #  <!-- Desocupada -->
+                                                    # if (ready === 1) { #
+                                                          <i id="broomReady#: idfacility #" class="mdi mdi-broom" style="color: \#E52E86; font-size: 24px "></i>
+                                                      # } else { #             
+                                                          <i id="broomnotReady#: idfacility #" class="mdi  mdi-broom" style=" color: \#4c5356; font-size: 24px"></i>
+                                                      # }  #                       
+                                                   # }  #      
+                                                  
+                                             # } #
+                                          <br>                                           
+                                         # if (status == 'Entra') { #   
+                                              # if (guestactivity != globals.GUEST_ACTIVITY_CHECKED_IN) { # 
+                                                  <span class="label statusENTRA">INGRESA</span>
+                                              # } #
+                                              # if (guestactivity == globals.GUEST_ACTIVITY_CHECKED_IN) { #                                                  
+                                                  <i class="mdi mdi-arrow-left-bold-circle magictime tinRightIn" 
+                                                     style="color: \#ff362f; font-size: 20px;"></i>
+                                                  <span class="label statusENTRA">YA INGRESÓ</span>
+                                               # }  # 
+                                                  
+                  
+                                         # } #
+                                             # if (status == 'Sale') { #
+                                                 # if (guestactivity != globals.GUEST_ACTIVITY_CHECKED_OUT) { #    
+                                                      <span class="label statusSALE">SALE</span>
+                                                 # } #
+                                                  # if (guestactivity == globals.GUEST_ACTIVITY_CHECKED_OUT) { #                                                                                                
+                                                      <i class="mdi mdi-arrow-right-bold-circle magictime tinRightIn" 
+                                                         style="color: \#ff362f; font-size: 20px;"></i>
+                                                      <span class="label statusSALIO">YA SALIÓ</span>
+                                                   # }  #                  
+                                                       
+                                         # } #
+                                         # if (status == 'Hospedado') { #
+                                             <span class="label statusHOSPEDADO">HOSPEDADO</span>
+                                            
+                                         # } #
+                                             
+                                         # if (status == 'Desocupada') { #
+                                              <span class="label statusDESOCUPADA">DESOCUPADA</span>
+                                         # } #
+                                         # if (status == 'Pendiente') { #
+                                              <span class="label statusPENDIENTE">PENDIENTE</span>
+                                         # } #
+                                        
+                                         
+                  
+                                          <span class="spaniscleaningstatus">
+                  
+                                             
+                                              # if (iscleaningstatus == 4 && namestaff !== 0) { #
+                                                 <span class="label statusDND">No molestar-#: namestaff #</span>      
+                                              # }else if (iscleaningstatus == 4 ) { #
+                                                 <span class="label statusDND">No molestar</span>      
+                                              # }else if (iscleaningstatus == 2 && namestaff !== 0) { #
+                                                 <span class="label statuspause">Pausada-#: namestaff #</span>  
+                                              # }if (iscleaningstatus == 2 ) { #
+                                                 <span class="label statuspause">Pausada</span>  
+                                              # }else if (iscleaningstatus == 1 && namestaff !== 0) { #
+                                                 <span class="label statusclean">LIMPIANDO - #: namestaff #</span>      
+                                              # }else if (iscleaningstatus == 1 ) { #
+                                             
+                                                 <span class="label statusclean">LIMPIANDO</span>      
+                                              # }else if (iscleaningstatus == 3 && namestaff !== 0) { #
+                                                 <span class="label statuscleanasig">#: namestaff # <small>-ASIGNADA</small></span>      
+                                              # }else if (iscleaningstatus == 100) { #
+                                                 <span class="label statuscleaning">LIMPIA</span>
+                                              # } #
+                  
+                                          </span>
+                                         </span>
+                                      </div>                                      
+                                </div>
+                  
+                                
+                                
+                                # if (app.user.role == globals.ROLE_HOUSEKEEPER || app.user.role == globals.ROLE_OPERATIONS) { #
+                                  <div class="col-xs-2"  data-bind="click: toggleRoomReady"
+                                              style="padding-right: 0px; padding-left: 0px; text-align: right; border-top2: 1px solid  \#ccc">                                                                                                                         
+                                          # if (status != 'Desocupada') { #                                                  
+                                              # if (ready === 1) { #
+                                                  <i id="broomReady#: idoccupancy #" class="mdi mdi-broom shadow " style="color: \#E52E86; font-size: 35px "></i>
+                                              # } else { #             
+                                                  <i id="broomnotReady#: idoccupancy #" class="mdi  mdi-broom shadow" style=" color: \#4c5356; font-size: 35px"></i>
+                                              # }  #             
+                                          # } else {  #  <!-- Desocupada -->
+                                            # if (ready === 1) { #
+                                                  <i id="broomReady#: idfacility #" class="mdi mdi-broom shadow" style="color: \#E52E86; font-size: 35px "></i>
+                                              # } else { #             
+                                                  <i id="broomnotReady#: idfacility #" class="mdi  mdi-broom shadow" style=" color: \#4c5356; font-size: 35px"></i>
+                                              # }  #                       
+                                           # }  #                                          
+                                      
+                                    </div>
+                                  
+                               # }  #                                 
+                              
+                              
+                            </div>
+                             <div class="row" data-bind="click: showOccupancy" >
+                                  <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px; padding-top: 5px">
+                                      <div class="sh-fixlongtext " style="padding: 0px" >                                         
+                                         <em style="color: black" class="c-light2">#: helper.fixNull(guest) #</em>
+                                         
+                                          # if (guestactivity != 0 && guestactivity != globals.GUEST_ACTIVITY_CHECKED_OUT && guestactivity != globals.GUEST_ACTIVITY_CHECKED_IN &&
+                                                 status != 'Desocupada') { #    
+                                             
+                                             <span style="opacity: .8; float: right;" class=" label label-activity">#: helper.getGuestActivityName(guestactivity) # - #:  $date.datef(activitytime, "h:mm a") #</span>                                               
+                                              
+                                         # } #
+                                      </div>
+                                  </div>                                  
+                              </div>  
+                  
+                                
+                                                 
+                  
+                            
+                        </div>
+                   
+                    </div>
+                  
+                  </div>  
+                </span>  
+              </script>    
+                  
+            <script>
+             
+    
+            $(function() {
+                
+                sliderOcuppacy = {};
+                sliderOcuppacy.swiping = false;
+                sliderOcuppacy.open = false;      
+                window.prevent = false;
+                var item = null;
+                var previousItem = null;               
+                var previousidalert = null;               
+                var idfacility = null;
+                var facilityname = null;
+               
+                        
+                sliderOcuppacy.swipe = function(e) {
+                    var newidfacility = $(e.sender.element).data("idfacility");
+                    facilityname = $(e.sender.element).data("facilityname");
+                    var idstatus = $(e.sender.element).data("status");
+                   
+                   console.log("idstatus");
+                   console.log(e.sender.element);
+                    if (e.direction === "left") {         // open
+                     previousItem = item;
+                     previousidfacility = newidfacility;
+                     item = e.sender.element;      
+                     idfacility = newidfacility;
+                     
+                     // Remove slider from any previous list-items.
+                     $("#listviewOccupancy").find(".slider-action").empty();
+                                        
+                     $('#sliderStartOcupacy #sliderDND #sliderResumeOcupacy #sliderPauseOcupacy #sliderFinishOcupacy #sliderChecklistOcupacy').hide();
+                     var margin = -200;
+                     if (idstatus == 0 || idstatus == 4|| idstatus == 3) {
+                        $('#sliderStartOcupacy').show();
+                        $('#sliderDND').show();
+                     }else if (idstatus == 1 || idstatus == 5 ) {
+                        $('#sliderFinishOcupacy').show();
+                        $('#sliderPauseOcupacy').show();
+                        $('#sliderChecklistOcupacy').show();
+                        margin = -210;
+                     }else if(idstatus == 2){ 
+                        $('#sliderResumeOcupacy').show();
+                        $('#sliderChecklistOcupacy').show();
+                        margin = -140;
+                     }else if(idstatus == 100){ 
+                        $('#sliderChecklistOcupacy').show();
+                        margin = -80;
+                     }
+                    
+                    
+                     var s = $("#sliderderechoOcupacy");                     
+                     s.show();
+                     $("#slideActionRightOcupacy" + idfacility).empty().append(s);
+                   
+                    
+                     sliderOcuppacy.swiping = true;       
+                   
+                        console.info('Open',sliderOcuppacy.open);
+                        if (sliderOcuppacy.open == false) {
+                             console.info('Slide left');
+                             $("#slideActionRightOcupacy" + idfacility).show();
+                            sliderOcuppacy.open = true;
+                            var del = e.sender.element;                                                                    
+                            $(del).animate({'marginLeft': margin + "px"}, 150);  
+                            sliderOcuppacy.open = true;
+                        } else {
+                            // Close Previous item
+                            previousItem.css({ left: 0 });
+                            $(previousItem).animate({'marginLeft': 0 + "%"}, 200);    
+                            
+                            if (item != previousItem) {
+                                // Open New
+                                
+                                 //$("#slideActionLeft" + idfacility).hide();
+                                 $("#slideActionRightOcupacy" + idfacility).show();
+                                 sliderOcuppacy.open = true;                                      
+                                 $(item).animate({'marginLeft': margin + "px"}, 150);       
+                                 sliderOcuppacy.open = true;
+                               
+                                }
+                              else
+                                sliderOcuppacy.open = false; 
+                        }                    
+                    } else if (e.direction === "right") {    // close   
+                        if (sliderOcuppacy.open == true) {
+                 
+                            if(previousidfacility == newidfacility || previousidfacility == null){
+                             sliderOcuppacy.open = false;
+                             
+                             $("#listviewOccupancy").find(".slider-action").empty();
+                             item = e.sender.element;
+                             item.css({ left: 0 });
+                             $(item).animate({'marginLeft': 0 + "%"}, 200);  
+                           }
+                        }
+                    }
+                }                               
+                sliderOcuppacy.markDND = function(e) {
+                    
+                     e.preventDefault();       
+                    var idalerttosig = $(item).data("idalert");
+                    console.log("DND",facilityname);
+                    app.hotelView.showmarkDND(idfacility,facilityname,idalerttosig).done(
+                    function(result) { 
+                        if(result == true){ 
+                            $("#slideActionRightOcupacy"+idfacility).find("#sliderStartOcupacy").hide();
+                            $("#slideActionRightOcupacy"+idfacility).find("#sliderDND").hide();
+                            item.css({ left: 0 });
+                            $(item).animate({'marginLeft': 0 + "%"}, 200); 
+                            $(item).data("status",4);
+                            $("#occupancy"+idfacility).find(".spaniscleaningstatus").empty().append('<span class="label statusDND">No molestar</span>');
+                            sliderOcuppacy.open = false;
+                        }
+                    });
+                }
+                
+                sliderOcuppacy.startCleaningTask = function(e) {
+                                       
+                    e.preventDefault();                        
+                    //slider.open = true;
+                    
+                    console.log(facilityname);
+                    app.hotelView.showstartcleaningtask(idfacility,facilityname).done(
+                    function(result) { 
+                        if(result == true){ 
+                          var idalertasig = $(item).data("idalert");
+                            console.log("idalertasig *****>",idalertasig);
+                         app.hotelView.startCleaningTaskFromSlider(idfacility,facilityname,false,idalertasig)
+                           .done(function(result2) {  
+                            console.log("paso result2==>",result2);
+                           if(result2 === true){ 
+                            
+                            $("#slideActionRightOcupacy"+idfacility).find("#sliderStartOcupacy").hide();
+                            $("#slideActionRightOcupacy"+idfacility).find("#sliderDND").hide();
+                            item.css({ left: 0 });
+                            $(item).animate({'marginLeft': 0 + "%"}, 200); 
+                            $("#occupancy"+idfacility).find(".spaniscleaningstatus").empty().append('<span class="label statusclean">LIMPIANDO -'+app.user.fullname+'</span>');
+                            sliderOcuppacy.open = false;
+                            $(item).data("status",1);
+                          
+                            var newuuid = localStorage.getItem("newuuid");
+                            $(item).data("uuid",newuuid);
+                            console.log("newuuid ===>",newuuid);
+                            setTimeout(function() {      
+                                sliderOcuppacy.GotoChecklist();
+                             },200); 
+                           }
+                           });  
+                        } 
+                       console.log("respuessta",result);
+                    });
+                }
+                
+                 sliderOcuppacy.finishCleaningTask = function(e) {
+                  var newuuid = $(item).data("uuid");
+                  var idalert = $(item).data("idalert");
+                  var idfacility = $(item).data("idfacility");
+                  app.hotelView.showFinishcleaningtask(newuuid,idalert,idfacility);
+                }
+                            
+                sliderOcuppacy.pauseCleaningTask = function(e) {
+                  var newuuid = $(item).data("uuid");
+                  var idalert = $(item).data("idalert");
+                  var idfacility = $(item).data("idfacility");
+                  app.hotelView.showPausecleaningtask(newuuid,idalert,idfacility);
+                }
+                sliderOcuppacy.reanudarCleaningTask = function(e) {
+                  var newuuid = $(item).data("uuid");
+                  var idalert = $(item).data("idalert");
+                  var idfacility = $(item).data("idfacility");
+                  app.hotelView.showReanudarcleaningtask(newuuid,idalert,idfacility);
+                }
+                
+                 sliderOcuppacy.finish = function(e) {
+                        $("#occupancy"+idfacility).find(".spaniscleaningstatus").empty().append('<span class="label statuscleaning">LIMPIA</span>');
+                        $(item).data("status",100);
+                        sliderOcuppacy.close();
+                 }  
+                 sliderOcuppacy.pause = function(e) {
+                        $("#occupancy"+idfacility).find(".spaniscleaningstatus").empty().append('<span class="label statuspause">Pausada</span>');
+                        $(item).data("status",2);
+                        sliderOcuppacy.close();
+                 }  
+                 sliderOcuppacy.resume = function(e) {
+                        $("#occupancy"+idfacility).find(".spaniscleaningstatus").empty().append('<span class="label statusclean">Limpiando -'+app.user.fullname+'</span>');
+                        $(item).data("status",1);
+                        sliderOcuppacy.close();
+                 }  
+                
+                sliderOcuppacy.close = function(e){
+                    $("#slideActionRightOcupacy"+idfacility).find("#sliderFinishOcupacy").hide();
+                    $("#slideActionRightOcupacy"+idfacility).find("#sliderPauseOcupacy").hide();
+                    $("#slideActionRightOcupacy"+idfacility).find("#sliderChecklistOcupacy").hide();
+                    item.css({ left: 0 });
+                    $(item).animate({'marginLeft': 0 + "%"}, 200); 
+                    
+                    sliderOcuppacy.open = false;
+                }
+                        
+                 sliderOcuppacy.GotoChecklist = function(e) {
+                     
+                      var newuuid = $(item).data("uuid");
+                      var idalert = $(item).data("idalert");                                      
+                      app.hotelView.showChecklist(newuuid,idalert);          
+                     
+                      sliderOcuppacy.open = true;
+                 }
+            })
+        
+            </script>
+        </div>

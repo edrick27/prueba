@@ -1,0 +1,66 @@
+
+<div id="viewSelectZone" data-role="view" data-layout="main" data-model="app.reportAlertView">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <footer data-role="footer">
+        
+    </footer>
+
+    <div class="container-fluid" style="width:100%;">
+
+        <div class="row pb5 text-center" style="border-bottom: solid 1px #e5e5e5; height: 45vh;" data-bind="click: selectWhereFacility">
+            <div class="col-sm-12">
+
+                <div style="padding-top: 15%" >
+                    <img src="resources/imgs/habitacion.jpg" width="240" height="90" >
+                    <br><strong class="sh-label2 valign" data-bind="html: roomText"></strong> <i class="mdi mdi-chevron-right mdi-2x c-black valign"></i>
+                </div>
+
+                <!-- <button type="button" data-role="touch" data-tap="app.reportAlertView.selectZone" data-lodging="1"
+                class="btn btn-block">
+                <i class="fa fa-home fa-5x"></i><br/>
+                Habitación
+                </button> -->
+            </div>
+        </div>
+        <div class="row pb5 text-center" style="height: 45vh;" data-bind="click: selectWhereCommonArea" >
+            <div class="col-sm-12">
+
+                <div style="padding-top: 15%" >
+                    <img src="resources/imgs/zonacomun.jpg" width="240" height="90" style="vertical-align: middle">
+                    <br><strong class="sh-label2 valign">en zona común</strong> <i class="mdi mdi-chevron-right mdi-2x c-black valign"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

@@ -1,0 +1,93 @@
+
+<style>
+    #viewProfileManager .listviewHeader {
+        padding-top: 0px;
+        /*height: 50px;*/
+        color: #2a3a40;
+        background-color: White;
+    } 
+    
+    
+    #viewProfileManager .km-group-title{
+        border: none;
+    }
+    
+    .isWorkingtrue {        
+        background-color: #f4f4f4;
+        
+    }
+        
+    
+    #viewProfileManager .km-listview-link:after {
+        display: none !important;
+    }
+    
+     
+    #viewProfileManager .km-list>li {
+        border: none;
+     }   
+  
+        
+</style>
+
+<div id="viewProfileManager" data-role="view" data-title="Profile" data-layout="main" data-model="app.profileView" 
+     data-init="app.profileView.initHousekeeper" data-before-show="app.profileView.beforeShowHousekeeper" data-after-show="app.profileView.afterShowHousekeeper">
+
+    
+    <header data-role="header" >
+        <div id="navbarmaid" class="navbar" data-role="navbar" style="height: 60px !important;">
+            
+            <span data-align="left" data-bind="visible:dingdone">
+                <img data-bind="attr: {src: profilehousekeeper.avatar }"   class="image-cropper" style="width: 50px; height: 50px;"
+                    onclick="javascript: $smart.goSettings()" />
+            </span>
+             <span data-align="left" data-bind="invisible:dingdone"> 
+                <img src="resources/imgs/misc/zzz2.jpg"   style="width: 50px; height: 50px; opacity: 1"
+                     onclick="javascript: $smart.goSettings()" />                                  
+            </span>   
+            
+            <div data-align="left" style="text-align: left; margin-left: 10px;" >
+                <h4  data-bind="html: profilehousekeeper.fullname" class="c-black m0"></h4>&nbsp;<br>
+                <small data-bind="html: profilehousekeeper.role"></small>
+            </div>
+            
+            <span data-align="right"> <i class="mdi mdi-clock sh-mdi-clock" style="vertical-align: middle"></i> <span id="clockhousekeeper" style="vertical-align: middle" class="sh-time"></span> </span>
+        </div>
+        
+        <!-- CIRCULO PARA CREAR TAREAS -->
+       <div class="plusCircle hidden" data-role="button" data-bind="click: goCreateTask">
+           <div class="height_fix"></div>
+           <div class="content"><i class="mdi mdi-plus"></i></div>
+       </div>
+    
+        
+    </header>
+    
+   
+   
+
+    <header data-role="header" class="c-white b-main" style="margin-top: 1px; height: 50px;">
+        <div style="vertical-align: middle; padding-top: 15px; padding-left: 10px;"
+             data-role="touch" data-tap="app.profileView.goFilter" >
+            <i class="mdi mdi-filter-outline" style="font-size: 20px"></i>
+            <span class="valign" style="font-size: 18px;">Filtrar personal por </span>
+            <i class="mdi mdi-chevron-right" style="font-size: 20px; float: right; padding-right: 10px;"></i>
+        </div>
+    </header>
+
+    <ul id="staffListView" data-role="listview" class="listViewAlerts"         
+        data-bind="source: staffDataSource, click: goStaffProfile"
+        data-endless-scroll="false"
+        data-fixed-headers="false"  
+        data-filterable="{ field: 'fullname', operator: 'contains' }"    
+        data-template="staff-template-housekeeper"
+        data-header-template="staff-header-template-housekeeper"
+        data-pull-to-refresh="true"
+        data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                         "refreshTemplate": "Actualizando"}'>
+    </ul>
+
+  
+    
+    <!-- END_CUSTOM_CODE_contactsView -->
+</div>

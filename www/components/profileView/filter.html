@@ -1,0 +1,60 @@
+
+
+
+    <div id="viewFilter" data-role="view" data-title="" data-layout="main" data-model="app.profileView">
+    
+    <header data-role="header" >
+        <div class="navbar b-main" data-role="navbar">
+             <span style="font-size: 1em; color: white"  data-align="center">Filtar por</span>
+             <a data-align="left" data-role="button" data-bind="click:goBack" class="sh-headerbutton">
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px"></i>                
+                <span class="sh-volver valign c-white">Volver</span>
+            </a> 
+        </div>
+    </header>
+    
+    
+    
+    <div class="container-fluid">         
+        <div class="row">               
+                
+                    <ul  data-role="listview" 
+                         data-bind="source: filterOptions" 
+                         data-template="filter-template">
+                    </ul>               
+                
+        </div>
+    </div>
+        
+        
+    <script type="text/x-kendo-template" id="filter-template">
+        <div data-role="listview-link" class="km-listview-link2 listview-item" style="padding: 8px;">
+            <div data-role="touch" data-tap="app.profileView.filter" data-filter="#: id #">
+        
+        
+                   <div class="col-xs-10">
+                       <span  class="sh-label2">#: name #</span> 
+                   </div> 
+                   <div class="col-xs-2">
+                       # if (app.profileView.filterOption === id)  {#
+                           <i id="filter#:id #" class="mdi mdi-checkbox-marked-circle c-main mdi-2x"></i>
+                       #} else { #
+                            <i id="filter#:id #" class="mdi mdi-checkbox-blank-circle-outline mdi-2x"></i>
+                       #}# 
+                   </div>
+            </div>  
+        </div>  
+         
+        
+        
+        
+    </script>
+    
+    <!--  ---------------------->
+    
+    
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+
+       

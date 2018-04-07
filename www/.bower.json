@@ -1,0 +1,31 @@
+{
+  "name": "SmartHotel",
+  "version": "1.0.0",
+  "description": "SmartHotel by SuisseWorks & LumenUp",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "SmartHotel",
+    "Hotel Software",
+    "APP"
+  ],
+  "authors": [
+    "Matthias Malek"
+  ],
+  "license": "",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.5.0",
+    "angular": "~1.4.7",
+    ""
+
+  }
+}

@@ -1,0 +1,380 @@
+
+<style>
+    
+    #viewHome .groupHeader
+    {
+        color: #2a3a40; 
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 23px;
+    }
+    
+    #viewHome .groupIcon
+    {
+        color: #2a3a40;
+        font-size: 22px;
+    }    
+    
+    #viewHome .listviewHeader
+    {
+        padding-top: 15px;
+        height: 50px;
+        color: #2a3a40;
+        background-color: White;
+    }    
+    
+    #viewHome .km-group-title
+    {
+        border: none;
+    }
+    
+    #viewHome .buttonTransparent
+    {
+    
+        color: #2a3a40;
+        background-color: transparent; 
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 16px;
+    }    
+    
+    #viewHome .staffName
+    {
+    
+        color: black; 
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+    }    
+    
+    #viewHome .km-listview-link
+    {
+        line-height: normal;
+    }
+    #viewHome .km-listview-link:after, #viewBreakdownHistory .km-listview-link:after
+    {
+        display: none !important;
+    }
+    
+    
+    #viewHome .sh-alertname {    
+        color: black;        
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+    }
+    
+    .manager .km-list > li {
+       border-bottom: 1px solid  rgba(0,0,0,0.2) !important;
+    }    
+    
+    
+     #viewHome .km-content {
+         /*background: url("resources/imgs/vector.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;*/
+    }
+    
+    
+    #viewHome .btnDetalle {
+        background: transparent;
+        color: #38b8a4;
+    }
+    
+    
+</style>
+
+<div id="viewHome" data-role="view" data-title="" data-layout="main" data-model="app.homeView" class="homeView manager"
+     data-init="app.homeView.init"  data-before-show="app.homeView.beforeShow" data-after-show="app.homeView.afterShow">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header">
+        <div class="navbarhousekeeper" data-role="navbar" style="height: 60px !important;">
+            <a data-align="left" data-role="button" data-bind="click:openDrawer" class="sh-headerbutton">
+                <i class="mdi mdi-menu c-black valign" style="font-size: 25px"></i>
+                &nbsp;
+            </a>    
+            <span data-align="left" data-bind="visible:dingdone">
+                <img data-bind="attr: {src: avatar }"   class="image-cropper shadow" 
+                    style="width: 50px; height: 50px; border: 1px white solid"/>
+            </span>             
+            <span data-align="left" data-bind="invisible:dingdone"> 
+                <img src="resources/imgs/misc/zzz2.jpg"   style="width: 50px; height: 50px; opacity: 1"/>                                  
+            </span>               
+
+           
+            <span data-bind="html: profile.hotelname" class="shadow" style="font-size: 1.5em; color: black; font-weight: 400; margin-left: 20px;" data-align="left"></span>
+        </div>
+       <header>
+         <div id="divnewversion"  style="display: none; color: Black; background-color: rgb(246, 255, 103); border: 1px solid white; padding: 5px; margin-top: 5px">            
+             <i class="mdi mdi-information-outline"></i> 
+            <small style="font-size: 15px;color: black;opacity: 0.6;">
+              <a id="hrefnewversion" style="background: rgba(0,0,0,0);border-style: hidden;" data-role="button" data-bind="click:getNewVersion" ></a>          
+            </small>            
+         </div>
+       </header>
+    </header>
+
+    <header class="jumbotron" >
+        <div class="container-fluid">
+            
+            <div class="row">
+                <br>
+                <div class="col-xs-4 center mt10" style="border-right: 1px solid #e5e5e5;" >
+                    <span data-bind="html: data.effectivity" class="c-main sh-number2"></span>
+                    
+                    <br><span class="sh-info">Efectividad</span>
+                </div>
+
+                <div class="col-xs-4 center mt10" style="border-right: 1px solid #e5e5e5;" >
+                    <span data-bind="html: collaborators" class="c-main sh-number2"></span>
+                    <br><span class="sh-info">Personal<br>en turno</span>
+                </div>
+
+                <div class="col-xs-4 center mt10" >
+                    <span data-bind="html: data.alerts.notresolved"  class="c-main4 sh-number2"></span>
+                    <br><span class="sh-info">Alertas sin <br>resolver</span>
+                </div> 
+            
+            </div>
+        </div>
+        <br>
+    </header>
+    
+    <div class="container-fluid">
+         <div class="row" data-bind="visible: noActivity">   
+                        <div class="col-xs-12">
+                            <div style="text-align: center">                                
+                                <h5 class="c-light" style="opacity: 0.5">No hay actividad</h5>
+                                <h5 class="c-light" style="opacity: 0.5">Desliza para actualizar</h5>
+                                <img src="resources/imgs/misc/pulltorefresh.png" > 
+                             </div>                
+                        </div>
+         </div>
+        
+        
+       
+            
+        <div class="row" data-bind="invisible: noActivity">                
+            
+             <div class="col-xs-12" style="margin-top: 20px;">                
+                <i class="mdi mdi-bell-outline valign" style="font-size:24px; "></i>
+                <span class="sh-title3 valign">Notificaciones importantes</span><br><br>
+            </div>
+            
+             <div style="margin-top: 10px;">                
+                 <ul  data-role="listview" class="listViewAlerts"         
+                        data-bind="source: alertsDataSource, click: openAlertHousekeeper"                                                
+                        data-template="alerts-manager-template"
+                        data-pull-to-refresh="true"
+                        data-messages='{ "pullTemplate": "", releaseTemplate: "Suelte para actualizar",
+                         "refreshTemplate": "Actualizando"}'>
+                 </ul>
+             </div>  
+            
+             <script type="text/x-kendo-template" id="alerts-manager-template">                
+                    <div data-role="listview-link" class="km-listview-link listview-item2 alertStatus#: idstatus #" style="padding: 8px; ">
+                        
+                        <div class="container-fluid istaskStatus#: idstatus # " >
+                            <div class="row">
+                                <div class="col-xs-1" style="text-align: left; padding-left:0px; padding-right: 10px;">
+                                       # if (idcategory == globals.IS_TASK) { #
+                                         <i class="mdi mdi-wrench mdi-taskcolor shadow  " style="font-size: 28px; "></i>
+                                      # } else { #
+                 
+                                          # if (idtypecategory === globals.ALERT_CATEGORY_LOSTANDFOUND) { #
+                                            <i class="mdi  mdi-binoculars c-main valign " style="font-size: 28px; "></i>    
+                                           # } else if (idtypecategory === globals.ALERT_CATEGORY_REQUEST) { #
+                                            <i class="mdi  mdi-bell-ring-outline c-main2 shadow magictime vanishIn " style="font-size: 28px; "></i>    
+                                          #} else { #
+                                          #if (byguest == 1) {#
+                                            <i class="mdi mdi-emoticon-sad mdi-alertcolor shadow magictime twisterInUp  " style="font-size: 24px; "></i>
+                                          # } else { #
+                                             <i class="mdi mdi-alert-outline mdi-alertcolor shadow " style="font-size: 24px; "></i>
+                                          # } #
+                                         #}#                                        
+                                      #}#                                        
+                                </div>   
+                                <div class="col-xs-6" style="padding-right: 0px; padding-left: 5px;">
+                                     <div class="sh-fixlongtext " >       
+                                         #if (helper.hasPicture(uris)) { #
+                                            <i class="mdi mdi-camera shadow " style="opacity: 1"></i>
+                                        # } #
+                                        <span class="taskTitle#: idstatus #  sh-alertname valign" >#: name #</span>
+                                            
+                                     </div>
+                                </div>
+                                          
+                                <div class="col-xs-3" style="padding-right: 0px; padding-left: 5px;">
+                                     <div class="sh-fixlongtext " >                                    
+                                        <span class="sh-alertname valign" >#: helper.getShortFacilityName(idfacility) #</span>
+                                     </div>
+                                </div>
+                                          
+                                # if (idstaff !== 0) { #
+                                <div class="col-xs-2" style="padding-right: 0px; padding-left: 5px; text-align: right">                                          
+                                     <div class="sh-fixlongtext ">
+                                          <img src="#: helper.getStaffAvatar(idstaff) #"  class="image-cropper-no-shadow valign" style="width: 40px; height: 40px; "/>                                        
+                                     </div>                                          
+                                </div>
+                               #} #
+                            </div>
+                              <div class="row rowinform" style="font-size: 0.9em; opacity: 0.8; margin-top: 5px">
+                                          
+                                   #if (tag === globals.TAG_DND    || tag === globals.TAG_MARKED_AS_FINISHED || tag ===  globals.TAG_ALERT_TO_TASK) { # 
+                                        #if (tag === globals.TAG_DND )  { #  <!--DND -->
+                                           <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: left">                                    
+                                               
+                                                <span style="color: red; opacity: 1; border: 1px solid \#00bcd4; padding: 2px">DND </span>           
+                                           </div>
+                                         # } else if (tag === globals.TAG_MARKED_AS_FINISHED) { #  
+                                           <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: left">                                    
+                                               
+                                                <span style="color: gray; border: 1px solid \#00bcd4; padding: 2px">Marcada como Finalizada</span>           
+                                           </div>
+                                          # } else if (tag === globals.TAG_ALERT_TO_TASK) { #  
+                                           <div class="col-xs-12" style="margin: 0px; padding-left: 5px; text-align: left">                                    
+                                               
+                                                <span style="color: gray; border: 1px solid \#00bcd4; padding: 2px">Tarea Creada</span>           
+                                           </div>
+                                         # } #
+                                 # } else { #          
+                    
+                                 #if (action === globals.ACTION_PAUSED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        <i class="mdi mdi-2x  mdi-pause-circle-outline valign " style="opacity: 1"></i>
+                                        <small class="valign" >Alerta pausada </small>
+                                    </div>                 
+                                # } #    
+                                
+                                #if (action === globals.ACTION_RESOLVED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        <i class="mdi mdi-2x mdi-clock-out valign " style="opacity: 1"></i>
+                                        <small class="valign">Se resolvió a las #:  $date.datef(finishdate, "h:mm a")  # </small>
+                                    </div>                 
+                                # } #            
+                    
+                    
+                                #if (action === globals.ACTION_STARTED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        <i class="mdi mdi-2x mdi-clock c-main2 valign" style="opacity: 1"></i>
+                                        <small class="valign">ETC para las #: $date.toCurrentTimeZone(startdate).add(expectedduration,'minutes').format("h:mm a")  # </small>
+                                    </div>                 
+                                # } #
+                    
+                                #if (action === globals.ACTION_RESUMED) { #                                     
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        <i class="mdi mdi-2x mdi-clock c-main2 valign" style="opacity: 1"></i>
+                                        <small class="valign">ETC para las #: $date.toCurrentTimeZone(resumedate).add(expectedduration-(duration/60),'minutes').format("h:mm a")  # </small>
+                                    </div>                 
+                                # } #
+                    
+                    
+                                #if (action === globals.ACTION_REPORTED || action === globals.ACTION_RECEIVED_BY_MODULE ||  action === globals.ACTION_RECEIVED_BY_OWNER || action === globals.ACTION_ASSIGNED ||
+                                          action === globals.ACTION_ESTIMATED_DURATION || action === globals.ACTION_WILLCHECK) { #
+                    
+                                    <div class="col-xs-10" style="padding-right: 0px; padding-left: 0px">
+                                        #if (willcheckdate !== 0) {#
+                                            <i class="mdi mdi-2x mdi-eye c-main3 valign" style="opacity: 1"></i>
+                                            <small class="valign">Lo reviso a las #: $date.datef(willcheckdate, "h:mm a") # </small>
+                                        #} else {#
+                                            <i class="mdi mdi-2x mdi-clock-in c-main2 valign" style="opacity: 1"></i>
+                                            <small class="valign">#: $date.showAlertReportedDate(reporteddate, "h:mm a") # </small>
+                                        #} #
+                                    </div>
+                                    
+                                    #if (action === globals.ACTION_RECEIVED_BY_MODULE)  { #  <!-- Received by module manager -->
+                                    <div class="col-xs-2" style="text-align: right; padding-right:0px;">
+                                        <i class="mdi mdi-2x mdi-check" style="opacity: 1; color:  \#00bcd4"></i>
+                                    </div> 
+                                    # } #                                            
+                                    #if (action === globals.ACTION_RECEIVED_BY_OWNER)  { #  <!-- Received by owner -->
+                                      <div class="col-xs-2" style="text-align: right; padding-right:0px;">
+                                          <i class="mdi mdi-2x mdi-check-all" style="opacity: 1; color:  \#00bcd4"></i>
+                                      </div> 
+                                    # } #                            
+                                # } #  
+                             # } #
+                            </div>       
+                                          
+                           
+                        </div>
+                    </div>
+              </script>
+            
+            
+            
+            
+            <div class="col-xs-12">                  
+                <br><br>
+                <span>
+                     <i class="mdi mdi-calendar-check valign" style="font-size:24px"></i>
+                    <span class="sh-title3 valign">Cumplimiento de tiempo</span>
+                </span>                
+                
+               <div data-role="progressbar" id="cumplimiento" data-min="0" data-max="100" data-type= "percent"  data-bind="value: data.effectivity" 
+                                     style="width: 100%; height: 20px; margin-top: 10px;">
+               </div>                 
+            </div>
+            <div class="col-xs-12" style="text-align: center">
+                <span class="sh-info" >
+                    
+                     <span data-bind="invisible: data.hasdelay">sin atrasos </span> 
+                    <span data-bind="visible: hasdelay"><span data-bind="html: delay, visible: hasdelay"></span> min. de atraso en promedio</span> 
+                      
+                </span>
+            </div>
+            
+            
+                        
+             
+            <div class="col-xs-12">                
+                <br>
+                <hr style="margin-bottom: 10px; margin-top: 10px;"> 
+                <i class="mdi  mdi-chart-pie valign" style="font-size:24px"></i>
+                <span class="sh-title3 valign">Reporte de averías</span>
+            </div>
+            <div class="col-xs-12" style="text-align: center; margin-top: 10px">                
+                <br>                
+                <div style="height: 300px;" id="breakdownsChart"></div>
+            </div>
+            <div class="col-xs-12" style="text-align: center; margin-top: 10px">                
+                <br>                
+                 <button type="button" data-role="touch" data-tap="app.homeView.goBreakdownHistory" data-range="1"  
+                         class="btn mb10 btn-main2">
+                    <span translate>VER HISTORIAL</span>
+                 </button> 
+            </div>
+            <div class="col-xs-12" style="text-align: center; ">                
+                <br>                
+                <button type="button" data-role="touch" data-tap="app.homeView.goBreakdownHistory" data-range="0"  
+                         class="btn mb10 btn-main2">
+                    <span translate>VER AVERÍAS DE HOY</span>
+                 </button> 
+            </div>
+            
+            
+            
+        </div>
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

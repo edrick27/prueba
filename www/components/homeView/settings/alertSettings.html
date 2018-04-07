@@ -1,0 +1,107 @@
+<style>    
+    #viewAlertSettings .jumbotron
+    {
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 9px; 
+        
+        background-color: #f4f4f4;
+    }
+    
+    
+    
+    
+ </style>
+
+<div id="viewAlertSettings" data-role="view"  data-model="app.homeView">
+    
+    <header data-role="header">
+        <div class="navbar b-main3" data-role="navbar" >
+             <span style="font-size: 1.5em; color: white" data-align="left">Opciones</span> 
+            
+            <a  data-align="right"  data-role="button" data-bind="click:goBack2" class="sh-headerbutton">
+                <i class="mdi mdi-close mdi-2x " style="color: white"></i>
+            </a>              
+        </div>
+    </header>
+    
+    <footer data-role="footer">
+        
+    </footer> 
+    
+    
+   
+       <div class="container-fluid" style="width:100%;"> 
+           
+             <div class="row">             
+               <div class="col-xs-12">
+                 
+                   <div class="km-listview-wrapper">
+                       <ul data-role="listview"  class="km-widget km-listview km-list">
+                            <li data-bind="visible: alert.pending, click:showAlertSettingWillCheckDate" >
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" >                                                           
+                                     <span style="color: black" class="valign"> ¿Cuándo lo vas a ir a ver? </span>
+                                 </div>
+                               </div>
+                           </li>
+                           <li data-bind="invisible: alert.resolved">
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" data-bind="click:showSettingEstimateDuration" >                                                            
+                                     <span style="color: black" class="valign"> ¿Cuánto tiempo ocupas? </span>
+                                 </div>
+                               </div>
+                           </li>                                                     
+                                <li data-bind="invisible: alert.resolved">                                    
+                                       <div data-role="listview-link" class="km-listview-link">
+                                         <div class="sh-listview-item" data-bind="click:showMarkAlertAsFinished">                                               
+                                                <span style="color: black" class="valign"> Marcar como finalizada</span>
+                                         </div>
+                                       </div>                                   
+                               </li>
+                           
+                            <li class="hidden" data-bind="invisible: alert.resolved">
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" data-bind="click:showMarkAlertAsDND">                                                           
+                                        <span style="color: black" class="valign"> DND</span>
+                                 </div>
+                               </div>
+                            </li>
+                             
+                            <span data-bind="invisible: alert.isTask">
+                           <li data-bind="invisible: alert.resolved">
+                               
+                               <span data-bind="invisible: alert.isRequest">
+                                   <div data-role="listview-link" class="km-listview-link">
+                                     <div class="sh-listview-item" data-bind="click:showAlertToTask">     
+                                          <i class="mdi mdi-wrench mdi-taskcolor"></i>
+                                            <span style="color: black" class="valign">Convetir a Tarea</span>
+                                     </div>
+                                   </div>
+                               </span>
+                           </li>
+                           </span>
+                           
+                           <li data-bind="visible: alert.byhousekeeper">                               
+                               <div data-role="listview-link" class="km-listview-link">
+                                 <div class="sh-listview-item" data-bind="click:showEscalateAlert">                                                           
+                                        <span style="color: black" class="valign"> Escalar</span>
+                                 </div>
+                               </div>                               
+                           </li>
+                       </ul>    
+                   </div>                 
+               </div>
+                 
+                 
+               
+                
+            
+            </div>
+       </div>
+        
+ 
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+

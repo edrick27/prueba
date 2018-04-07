@@ -1,0 +1,99 @@
+
+<div id="viewSelectAlertCategory"  data-role="view" data-title="Crear Alerta" data-layout="main" data-model="app.reportAlertView" 
+     data-init="app.reportAlertView.init"data-before-show="app.reportAlertView.beforeShow"  data-after-show="app.reportAlertView.afterShow">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+    
+     <header data-role="header">
+            <div class="navbar" data-role="navbar" style="height: 60px !important;">
+                 
+                <span style="font-size: 1.5em; color: black; font-weight: 400" data-align="left">Crear alerta</span> 
+                
+                <span data-align="right">                                  
+                    <i class="mdi mdi-clock sh-mdi-clock" style="vertical-align: middle"></i>                                        
+                    <span id="clock" style="vertical-align: middle" class="sh-time"></span> 
+                </span>
+                
+
+                
+            </div>
+     </header>
+    
+    
+     <header class="jumbotron">
+        <div class="container-fluid" style="width:100%;">
+            
+            <div class="row">
+               
+                <br>
+                <div class="col-xs-12 pb5" style="text-align: center" >
+                    <button type="button" data-role="button" data-bind="click: _selectAlertCategory" data-category="1"  
+                            class="btn sh-button mb10 b-main3"  >                         
+                         <i class="mdi mdi-alert   magictime tinDownIn" style="font-size: 1.5em;"></i>
+                        <span translate>REPORTAR PROBLEMA</span>
+                    </button>           
+                     <button type="button" data-role="button" data-bind="visible: isHousekeeping, click:_selectCleaningTask"  data-category="1"
+                        class="hidden btn sh-button mb10  b-main2">
+                        <i class="mdi mdi-broom" style="font-size: 1.5em"></i>
+                        <span translate>LIMPIEZA</span>
+                    </button>        
+                    <button type="button" data-role="button" data-bind="click: _selectAlertCategory" data-category="2"  
+                        class="btn sh-button mb10 b-main ">
+                        <i class="mdi mdi-bell-ring-outline" style="font-size: 1.5em"></i>                        
+                        <span translate>CREAR SOLICITUD </span>
+                    </button>
+                    
+                    <button type="button" data-role="button" data-bind="click:_selectAlertCategory" data-category="3"  
+                        class="btn sh-button mb10 b-main">
+                        <i class="mdi mdi-binoculars" style="font-size: 1.5em"></i>
+                        <span translate>PERDIDO Y ENCONTRADO</span>
+                    </button>
+                    <button type="button" data-role="button" data-bind="click:_selectTask"  data-category="1"
+                        class="btn sh-button mb10  b-main">
+                        <i class="mdi mdi-wrench" style="font-size: 1.5em"></i>
+                        <span translate>CREAR TAREA</span>
+                    </button>                           
+                </div>
+                
+            </div>
+        </div> 
+     </header>     
+    
+    
+                
+    
+       <div class="container-fluid" style="width:95%;"> 
+           
+             <div class="row">             
+                 <div class="col-xs-12 center">
+                     <span class="sh-title">
+                         PROBLEMAS COMUNES                         
+                     </span>
+                     <br><br>
+                 </div>
+                 
+                <!-- We use data-role="listview" in order to be able to do pull to refresh and update common Alerts DataSource-->
+                <div class="col-xs-12" style="padding-right: 0px;" >                   
+                   <ul  data-role="listview" 
+                        data-bind="source: commonAlertTypesDataSource, click: selectCommonAlertType" 
+                        data-template="commonAlerts-template">
+                   </ul>                            
+                </div>
+                 
+                 <script type="text/x-kendo-template" id="commonAlerts-template">
+                    <div data-role="listview-link" class="km-listview-link ">
+                         <div class="sh-listview-item" >                      
+                             <span style="color: black"> #: name # </span>
+                         </div>
+                    </div>
+                 </script>
+                 
+            
+            </div>
+       </div>
+        
+    
+    
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

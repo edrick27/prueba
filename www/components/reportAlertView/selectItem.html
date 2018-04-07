@@ -1,0 +1,96 @@
+<style>
+    .b-bottom {
+        border-bottom: 1px solid #e5e5e5;
+    }
+    
+    .b-right {
+        border-right: 1px solid #e5e5e5;
+    }
+</style>
+
+<div id="viewSelectItem" data-role="view" data-title="Crear Alerta" data-layout="main" data-model="app.reportAlertView"
+     data-init="app.reportAlertView.initSelectItem"  data-before-show="app.reportAlertView.beforeShowSelectItem">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+   <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+     <footer data-role="footer">
+        
+    </footer>
+    
+     <div data-role="header"  style="border-bottom: 1px solid #e5e5e5; ">
+            <div class="col-sm-12" style="padding: 10px">
+                <span data-bind=" html: alert.facility.name"  class="sh-breadcrumb"></span>                
+                <span class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                <span data-bind="html: alert.location.name"  class="sh-breadcrumb"></span>
+            </div>             
+        </div>
+     
+
+    <div class="container-fluid"  >
+        
+        <div class="row pb5">
+        
+            <div class="col-xs-12 text-center">                
+                    <div style="padding-top: 10%" class="text-center">                                                 
+                        <strong data-bind="invisible: isRequest" class="sh-label2 valign">¿Qué está afectado?</strong> 
+                        <strong data-bind="visible: isRequest" class="sh-label2 valign">¿Qué necesita?</strong> 
+                        <br><br>
+                    </div>
+            </div>   
+        
+        
+            
+             
+            <!-- We use data-role="listview" in order to be able to do pull to refresh and update common Alerts DataSource-->
+            <ul id="listViewItemTypes" class="col-xs-12" data-role="listview2" >                
+                <div class="row pb5" data-bind="source: itemsDataSource" data-template="items-template">
+                    <!-- Template results goes here -->
+                    
+                    
+                </div>
+            </ul>
+
+            <script type="text/x-kendo-template" id="items-template">
+                <div class="col-xs-6" style="padding-right: 0px; padding-left:0px;">
+                    <div style="padding-top: 15%; padding-bottom: 10px;" 
+                             class="text-center b-bottom b-right"
+                             data-bind="click: selectItem"
+                             data-id="#: iditem #" data-name="#: name #">
+                            <img src="#: helper.getItemImagePath(image) #" width="100" height="80" class="magictime tinLeftIn" > <br>
+                            <strong class="sh-labelItem center">#: helper.removeZZ(name.toUpperCase()) #</strong>
+                    </div>
+                </div>
+            </script>
+        </div>
+
+    </div>
+    <!-- data-role="touch" data-tap="app.reportAlertView.selectItem"  -->
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>

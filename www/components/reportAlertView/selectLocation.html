@@ -1,0 +1,86 @@
+
+
+<div id="viewSelectLocation" data-role="view" data-title="Crear Alerta" data-layout="main" data-model="app.reportAlertView"
+     data-before-show="app.reportAlertView.beforeShowSelectLocation" >
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBackToSelectFacility" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+     <footer data-role="footer">
+        
+    </footer>
+    
+     <div data-role="header" style="border-bottom: 1px solid #e5e5e5; ">
+            <div class="col-sm-12" style="padding: 10px" >
+                <span data-bind="html: alert.facility.name"  class="sh-breadcrumb"></span>
+            </div>         
+     </div>
+    
+
+    <div class="container-fluid" >        
+        
+         <div class="row  ">                        
+            <div class="col-xs-12 text-center">                
+                <div style="padding-top: 10%" class="text-center">                                                 
+                    <strong data-bind="invisible: isRequest" class="sh-label2 valign">¿Dónde está el problema?</strong> 
+                    <strong data-bind="visible: isRequest" class="sh-label2 valign">¿Dónde lo necesita?</strong> 
+                    <br><br>                    
+                </div>
+            </div>   
+             
+            <div class="col-xs-12" style="padding-right: 0px; padding-left:0px; text-align: center" data-bind="visible: isTask"
+                data-role="touch" data-tap="app.reportAlertView._selectNoItemForTask">
+                <strong class="sh-labelItem center">OMITIR</strong>
+                <br>
+            </div>   
+        
+                         
+            <ul id="listViewItemTypes" class="col-xs-12" data-role="listview2" >                
+                <div class="row pb5" data-bind="source: locationsDatasource" data-template="locations-template">
+                    
+                </div>
+            </ul>
+
+            <script type="text/x-kendo-template" id="locations-template">
+                <div class="col-xs-6" style="padding-right: 0px; padding-left:0px;">
+                    <div style="padding-top: 15%; padding-bottom: 10px;" 
+                             class="text-center b-bottom b-right"
+                             data-role="touch" data-tap="app.reportAlertView.selectLocation" 
+                             data-id="#: idlocation #" data-name="#: name #">
+                            <img src="#: helper.getItemImagePath(image) #" width="100" height="80" > <br>
+                            <strong class="sh-labelItem center">#: name.toUpperCase() #</strong>
+                    </div>
+                </div>
+            </script>
+       
+        </div> 
+    </div>      
+
+</div>
+
+

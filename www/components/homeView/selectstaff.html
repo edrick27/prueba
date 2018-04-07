@@ -1,0 +1,112 @@
+
+<style>
+    
+    
+     #viewSelectStaff .listviewHeader {
+        padding-top: 0px;
+        /*height: 50px;*/
+        color: #2a3a40;
+        background-color: White;
+    } 
+    
+    
+    #viewSelectStaff .km-group-title{
+        border: none;
+    }
+    
+     #viewSelectStaff .km-listview-link:after {
+        display: none !important;
+    }
+    
+     #viewSelectStaff .km-list>li {
+        border: none;
+     }  
+    
+</style>
+
+<div id="viewSelectStaff" data-role="view" data-title="Asignar" data-layout="main" data-model="app.homeView" 
+     data-init="app.homeView.initSelectStaff">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    
+     <header data-role="header">
+        <div class="navbar" data-role="navbar" style="height: 60px !important;">
+            
+             <span style="font-size: 1.5em; color: black; font-weight: 400" data-align="left">Asignar a</span> 
+            
+             <a  data-align="right" data-role="button" data-bind="click:goBack2" class="sh-headerbutton" >
+                <i class="mdi mdi-close mdi-2x " style="color: #ff362f;"></i>
+            </a>    
+        </div>
+    </header>
+    
+    
+    <ul id="staffListView" data-role="listview" class="listViewAlerts"         
+        data-bind="source: staffDataSource, click: showDialogAssign"
+        data-endless-scroll="false"
+        data-fixed-headers="true"       
+        data-template="staff-template"
+        data-header-template="staff-header-template">
+    </ul>
+    
+    
+     <script type="text/x-kendo-template" id="staff-header-template">
+
+        <div class="listviewHeader">         
+           <h3 class="c-main2">#: helper.isAvailableText(value) #</h3>         
+            
+        </div>
+        
+    </script>
+
+    <script type="text/x-kendo-template" id="staff-template">
+        <div data-role="listview-link" class="km-listview-link listview-item ">
+            <a>
+                <div class="container-fluid">
+                   <article class="row">
+                      <div class="col-xs-2">
+                        
+                        <img src="#: helper.getAvatar(avatar) #"  class="image-cropper-no-shadow valign" style="width: 50px; height: 50px;"/>
+                          #if (available == true) { # 
+                                <span style="font-size: 0.9em;display: inline-block; margin-left: 20px;" class="label label-available">DISPONIBLE</span>
+                            #} else {#        
+                                <span style="font-size: 0.8em;display: inline-block; margin-left: 20px;" class="label label-not-available">NO DISPONIBLE</span>
+                            #} #              
+                            <sup style="margin-left:-10px; margin-top: -20px" class="badge b-main4 c-white">
+                            #: stats.alerts.pending + stats.tasks.pending #
+                            </sup>        
+                      </div>
+                      <div class="col-xs-10">
+                        
+                        <div style="text-align: left; margin-left: 0px; display: inline-block" class="valign">
+                            <h4 class="c-black m0 sh-fixlongtext ">#: fullname # 
+                            <!--<sup class="c-light" style="font-size: 0.5em"> #: idstaff #</sup> -->
+                            <br><small >#: helper.getRole (type) #</small> </h4>
+                        </div>
+                      </div>
+                    </article>                       
+                    <div class="row">
+                        <div class="col-xs-12">                            
+                             <div data-role="progressbar" data-min="0" data-max="100" data-type= "percent" data-bind="value: stats.progress"
+                                                 style="width: 100%; height: 20px; margin-top: 10px;">
+                             </div> 
+                        </div>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span class="sh-info" >                                                                 
+                                    #: stats.alerts.resolved + stats.tasks.resolved #/#: stats.all #
+                            </span>
+                        </div>            
+                    </div>                    
+        
+                </div>
+            </a>
+        </div>
+    </script>
+    
+        
+   
+        
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
+        
+    

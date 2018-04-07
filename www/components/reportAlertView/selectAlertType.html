@@ -1,0 +1,113 @@
+
+
+<div id="viewSelectAlertType" data-role="view" data-title="Crear Alerta" data-layout="main" data-model="app.reportAlertView"
+     data-after-show="app.checkConnection">
+    <!-- START_CUSTOM_CODE_homeView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <header data-role="header" data-bind="invisible: isTask">
+        <div class="navbar b-main3" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+    <header data-role="header" data-bind="visible: isTask">
+       <div class="navbar b-main" data-role="navbar">
+            <span data-bind="html: thetitle" style="font-size: 1em; color: white" data-align="center"></span>
+            <a data-align="left"  data-role="button" data-bind="click:goBack" class="sh-headerbutton" >
+                <i class="mdi mdi-chevron-left  c-white valign" style="font-size: 36px;"></i>                
+            </a>
+            <a  data-align="right" data-role="button" data-bind="click:goHome" class="sh-headerbutton" >
+                <i class="mdi mdi-close " style="color: white; font-size: 26px;"></i>
+            </a>              
+            
+        </div>
+    </header>
+    
+     <footer data-role="footer">
+        
+    </footer>
+
+    <div data-role="header"  style="border-bottom: 1px solid #e5e5e5; ">
+        <div class="col-sm-12" style="padding: 10px">
+            <span data-bind="html: alert.facility.name"  class="sh-breadcrumb"></span>
+            <span data-bind="invisible: noItem" >
+                <span data-bind="visible: isLodging" >
+                    <span data-bind="invisible: isRequest" class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                    <span data-bind="html: alert.location.name "  class="sh-breadcrumb"></span>
+                    <span data-bind="invisible: isRequest," class="sh-breadcrumb"> <i class="mdi mdi-chevron-right"></i> </span>
+                    <span data-bind="html: alert.item.name"  class="sh-breadcrumb"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="width:95%;" >
+
+        
+        <div class="row pb5">
+        
+            <div class="col-sm-12 text-center" >
+                <div style="padding-top: 10%" class="text-center">
+                    <span data-bind="invisible: noItem" >
+                        <strong data-bind="invisible: isRequest" class="sh-label2 ">¿Cuál es el problema?</strong> 
+                        <strong data-bind="visible: isRequest" class="sh-label2 ">¿Cuál es la Solicitud?</strong> 
+                    </span>                    
+                     <span data-bind="visible: isTask" >
+                        <strong data-bind="invisible: isRequest" class="sh-label2 ">¿Cuál es la tarea?</strong>                        
+                    </span>
+                    <br>
+                </div>
+            </div>
+            
+            <div class="col-sm-12" style="padding-left: 10px;">
+                <div style="padding-top: 5%" >
+                    <span class="sh-breabcrumb" style="font-size:16px; color: #909090;">Elija de la siguiente lista</span> <br><br>
+                </div>
+            </div>
+
+
+             <!--<ul class="col-xs-12" data-role="listview2" >                
+                <div class="row pb5" data-bind="source: alertTypesDataSource" data-template="alertTypes-template">
+                    
+                </div>
+            </ul>
+            -->
+            
+             
+            
+             <div class="col-xs-12" style="padding-right: 0px;" >                   
+                   <ul id="listviewAlertTypes" 
+                        data-role="listview"                         
+                        data-bind="source: alertTypesDataSource, click: selectAlertType"                         
+                        data-template="alertTypes-template">
+                   </ul>                            
+             </div>
+            
+             <script type="text/x-kendo-template" id="alertTypes-template">
+                    <div data-role="listview-link" class="km-listview-link">
+                         <div class="sh-listview-item">                      
+                             <span style="color: black">#: name #  </span>           
+                             # if (idchecklist > 0) { #
+                                 <i class="c-main3 mdi mdi-checkbox-marked-outline"></i>
+                            #}#
+                         </div>
+                    </div>
+             </script>
+            
+             
+           
+
+        </div>
+
+    </div>
+
+    <!-- END_CUSTOM_CODE_homeView -->
+</div>
